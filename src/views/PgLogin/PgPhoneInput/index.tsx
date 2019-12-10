@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from 'react'
-// import { login } from '../../api/index.js'
-import {Headers, Toast} from '../../../components'
+import React, { useState } from 'react'
+import { Headers, Toast } from '../../../components'
 import './index.scss'
 function PgPhoneInput(props: any) {
     let [phone, setphone] = useState('')
-    useEffect(() => {
-        console.log(1111, '=======')
-    }, [])
     function toPassword() {
         if (phone.length < 11) {
             Toast('请输入11位数字的手机号', 2000)
@@ -16,7 +12,7 @@ function PgPhoneInput(props: any) {
     }
     return (
         <>
-            <Headers props={props}/>
+            <Headers props={props} />
             <div className="phone-wrap">
                 <p className="phone-tips">
                     未注册的手机号登陆后自动创建账户
@@ -27,9 +23,9 @@ function PgPhoneInput(props: any) {
                             +86
                         </div>
                         <div className="phone-text-wrap">
-                            <input type="text" className="phone-text" value= { phone } onChange={(e) => {
+                            <input type="text" className="phone-text" value={phone} onChange={(e) => {
                                 setphone(e.target.value)
-                            }}/>
+                            }} />
                         </div>
                         <div className="phone-close">
                             x
@@ -38,12 +34,12 @@ function PgPhoneInput(props: any) {
                 </div>
                 <div className="phone-buttom" onClick={() => {
                     toPassword()
-                    
+
                 }}>
                     下一步
                 </div>
             </div>
-            
+
         </>
     )
 }

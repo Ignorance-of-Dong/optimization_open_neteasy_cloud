@@ -1,13 +1,12 @@
 import React from 'react'
 import './index.scss'
 
-function Home(props:any) {
+function Home(props: any) {
     return (
         <>
-        {console.log(props)}
             <div className='home-wrap'>
                 <div className="home-logo">
-                    <img className='home-logo-wh' src={require('../../assets/images/logo.png')} alt=""/>
+                    <img className='home-logo-wh' src={require('../../assets/images/logo.png')} alt="" />
                 </div>
                 <div className='home-button'>
                     <div className='iphone-login' onClick={() => {

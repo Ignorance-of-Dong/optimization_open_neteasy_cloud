@@ -34,7 +34,10 @@ let Config: overalSituationConfig = {
 	Vendor: ['react'],                              // 对第三方包分包配置
 	ResolveAlias: {
 		"src": path.resolve(process.cwd(), 'src'),  // 配置别名
-		"components": path.resolve(process.cwd(), 'src', 'components')
+		"components": path.resolve(process.cwd(), 'src', 'components'),
+		"utils": path.resolve(process.cwd(), 'src', 'utils'),
+		"views": path.resolve(process.cwd(), 'src', 'views'),
+		"api": path.resolve(process.cwd(), 'src', 'api'),
 	}
 }
 export default Config

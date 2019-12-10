@@ -2,7 +2,10 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths":{
-      "components/*": ["src/components/*"]
+      "components/*": ["src/components/*"],
+      "utils/*": ["src/utils/*"],
+      "views/*": ["src/views/*"],
+      "api": ["src/api"]
     },
     "outDir": "./dist/",
     "sourceMap": false,
