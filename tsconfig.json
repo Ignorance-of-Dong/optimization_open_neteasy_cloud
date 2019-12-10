@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths":{
+      "components/*": ["src/components/*"]
+    },
+    "outDir": "./dist/",
+    "sourceMap": false,
+    "module": "commonjs",
+    "target": "es5",
+    "lib": ["es6","esnext", "dom"],
+    "jsx": "react",
+    "strict": false,
+    "noImplicitThis": false, // 当 this表达式的值为 any类型的时候，生成一个错误。
+    "noFallthroughCasesInSwitch": true, //报告switch语句的fallthrough错误。（即，不允许switch的case语句贯穿）
+    "allowUnreachableCode": true, // 不报告执行不到的代码错误。
+    "allowUnusedLabels": true, // 不报告未使用的标签错误。
+    "removeComments": true, // 删除所有注释，除了以 /!*开头的版权信息
+    "emitDecoratorMetadata": true, // 给源码里的装饰器声明加上设计类型元数据。查看 issue #2577了解更多信息。
+    "experimentalDecorators": true, // 启用实验性的ES装饰器。
+    "downlevelIteration": true, 
+    "moduleResolution": "node", // 决定如何处理模块。或者是"Node"对于Node.js/io.js，或者是"Classic"（默认）。查看模块解析了解详情。
+    "allowSyntheticDefaultImports": true, // 允许从没有设置默认导出的模块中默认导入。这并不影响代码的输出，仅为了类型检查。
+    "esModuleInterop": true,  // 同上
+    "reactNamespace" : "React", // 当目标为生成 "react" JSX时，指定 createElement和 __spread的调用对象
+    "allowJs": true,                            //是否允许工程中js和ts同时存在。
+    "skipLibCheck": false,                      // 跳过lib文件的静态检查，哎，不是所有的lib都给你写得规规整整的。
+  },
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ]
+}

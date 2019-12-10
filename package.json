@@ -1,0 +1,78 @@
+{
+  "name": "todowenpack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "webpack-dev-server --config ./config/webpack.config.test.ts --color",
+    "dev": "webpack-dev-server --config ./config/webpack.config.dev.ts --color",
+    "build": "webpack --config ./config/webpack.config.prod.ts --color"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "antd-mobile": "^2.3.1",
+    "autoprefixer": "^9.7.3",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-import": "^1.13.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.0.5",
+    "css-loader": "^3.2.1",
+    "file-loader": "^5.0.2",
+    "html-webpack-plugin": "^3.2.0",
+    "lyric-parser": "^1.0.1",
+    "mini-css-extract-plugin": "^0.8.0",
+    "mobx": "^5.15.0",
+    "mobx-react": "^6.1.4",
+    "node-sass": "^4.13.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "postcss-loader": "^3.0.0",
+    "progress-bar-webpack-plugin": "^1.12.1",
+    "react": "^16.12.0",
+    "react-dev-utils": "^9.1.0",
+    "react-dom": "^16.12.0",
+    "react-router-dom": "^5.1.2",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.1",
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.2",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "url-loader": "^3.0.0",
+    "video-react": "^0.14.1",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0",
+    "webpack-merge": "^4.2.2"
+  },
+  "browsers": [
+    "last 30 versions",
+    "> 2%",
+    "Firefox >= 10",
+    "ie 6-11"
+  ],
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.4",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-proposal-decorators": "^7.7.4",
+    "@babel/plugin-transform-classes": "^7.7.4",
+    "@babel/plugin-transform-runtime": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "@babel/preset-react": "^7.7.4",
+    "@babel/preset-typescript": "^7.7.4",
+    "@types/node": "^12.12.14",
+    "@types/react": "^16.9.14",
+    "@types/webpack": "^4.41.0"
+  }
+}

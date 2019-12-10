@@ -1,0 +1,254 @@
+@import 'src/assets/style/px2rem.scss';
+.music-player-wraps-mask {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top:0;
+    left: 0;
+    // background:url(https://p1.music.126.net/1ps8p2zDZ-eBWZoJOYe86Q==/109951164305864441.jpg);
+    filter: blur(20px);
+    z-index: 0;
+    box-shadow:inset 0px 0px 200px 5px #555;
+}
+.music-player-wraps {
+    width: 100%;
+    height: 100%;
+    // background: #ccc;
+    
+    // animation-play-state: paused;
+    position: relative;
+    top:0;
+    left:0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding-bottom: px2rem(20);
+    .music-player-content-logo {
+        width: 100%;
+        height: 65%;
+        // background: #ccc;
+        position: relative;
+        .rotate-music-logo-wraps {
+            
+            position: absolute;
+            top:50%;
+            left: 50%;
+            animation: rotates 3s linear infinite;
+            margin-left: px2rem(-275);
+            margin-top: px2rem(-275);
+            width: px2rem(550);
+            height: px2rem(550);
+            // background: lightblue;
+            z-index: 3;
+            border-radius: 50%;
+            overflow: hidden;
+            border:px2rem(5) dotted #fff;
+        }
+        .rotate-music-logo {
+            position: absolute;
+            top:50%;
+            left: 50%;
+            margin-left: px2rem(-250);
+            margin-top: px2rem(-250);
+            width: px2rem(500);
+            height: px2rem(500);
+            background: lightblue;
+            z-index: 3;
+            border-radius: 50%;
+            overflow: hidden;
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+        .lyric-content {
+            width: 100%;
+            height: px2rem(100);
+            // background: #ccc;
+            position: absolute;
+            bottom: px2rem(30);
+            text-align: center;
+            align-items: center;
+            font-size: px2rem(40);
+            color: red;
+        }
+    }
+    .music-player-conster-ok {
+        width: 100%;
+        flex: 1;
+        // background: #ccc;
+        display: flex;
+        flex-direction: column;
+        .music-player-conster-top {
+            width: 100%;
+            height: px2rem(150);
+            // background: lightgreen;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 px2rem(100);
+            .like-icon {
+                font-size: px2rem(50);
+                color: #fff;
+            }
+            .download-icon {
+                font-size: px2rem(50);
+                color: #fff;
+            }
+            .sound-icon {
+                font-size: px2rem(55);
+                color: #fff;
+            }
+            .more-icon {
+                font-size: px2rem(60);
+                color: #fff;
+            }
+            .comm-icon {
+                font-size: px2rem(55);
+                color: #fff;
+            }
+        }
+        .music-player-conster-center {
+            width: 100%;
+            height: px2rem(100);
+            // background: lightcoral;
+            // padding:px2rem(50) px2rem(100);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding:0 px2rem(20);
+            .m-p-c-c-l,
+            .m-p-c-c-r {
+                color:#fff;
+                font-size: px2rem(30);
+                // padding-top: px2rem(5)
+            }
+            .m-p-c-c-c {
+                flex: 1;
+                padding:0 px2rem(30);
+            }
+        }
+        .music-player-conster-bottom {
+            width: 100%;
+            flex: 1;
+            // background: lightseagreen;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 px2rem(100);
+            .loop-icon {
+                font-size: px2rem(70);
+                color: #fff;
+            }
+            .upper-icon,
+            .lower-icon {
+                font-size: px2rem(45);
+                color: #fff;
+            }
+            .list-icon {
+                font-size: px2rem(70);
+                color: #fff;
+            }
+            .player-icon {
+                font-size: px2rem(100);
+                color: #fff;
+            }
+        }
+    }
+}
+
+@keyframes rotates {
+    from {
+        transform:rotate(0deg);
+        
+    }
+
+    to {
+        transform:rotate(360deg);
+    }
+}
+.audios {
+    background: #000;
+    position: absolute;
+    z-index: -888;
+    opacity: 0;
+}
+.eject-module-wrap {
+    width: 100%;
+    height: px2rem(1000);
+    background: #fff;
+    border-radius: px2rem(45) px2rem(45) 0 0;
+    display: flex;
+    flex-direction: column;
+    .eject-module-wrap-title {
+        width: 100%;
+        height: px2rem(120);
+        border-bottom: px2rem(1) solid #ccc;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 px2rem(30);
+        .eject-module-wrap-title-left {
+            // height: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            .player-list-icon {
+                font-size: px2rem(50)
+            }
+            .list-t {
+                font-size: px2rem(30);
+                padding-left: px2rem(10);
+                color: #000;
+            }
+            .list-len {
+                font-size: px2rem(25);
+                padding-left: px2rem(5);
+            }
+        }
+    }
+    .eject-module-wrap-content-list {
+        width: 100%;
+        flex: 1;
+        overflow-y: auto;
+        -webkit-overflow-scrolling : touch;
+        .eject-module-wrap-content-tip {
+            width: 100%;
+            height: px2rem(120);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 px2rem(40);
+            &:active {
+                background: gainsboro;
+            }
+            .eject-module-wrap-content-name {
+                flex: 1;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                height: 100%;
+                color: #000;
+                .eject-module-wrap-music-name {
+                    font-size: px2rem(35);
+                }
+                .eject-module-icon {
+                    padding-right: px2rem(10);
+                }
+                span {
+                    color: #ccc;
+                }
+                .eject-module-wrap-music-author {
+                    font-size: px2rem(25);
+                    padding-top:px2rem(10);
+                    color: #ccc;
+                }
+            }
+        }
+    }
+
+}
+.am-modal-content {
+    background: transparent!important;
+}

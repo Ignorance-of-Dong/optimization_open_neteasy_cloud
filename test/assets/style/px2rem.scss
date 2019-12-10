@@ -1,0 +1,22 @@
+$designWidth: 375;
+
+@function px2rem($px:18) {
+    @return $px*10/$designWidth + rem;
+}
+
+@mixin placeholder($placeholderColor) {
+    &::-webkit-input-placeholder { /* WebKit browsers */
+        color: $placeholderColor;
+    }
+    &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color: $placeholderColor;
+        opacity: 1;
+    }
+    &::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color: $placeholderColor;
+        opacity: 1;
+    }
+    &:-ms-input-placeholder { /* Internet Explorer 10+ */
+        color: $placeholderColor;
+    }
+}

@@ -1,0 +1,212 @@
+@import 'src/assets/style/px2rem.scss';
+
+.mv-details-wraps {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    // overflow-y: auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    .mv-vidio-wrap {
+        width: 100%;
+        // height: px2rem(500);
+        background: lightcoral;
+        // .mv-vidio-wrap-constur {
+        //     width: 100%;
+        //     padding-top:px2rem(500) !important;
+        // }
+    }
+    .mv-vidio-contains {
+        width: 100%;
+        flex: 1;
+        overflow-y: auto;
+        -webkit-overflow-scrolling : touch;
+    }
+    .mv-vidio-title {
+        width: 100%;
+        // height: px2rem(100);
+        padding: px2rem(20);
+        font-weight: 800;
+        // background: #ccc;
+    }
+    .mv-vidio-label{
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: px2rem(20) 0;
+        flex-wrap: wrap;
+        .playback-volume {
+            font-size: px2rem(30);
+            color: #ccc;
+            margin-left: px2rem(20);
+        }
+        .labels-playback {
+            padding:px2rem(15) px2rem(20);
+            font-size: px2rem(25);
+            background:#f0f0f0;
+            border-radius: px2rem(30);
+            margin-left: px2rem(20);
+        }
+    }
+    .user-follow {
+        width: 100%;
+        height: px2rem(130);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding:0 px2rem(20);
+        border-top: px2rem(1) solid #f0f0f0;
+        .vidio-name {
+            width: 30%;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .header-portrail {
+                width: px2rem(50);
+                height: px2rem(50);
+                background: lightblue;
+                border-radius: 50%;
+                overflow: hidden;
+                img{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .header-name {
+                flex: 1;
+                overflow: hiddden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                margin-left: px2rem(30);
+            }
+        }
+        .please-follow {
+            padding:px2rem(10) px2rem(30);
+            font-size: px2rem(25);
+            background: red;
+            color: #fff;
+            border-radius: px2rem(30);
+        }
+    }
+    .lines {
+        width: 100%;
+        height: px2rem(20);
+        background: #f0f0f0;
+    }
+    .relevant-video-wrap {
+        width: 100%;
+        .relevant-video-title {
+            width: 100%;
+            height: px2rem(80);
+            padding-left: px2rem(20);
+            font-size: px2rem(30);
+            font-weight: 800;
+            line-height: px2rem(80);
+        }
+        .relevant-video-list {
+            width: 100%;
+            height: px2rem(190);
+            // background: #ccc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding:0 px2rem(30);
+            .relevant-video-list-left {
+                width: px2rem(300);
+                height: px2rem(150);
+                background: lightblue;
+                border-radius: px2rem(15);
+                overflow: hidden;
+                img{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .relevant-video-list-right {
+                flex: 1;
+                padding-left: px2rem(30);
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                .relevant-video-list-title {
+                    font-size: px2rem(30)
+                }
+                .relevant-video-list-name {
+                    font-size: px2rem(25);
+                    margin-top:px2rem(15);
+                    color: #ccc;
+                }
+            }
+        }
+    }
+    .mv-comment {
+        width: 100%;
+        .mv-comment-title {
+            width: 100%;
+            height: px2rem(80);
+            padding-left: px2rem(20);
+            font-size: px2rem(30);
+            font-weight: 800;
+            line-height: px2rem(80);
+        }
+        .mv-comment-list {
+            width: 100%;
+            border-bottom:px2rem(1) solid #f0f0f0;
+            padding:px2rem(20) 0;
+            .mv-comment-list-title{
+                width: 100%;
+                height: px2rem(100);
+                // background: #ccc;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding:0 px2rem(20);
+                .mv-comment-list-title-left {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding:0 px2rem(20);
+                    .m-c-l-t-l-header-pic {
+                        width: px2rem(50);
+                        height: px2rem(50);
+                        border-radius: 50%;
+                        background: lightcoral;
+                        overflow: hidden;
+                        img {
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+                    .m-c-l-t-l-header-name{
+                        padding-left: px2rem(20);
+                        // display: fl
+                        .m-c-l-t-l-name {
+                            font-size: px2rem(30)
+                        }
+                        .m-c-l-t-l-time {
+                            font-size: px2rem(25)
+                        }
+                    }
+                }
+                .mv-comment-list-title-right {
+                    .mv-comment-likedCount{
+                        font-size: px2rem(30);
+                        padding-right: px2rem(15)
+                    }
+                }
+            }
+            .mv-comment-list-content {
+                width: 100%;
+                // height: px2rem(200);
+                // background: #ccc;
+                padding-left: px2rem(100);
+                padding-right: px2rem(40);
+                line-height: px2rem(50);
+                font-size: px2rem(30)
+            }
+        }
+    }
+}

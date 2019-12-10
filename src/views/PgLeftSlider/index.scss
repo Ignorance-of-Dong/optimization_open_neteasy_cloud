@@ -1,0 +1,12 @@
+@import 'src/assets/style/px2rem.scss';
+.left-silder-signature{
+    width: px2rem(350);
+    font-size: px2rem(20);
+    display: block;
+    position: absolute;
+    top: px2rem(100);
+    right: px2rem(120);
+    overflow: hidden;/*超出部分隐藏*/
+    text-overflow: ellipsis;/* 超出部分显示省略号 */
+    white-space: nowrap;/*规定段落中的文本不进行换行 */
+}

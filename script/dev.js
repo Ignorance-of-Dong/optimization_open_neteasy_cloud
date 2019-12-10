@@ -1,0 +1,1 @@
+require('../config/webpack.config.dev.js')

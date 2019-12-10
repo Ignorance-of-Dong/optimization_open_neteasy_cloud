@@ -1,0 +1,54 @@
+@import 'src/assets/style/px2rem.scss';
+.phone-wrap{
+    width: 100%;
+    height: px2rem(300);
+    // background: #ccc;
+    .phone-tips{
+        width: 100%;
+        font-size: px2rem(35);
+        padding:px2rem(60) px2rem(30);
+        box-sizing: border-box;
+        color: #ccc;
+    }
+    .phone-input{
+        width: 100%;
+        height: px2rem(80);
+        padding:0 px2rem(30);
+        box-sizing: border-box;
+        .phone-border{
+            width: 100%;
+            height: 100%;
+            border-bottom:px2rem(1) solid #ccc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+    .phone-text-wrap {
+        flex:1;
+        padding:0 px2rem(30);
+        .phone-text{
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border:0;
+        }
+    }
+    .phone-buttom{
+        width: 90%;
+        height: px2rem(95);
+        background: #f33838;
+        margin: 0 auto;
+        margin-top: px2rem(60);
+        border-radius: px2rem(50);
+        text-align: center;
+        line-height: px2rem(95);
+        font-size: px2rem(35);
+        color: #fff;
+
+        &:active {
+            background: #e07e7e;
+        }
+    }
+    
+}

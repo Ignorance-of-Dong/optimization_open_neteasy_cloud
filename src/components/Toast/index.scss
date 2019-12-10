@@ -1,0 +1,15 @@
+@import 'src/assets/style/px2rem.scss';
+.over-toast {
+    width: auto;
+    position: fixed;
+    left: 50%;
+    bottom: 20%;
+    border-radius: px2rem(10);
+    transform: translateX(-50%);
+    background: #000;
+    padding:px2rem(20) px2rem(30);
+    white-space:nowrap;
+    box-shadow: 1px 1px 1px #ccc;
+    color: #a08383;
+    z-index: 999999999999999;
+}

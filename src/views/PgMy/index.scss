@@ -1,0 +1,140 @@
+@import 'src/assets/style/px2rem.scss';
+.my-music-wraps {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    .my-music-top-wrap {
+        width: 100%;
+        height: px2rem(200);
+        overflow-x: auto;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+        .my-music-top-content {
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 px2rem(40);
+            align-items: center;
+            overflow-x: auto;
+            &::-webkit-scrollbar {
+                display: none;
+            }
+            .my-music-top-content-wrap {
+                width: px2rem(120);
+                height: px2rem(130);
+                .my-music-top-tip-title {
+                    font-size: px2rem(30);
+                    padding-top: px2rem(20);
+                }
+            }
+            .my-music-top-tip {
+                width: px2rem(90);
+                height: px2rem(90);
+                background: red;
+                border-radius: 50%;
+                // margin-left: px2rem(40);
+                margin: 0 auto;
+                flex-shrink: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .fm-icon {
+                    font-size: px2rem(60);
+                    color: #fff;
+                }
+                .love-icon {
+                    font-size: px2rem(50);
+                    color: #fff;
+                }
+                .radio-icon {
+                    font-size: px2rem(50);
+                    color: #fff;
+                }
+                .run-icon {
+                    font-size: px2rem(50);
+                    color: #fff;
+                }
+                .drive-icon {
+                    font-size: px2rem(60);
+                    color: #fff;
+                }
+            }
+        }
+    }
+    .my-music-list-config-wrap {
+        width: 100%;
+        .my-music-list-config-tip {
+            width: 100%;
+            height: px2rem(110);
+            // background: #ccc;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding:0 px2rem(30);
+            border-bottom: px2rem(1) solid gainsboro;
+            .local-icon {
+                font-size: px2rem(50);
+                color: #000;
+            }
+            .my-music-list-config-title {
+                color: #000;
+                padding-left: px2rem(40);
+                font-size: px2rem(30)
+            }
+        }
+    }
+    .my-music-line {
+        width: 100%;
+        height: px2rem(20);
+        background: gainsboro;
+    }
+    .my-music-list-create {
+        .my-music-list-create-title {
+            width: 100%;
+            padding: px2rem(20) px2rem(40);
+            font-weight: 800;
+            text-align: left;
+            color: #000;
+        }
+        .my-music-list-create-tip {
+            width: 100%;
+            height: px2rem(150);
+            // background: #ccc;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding:0 px2rem(20);
+            .my-music-list-create-tip-pic {
+                width: px2rem(130);
+                height: px2rem(130);
+                // background: lightblue;
+                background: url('../../assets/images/timg.gif') no-repeat;
+                background-size: 100% 100%;
+                border-radius: px2rem(10);
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .my-music-list-create-tip-content {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                padding:0 px2rem(30);
+                // justify-content: space-between;
+                .my-music-list-create-tip-name {
+                    text-align: left;
+                    color: #000;
+                }
+                .my-music-list-create-tip-count{
+                    text-align: left;
+                    color: #666;
+                    padding-top:px2rem(20);
+                    font-size: px2rem(25);
+                }
+
+            }
+        }
+    }
+}
