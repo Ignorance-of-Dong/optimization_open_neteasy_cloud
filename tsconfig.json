@@ -11,7 +11,7 @@
     "sourceMap": false,
     "module": "commonjs",
     "target": "es5",
-    "lib": ["es6","esnext", "dom"],
+    "lib": ["es6", "esnext", "dom", "es2015"],
     "jsx": "react",
     "strict": false,
     "noImplicitThis": false, // 当 this表达式的值为 any类型的时候，生成一个错误。

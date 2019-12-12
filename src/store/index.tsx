@@ -1,6 +1,6 @@
-import {observable, action} from 'mobx'
+import { observable, action } from 'mobx'
 
-class Index{
+class Index {
     @observable heightlight = 1
     @observable open = false
 

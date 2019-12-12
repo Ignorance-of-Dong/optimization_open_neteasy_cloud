@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback, useLayoutEffect, memo } from 'react'
 import { Carousel, WingBlank } from 'antd-mobile';
 import './index.scss'
 import { Icons, Toast } from '../../components'
+import { observer } from 'mobx-react'
 import { apipersonalizedSongList, apialbum, apifirstMv, apibanner } from '../../api/index'
 
-function MvModule(props: any) {
+
+function MvModule(props: any): JSX.Element {
     let res = props.res
     let [show, setshow] = useState(false)
-    function toMvDetails() {
+    const toMvDetails =  () => {
         props.history.push(`/mvdetails?id=${res.id}`)
     }
     return (
@@ -46,48 +48,42 @@ function MvModule(props: any) {
     )
 }
 
+const MvModulePro = memo(MvModule)
 
+function PgFind(props: any): JSX.Element {
+    let [_recommendedSongList, setrecommendedSongList] = useState([])
+    let [_newDish, setnewDish] = useState([])
+    let [_personalizedMv, setpersonalizedMv] = useState([])
+    let [_bannerList, setbannerList] = useState([])
 
-
-function PgFind(props: any) {
-    let [recommendedSongList, setrecommendedSongList] = useState([])
-    let [newDish, setnewDish] = useState([])
-    let [personalizedMv, setpersonalizedMv] = useState([])
-    let [_condition, _setcondition] = useState(false)
-    let [_banner, _setbanner] = useState([])
-    useEffect(() => {
-        let getapipersonalizedSongList = async() => {
-            let params = {
-                limit: 6
-            }
-            try{
-                await apipersonalizedSongList(params).then((res: any) => {
-                    setrecommendedSongList(res.result)
-                })
-                await apibanner().then(res => {
-                    _setbanner(res.banners)
-                })
-            }catch (err) {
-                Toast('网络请求异常，请两分钟后再试', 2000)
-            }
+    let getapipersonalizedSongList = useCallback(async (): Promise<any> => {
+        let params = {
+            limit: 6
         }
-        getapipersonalizedSongList()
-        
-    }, [_condition])
-    useEffect(() => {
-        let getapipersonalizedMv = async () => {
-            let params = {
-                limit: 6
-            }
-            await apifirstMv(params).then((res: any) => {
-                setpersonalizedMv(res.data)
-            }).catch(err => {
-                Toast('网络请求异常，请两分钟后再试', 2000)
+        try {
+            await apipersonalizedSongList(params).then((res: any) => {
+                setrecommendedSongList(res.result)
             })
+            await apibanner().then(res => {
+                setbannerList(res.banners)
+            })
+        } catch (err) {
+            Toast('网络请求异常，请两分钟后再试', 2000)
         }
-        getapipersonalizedMv()
-    }, [_condition])
-    useEffect(() => {
+    }, [_recommendedSongList, _bannerList])
+
+    let getapipersonalizedMv = useCallback(async (): Promise<any> => {
+        let params = {
+            limit: 6
+        }
+        await apifirstMv(params).then((res: any) => {
+            setpersonalizedMv(res.data)
+        }).catch(err => {
+            Toast('网络请求异常，请两分钟后再试', 2000)
+        })
+    }, [_personalizedMv])
+
+    let getnewDish = useCallback(async (): Promise<any> => {
         let params = {
             limit: 3
         }
@@ -95,12 +91,19 @@ function PgFind(props: any) {
             setnewDish(res.albums)
         }).catch(err => {
             Toast('网络请求异常，请两分钟后再试', 2000)
-            _setcondition(false)
         })
-    }, [_condition])
-    function toPlayDetails(id) {
+    }, [_newDish])
+
+    useEffect(() => {
+        getapipersonalizedSongList()
+        getapipersonalizedMv()
+        getnewDish()
+    }, [])
+
+    const toPlayDetails = (id): void => {
         props.history.push(`/playdetails?id=${id}`)
     }
+
     return (
         <>
             <WingBlank>
@@ -110,10 +113,9 @@ function PgFind(props: any) {
                     beforeChange={() => { }}
                     afterChange={() => { }}
                 >
-                    {_banner.map(val => (
+                    {_bannerList.map(val => (
                         <span
                             key={val}
-                            // href="javascript:;"
                             style={{ display: 'inline-block', width: '100%', height: '100%' }}
                         >
                             <img
@@ -121,9 +123,7 @@ function PgFind(props: any) {
                                 alt=""
                                 style={{ width: '100%', verticalAlign: 'top', height: '100%' }}
                                 onLoad={() => {
-                                    // fire window resize event to change height
                                     window.dispatchEvent(new Event('resize'));
-                                    // setimgHeight('auto')
                                 }}
                             />
                         </span>
@@ -174,7 +174,7 @@ function PgFind(props: any) {
                 <div className="common-song-content">
                     <div className="recommended-song-list">
                         {
-                            recommendedSongList.map(item => {
+                            _recommendedSongList.map(item => {
                                 return (
                                     <div className="recommended-song-tip" key={item.id}>
                                         <div className="recommended-song-price" onClick={() => {
@@ -204,7 +204,7 @@ function PgFind(props: any) {
                 <div className="common-song-content">
                     <div className="recommended-song-list">
                         {
-                            newDish.map(item => {
+                            _newDish.map(item => {
                                 return (
                                     <div className="recommended-song-tip" key={item.id}>
                                         <div className="recommended-song-price">
@@ -232,9 +232,9 @@ function PgFind(props: any) {
                 <div className="common-song-content">
                     <div className="song-mv-list">
                         {
-                            personalizedMv.map(res => {
+                            _personalizedMv.map(res => {
                                 return (
-                                    <MvModule res={res} key={res.id} {...props}/>
+                                    <MvModulePro res={res} key={res.id} {...props} />
                                 )
                             })
                         }
@@ -245,4 +245,4 @@ function PgFind(props: any) {
         </>
     )
 }
-export default PgFind
+export default observer(PgFind)

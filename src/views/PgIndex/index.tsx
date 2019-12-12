@@ -1,15 +1,18 @@
 import { NavBar, Icon } from 'antd-mobile';
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback, memo } from 'react'
 // import {Icons} from '../../components'
 import RouterView from '../../router/routerView'
 import PgLeftSlider from '../PgLeftSlider'
+import {observer,inject} from 'mobx-react'
+import Store from './store'
 import './index.scss'
 
 
-function LeftSilderAddTitle(props) {
+const LeftSilderAddTitle = inject('Store')(observer((props) => {
     let [heightlight, setheightlight] = useState(1)
-    let [open, setopen] = useState(false)
+    let [changSHstate, setchangSHstate] = useState(false)
 
+    // let { open, changSHstate } = Store
     
     let tabBars = [
         {
@@ -30,22 +33,31 @@ function LeftSilderAddTitle(props) {
         }
     ]
 
-    function show(e) {
-        setopen(true)
-    }
-    function hide() {
-        setopen(false)
-    }
+
+    // 显示侧边栏
+    const show = useCallback(() => {
+        setchangSHstate(true)
+    }, [changSHstate])
+
+    // 关闭侧边栏
+    const hide = useCallback(() =>{
+        setchangSHstate(false)
+    }, [changSHstate])
+
+
     // eslint 并不了解你的规则，应该在此处禁用eslint
     /* eslint-disable */
     useEffect(() => {
         props.history.push(tabBars[heightlight].paths)
     }, [heightlight])
 
+
+    // 切换tab模块
     function toTabable(path, index) {
         setheightlight(index)
         props.history.push(path)
     }
+    
     return(
         <>
             <NavBar
@@ -69,8 +81,8 @@ function LeftSilderAddTitle(props) {
                 }
             </NavBar>
             <div className="left-mask-wrap" style={{
-                left: open ? '0px' : '-500px',
-                background: open ? 'rgba(47,44,44,0.7)' : '#fff'
+                left: changSHstate ? '0px' : '-500px',
+                background: changSHstate ? 'rgba(47,44,44,0.7)' : '#fff'
             }} onTouchEnd={()=>{hide()}}>
                 <div className="left-mask-wrap-content" onTouchEnd={(e) => {e.stopPropagation()}} >
                     <PgLeftSlider />
@@ -78,17 +90,19 @@ function LeftSilderAddTitle(props) {
             </div>
         </>
     )
-}
+}))
 
 
-
+const LeftSilderAddTitlepro = memo(LeftSilderAddTitle) 
+const RouterViewPro = memo(RouterView)
 function Index(props: any) {
+    console.log('..............')
     return (
         <>
             <div className='index-wraps'>
-                <LeftSilderAddTitle {...props}/>
+                <LeftSilderAddTitlepro {...props}/>
                 <div className="index-wraps-content">
-                    <RouterView routers={props.route} />
+                    <RouterViewPro routers={props.route} />
                 </div>
             </div>
         </>
