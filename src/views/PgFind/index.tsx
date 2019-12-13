@@ -122,9 +122,9 @@ function PgFind(props: any): JSX.Element {
                                 src={`${val.pic}`}
                                 alt=""
                                 style={{ width: '100%', verticalAlign: 'top', height: '100%' }}
-                                onLoad={() => {
-                                    window.dispatchEvent(new Event('resize'));
-                                }}
+                                // onLoad={() => {
+                                //     window.dispatchEvent(new Event('resize'));
+                                // }}
                             />
                         </span>
                     ))}

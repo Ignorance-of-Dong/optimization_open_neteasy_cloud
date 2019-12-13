@@ -1,27 +1,30 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useCallback} from 'react'
 import './index.scss'
 import { Icons, Toast, Headers } from '../../components'
 import query from '../../utils/useQuery'
 import { apiplaylistDetail } from '../../api'
+import {inject, observer} from 'mobx-react'
 function PgPlayDetails(props: any) {
     let [songListDetails, setsongListDetails] = useState([])
     let [songListObj, setsongListObj] = useState(null)
-    
-    useEffect(() => {
+
+    const getapiplaylistDetail = useCallback( async (): Promise<any> => {
         let { id } = query()
-        const getapiplaylistDetail = async() => {
-            let params = {
-                id: id
-            }
-            await apiplaylistDetail(params).then(res => {
-                setsongListObj(res.playlist)
-                setsongListDetails(res.playlist.tracks)
-            }).catch(err => {
-                Toast('网络请求异常，请两分钟后再试', 2000)
-            })
+        let params = {
+            id: id
         }
+        await apiplaylistDetail(params).then(res => {
+            setsongListObj(res.playlist)
+            setsongListDetails(res.playlist.tracks)
+        }).catch(err => {
+            Toast('网络请求异常，请两分钟后再试', 2000)
+        })
+    }, [songListDetails, songListObj])
+
+    useEffect(() => {
         getapiplaylistDetail()
     }, [])
+
     return (
         <>
             
@@ -67,6 +70,7 @@ function PgPlayDetails(props: any) {
                             songListDetails.map((res, index) => {
                                 return (
                                     <div className="play-details-content-song-tip" key={index} onClick={() => {
+                                        props.Store.getSongListDetails(songListDetails)
                                         sessionStorage.setItem('songListDetails', JSON.stringify(songListDetails))
                                         props.history.push(`/musicplayer?id=${res.id}`)
                                     }}>
@@ -91,4 +95,4 @@ function PgPlayDetails(props: any) {
     )
 }
 
-export default PgPlayDetails
+export default inject('Store')(observer(PgPlayDetails))

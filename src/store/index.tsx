@@ -1,13 +1,11 @@
 import { observable, action } from 'mobx'
 
 class Index {
-    @observable heightlight = 1
-    @observable open = false
+    @observable songListDetails = []
 
     @action.bound
-    changSHstate(flag) {
-        console.log(flag)
-        this.open = flag
+    getSongListDetails(data) {
+        this.songListDetails = data
     }
 }
 
