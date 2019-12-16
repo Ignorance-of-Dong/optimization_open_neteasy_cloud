@@ -44,6 +44,11 @@ export default {
             exact: false
         },
         {
+            path: "/about",
+            component: React.lazy(() => import('../views/PgAbout')),
+            exact: false
+        },
+        {
             path: "/search",
             component: React.lazy(() => import('../views/PgSearch')),
             exact: false

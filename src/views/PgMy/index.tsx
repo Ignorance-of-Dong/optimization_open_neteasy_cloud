@@ -1,23 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import './index.scss'
-import { Icons } from '../../components'
-import { apiuserplayer } from '../../api'
+import { Icons } from 'components/index'
+import { apiuserplayer } from 'api'
 function PgMy(props: any) {
     let [myCreateOrder, setmyCreateOrder] = useState([])
     let [collectionOrder, setcollectionOrder] = useState([])
     let [_condition, _setcondition] = useState(false)
-    useEffect(() => {
+
+    const getApiuserplayer = useCallback(() => {
         let useMsg = sessionStorage.getItem('useMsg')
         let uid = JSON.parse(useMsg).userId
         let parmas = {
             uid: uid
         }
         apiuserplayer(parmas).then(res => {
-            // console.log(res)
             let myCreateOrder = []
             let collectionOrder = []
-            for (let i = 0; i <= res.playlist.length - 1; i++){
-                // console.log(res.playlist[i].ordered)
+            for (let i = 0; i <= res.playlist.length - 1; i++) {
                 if (res.playlist[i].ordered) {
                     collectionOrder.push(res.playlist[i])
                 } else {
@@ -26,14 +25,21 @@ function PgMy(props: any) {
             }
             setmyCreateOrder(myCreateOrder)
             setcollectionOrder(collectionOrder)
-            // console.log(myCreateOrder)
         }).catch(err => {
             _setcondition(false)
         })
+    }, [])
+
+    useEffect(() => {
+        getApiuserplayer()
     }, [_condition])
-    function toPlayDetails(id) {
+
+
+    const toPlayDetails = (id) => {
         props.history.push(`/playdetails?id=${id}`)
     }
+
+
     return (
         <>
             <div className="my-music-wraps">

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import './index.scss'
 import { Icon } from 'antd-mobile';
 import { Toast } from '../../components'
@@ -7,15 +7,20 @@ function PgSearch(props: any) {
     let [hotSong, sethootSong] = useState([])
     let [searchSong, setsearchSong] = useState([])
     let [searchWord, setsearchWord] = useState('')
-    useEffect(() => {
+
+    const getApisearchhotdetai = useCallback(() => {
         apisearchhotdetai().then(res => {
             sethootSong(res.data)
         }).catch(err => {
             Toast('网络请求异常，请两分钟后再试', 2000)
         })
     }, [])
+    
+    useEffect(() => {
+        getApisearchhotdetai()
+    }, [])
 
-    function goSearchSong(keywords) {
+    const goSearchSong = useCallback((keywords) => {
         let params = {
             keywords
         }
@@ -25,7 +30,7 @@ function PgSearch(props: any) {
         }).catch(err => {
             Toast('网络请求异常，请两分钟后再试', 2000)
         })
-    }
+    }, [])
 
     function quickSearchSong(keywords) {
         setsearchWord(keywords)

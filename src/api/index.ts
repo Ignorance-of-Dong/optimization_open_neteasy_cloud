@@ -153,7 +153,8 @@ function apibanner(params?) {
  * 获取朋友动态
  */
 function apievent(params?) {
-  return fetch.post(`/event?pagesize=30`, {})
+  // return fetch.post(`/event?pagesize=30`, {})
+  return fetch.post('/comment/hotwall/list', {})
 }
 
 /**

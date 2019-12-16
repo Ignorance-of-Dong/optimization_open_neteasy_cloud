@@ -5962,7 +5962,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@15.x, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.8, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@15.x, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.8, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.npm.taobao.org/prop-types/download/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha1-UsQedbjIfnK52TYOAga5ncv/psU=
@@ -6050,6 +6050,11 @@ q@^1.1.2:
   version "1.5.1"
   resolved "https://registry.npm.taobao.org/q/download/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
   integrity sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc=
+
+qqmap@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npm.taobao.org/qqmap/download/qqmap-1.0.1.tgz#46279e8f9cd68002e2e0cc5a5fc155f701f401d3"
+  integrity sha1-Rieej5zWgALi4MxaX8FV9wH0AdM=
 
 qs@6.7.0:
   version "6.7.0"
@@ -6301,6 +6306,13 @@ react-native-swipeout@^2.2.2:
     create-react-class "^15.6.0"
     prop-types "^15.5.10"
     react-tween-state "^0.1.5"
+
+react-qmap@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.npm.taobao.org/react-qmap/download/react-qmap-0.1.6.tgz#08251707a96b3e9fc633ebec0d04d4c2f54205e1"
+  integrity sha1-CCUXB6lrPp/GM+vsDQTUwvVCBeE=
+  dependencies:
+    prop-types "^15.6.1"
 
 react-router-dom@^5.1.2:
   version "5.1.2"

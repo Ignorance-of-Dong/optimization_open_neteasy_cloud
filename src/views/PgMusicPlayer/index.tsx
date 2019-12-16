@@ -195,7 +195,7 @@ function PgMusicPlayer(props: any) {
     let [songUrl, setsongUrl] = useState('')
     let [songDetails, setsongDetails] = useState(null)
     let [lyric, setlyric] = useState([])
-    let [showlyric, setshowlyric] = useState('1111')
+    let [showlyric, setshowlyric] = useState('Start')
     let audiosRef = useRef(null)
 
     // 事件监听开始 / 停止
@@ -270,8 +270,8 @@ function PgMusicPlayer(props: any) {
      * 实时更新进度条【播放时间i】
      */
     const dropSpeed = useCallback((currenttime) => {
-        audiosRef.current.pause()
         setcurrenttime(currenttime ? currenttime : 0)
+        audiosRef.current.currentTime = currenttime
     }, [])
 
     /**
