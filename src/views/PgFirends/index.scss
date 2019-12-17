@@ -1,0 +1,61 @@
+@import 'src/assets/style/px2rem.scss';
+
+.yuncun-wraps{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    .yuncun-conation {
+        height: 100%;
+        overflow-y: auto;
+        .yuncun-tip {
+            width: 95%;
+            height: px2rem(200);
+            margin: px2rem(20) auto;
+            background-image: url(https://p1.music.126.net/8pZU75UDx6hooyYp1hzc9A==/2535473813822413.jpg);
+            // background-size: 100% 100%;
+            background-position: center;
+            filter: 120px;
+            border-radius: px2rem(15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .left {
+                height: 100%;
+                flex: 1;
+                color: #fff;
+                display: flex;
+                flex-direction: column;
+                padding: px2rem(50);
+                .left-title {
+                    width: 100%;
+                    height: 50%;
+                }
+                .left-contant {
+                    width: 100%;
+                    height: 50%;
+                    padding-top: px2rem(15);
+                    font-size: px2rem(30);
+                }
+            }
+            .right {
+                width: px2rem(150);
+                height: 100%;
+                // background: grey;
+                display: flex;
+                flex-direction: column;
+                padding: px2rem(50);
+                .right-mouth {
+                    font-size: px2rem(35);
+                    font-weight: 800;
+                    color: #fff;
+                }
+                .right-day {
+                    font-size: px2rem(60);
+                    font-weight: 800;
+                    color: #fff;
+                }
+            }
+        }
+    }
+    
+}

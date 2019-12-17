@@ -1,0 +1,86 @@
+@import 'src/assets/style/px2rem.scss';
+.vidio-wraps {
+    width: 100%;
+    height: 100%;
+    background: gainsboro;
+    display: flex;
+    flex-direction: column;
+    // overflow: hidden;
+    overflow-y: auto;
+    .vidio-top-tag {
+        width: 100%;
+        height: px2rem(100);
+        background: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 px2rem(40);
+        .vidio-top-tag-tip {
+            height: 100%;
+            line-height: px2rem(100);
+            text-align: center;
+            // background: #fff;
+            position: relative;
+            .line {
+                width: 100%;
+                height: px2rem(5);
+                // background: red;
+                left: 0;
+                position: absolute;
+                bottom: px2rem(10);
+            }
+        }
+    }
+    .vidio-contant-list {
+        width: 100%;
+        flex: 1;
+        background: red;
+        overflow-y: auto;
+        .vidio-list-tip {
+            width: 95%;
+            margin: 0 auto;
+            height: px2rem(600);
+            margin-bottom: px2rem(15);
+            margin-top: px2rem(10);
+            background: #fff;
+            .video-container {
+                width: 100%;
+                height: px2rem(400);
+                background: yellow;
+                border-radius: px2rem(20);
+                overflow: hidden;
+                img{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .video-name {
+                width: 100%;
+                height: px2rem(100);
+                background: #ccc;
+                line-height: px2rem(100);
+                overflow: hidden;
+                text-overflow:ellipsis;
+                white-space: nowrap;
+            }
+            .video-info {
+                width: 100%;
+                height: px2rem(100);
+                background: gold;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                .info-header {
+                    width: px2rem(60);
+                    height: px2rem(60);
+                    border-radius: 50%;
+                    background: green;
+                }
+                .info-name {
+                    flex: 1;
+                    height: px2rem(60);
+                }
+            }
+        }
+    }
+}

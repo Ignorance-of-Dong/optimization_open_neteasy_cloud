@@ -2,21 +2,37 @@ import React from 'react'
 import { List, Badge } from 'antd-mobile'
 import { Icons } from '../../components'
 import './index.scss'
-function PgLeftSlider() {
+function PgLeftSlider(props) {
     let useMsg = sessionStorage.getItem('useMsg')
     let useMsgs = JSON.parse(useMsg)
     return <List className='left-slider-wraps'>
         <div className="left-slider-topwrap">
-            <div className="left-slider-anuter">
-                <img src={useMsgs.avatarUrl} alt="" />
-            </div>
-            <span className='left-silder-signature'>
-                {useMsgs.signature}
-            </span>
-            <p className='left-silder-name'>
-                <span className='l-s-n-name'> {useMsgs.nickname} </span>
-                <span className='l-s-n-sign small'>签到</span>
-            </p>
+            {
+                useMsg ? 
+                <>
+                        <div className="left-slider-anuter">
+                            <img src={useMsgs.avatarUrl} alt="" />
+                        </div>
+                        <span className='left-silder-signature'>
+                            {useMsgs.signature}
+                        </span>
+                        <p className='left-silder-name'>
+                            <span className='l-s-n-name'> {useMsgs.nickname} </span>
+                            <span className='l-s-n-sign small'>签到</span>
+                        </p>
+                </>
+                :
+                <div className="left-slider-no-login">
+                    <p className='one'>登陆网易云音乐</p>
+                    <p>手机电脑多端同步,尽享海量高品质音乐</p>
+                    <div className="go-login" onClick={() => {
+                            props.history.push('/loginphone')
+                    }}>
+                        立即登陆
+                    </div>
+                </div>
+            }
+           
             <div className="left-slider-vip-wrap">
                 <div className="l-v-left">
                     <p className='v-i-p small'>开通黑胶VIP</p>

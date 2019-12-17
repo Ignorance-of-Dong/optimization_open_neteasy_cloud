@@ -1,0 +1,168 @@
+@import 'src/assets/style/px2rem.scss';
+
+.yuncun-wall-wrap-mask {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    filter: blur(20px);
+    z-index: 0;
+    box-shadow: inset 0px 0px 200px 5px #555;
+}
+.audios {
+    display: none;
+}
+.yuncun-wall-wrap {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    top:0;
+    left:0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    .yuncun-wall-header {
+        width: 100%;
+        height: px2rem(100);
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        box-sizing: border-box;
+        padding: px2rem(20);
+        // background: #ccc;
+        color: #fff;
+        .back-header {
+            margin-right: px2rem(20);
+        }
+
+        .text-header {
+            font-size: px2rem(35);
+            flex: 1;
+        }
+        .speed {
+            width: px2rem(150);
+            height: 100%;
+            text-align: center;
+            line-height: px2rem(60);
+            font-size: px2rem(35);
+        }
+        .header-icon {
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    .yuncun-wall-contant {
+        flex: 1;
+        // background: red;
+        .yuncun-wall-space-carousel {
+            touch-action: none;
+            width: 100%!important;
+            height: 100%!important;
+            .slider-frame {
+                width: 100% !important;
+                height: 100% !important;
+                ul, li{
+                    width: 100% !important;
+                    height: 100% !important;
+                }
+            }
+        }
+        .yuncun-wall-contant-tip {
+            width: 100%;
+            height: 100%;
+            // overflow: hidden;
+            .yuncun-wall-contant-tip-contant {
+                width: 100%;
+                // height: px2rem(800);
+                height: 100%;
+                margin-top: px2rem(150);
+                // overflow-y: auto;
+                // background: #ccc;
+                padding: px2rem(20);
+            }
+            .yuncun-wall-information {
+                width:100%;
+                height: 100%;
+                // background: yellow;
+                display: flex;
+                flex-direction: column;
+                .yuncun-wall-portrait {
+                    width: 100%;
+                    height: px2rem(80);
+                    // background: #fff;
+                    position: relative;
+                    .left-header-image {
+                        width: px2rem(80);
+                        height: px2rem(80);
+                        background: #ccc;
+                        border-radius: 50%;
+                        position: absolute;
+                        z-index: 2;
+                        overflow: hidden;
+                        img{
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+                    .left-header-name {
+                        top: 0;
+                        left: 0;
+                        line-height: px2rem(80);
+                        position: absolute;
+                        padding-left: px2rem(100);
+                        padding-right: px2rem(20);
+                        height: px2rem(80);
+                        border-radius: px2rem(40);
+                        font-size: px2rem(30);
+                        color: #fff;
+                        // background: #ccc;
+                    }
+                }
+                .yuncun-wall-punctuation {
+                    width: 100%;
+                    margin-top: px2rem(80);
+                    height: px2rem(100);
+                    // background: blue;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    .yuncun-wall-lower-icon {
+                        font-size: px2rem(80);
+                        color: #ccc;
+                    }
+                }
+                .yuncun-wall-aspirations {
+                    width: 100%;
+                    flex: 1;
+                    padding: px2rem(20);
+                    .text-alise {
+                        position: relative;
+                        span{
+                            font-size: px2rem(50);
+                            line-height: px2rem(80);
+                            color: #fff;
+                            font-weight: 800;
+                        }
+                        .yuncun-wall-aspirations-music {
+                            width: 100%;
+                            height: px2rem(160);
+                            padding-top: px2rem(80);
+                            // background: #ccc;
+                            .yuncun-wall-aspirations-content {
+                                width: 100%;
+                                height: 100%;
+                                // background: yellow;
+                                line-height: px2rem(80);
+                                color: #ccc;
+                                font-size: px2rem(30);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

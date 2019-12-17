@@ -13,7 +13,9 @@ function Home(props: any) {
                         props.history.push('/loginphone')
                     }}>手机号登陆</div>
                     <div className='temporary-login'>
-                        <div className="count-but">
+                        <div className="count-but" onClick={() => {
+                            props.history.push('/index/fined')
+                        }}>
                             立即体验
                         </div>
                     </div>

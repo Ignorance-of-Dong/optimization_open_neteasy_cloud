@@ -65,6 +65,27 @@
             background: #f1f1f1;
             padding-top:px2rem(40);
             position: relative;
+            .left-slider-no-login {
+                 width: 100%;
+                 height: px2rem(220);
+                //  background: #fff;
+                 padding-top: px2rem(20);
+                 p{
+                     font-size: px2rem(25);
+                     text-align: center;
+                     line-height: px2rem(35);
+                 }
+                 .go-login {
+                     width: 30%;
+                     height: px2rem(60);
+                     border: px2rem(2) solid #ccc;
+                     border-radius: px2rem(20);
+                     margin: px2rem(20) auto;
+                     text-align: center;
+                     line-height: px2rem(60);
+                     font-size: px2rem(26);
+                 }
+            }
             .left-slider-anuter {
                 width: px2rem(130);
                 height: px2rem(130);

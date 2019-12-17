@@ -1,18 +1,16 @@
 import { NavBar, Icon } from 'antd-mobile';
 import React, { useState, useEffect, useCallback, memo } from 'react'
-// import {Icons} from '../../components'
 import RouterView from '../../router/routerView'
 import PgLeftSlider from '../PgLeftSlider'
 import {observer,inject} from 'mobx-react'
-import Store from './store'
 import './index.scss'
 
 
 const LeftSilderAddTitle = inject('Store')(observer((props) => {
-    let [heightlight, setheightlight] = useState(1)
+    let index: number = sessionStorage.getItem('tabIndex') ? Number(sessionStorage.getItem('tabIndex')) : 1
+    let [heightlight, setheightlight] = useState(index)
     let [changSHstate, setchangSHstate] = useState(false)
 
-    // let { open, changSHstate } = Store
     
     let tabBars = [
         {
@@ -24,7 +22,7 @@ const LeftSilderAddTitle = inject('Store')(observer((props) => {
             paths: '/index/fined'
         },
         {
-            title: '朋友',
+            title: '云村',
             paths: '/index/firends'
         },
         {
@@ -48,12 +46,14 @@ const LeftSilderAddTitle = inject('Store')(observer((props) => {
     // eslint 并不了解你的规则，应该在此处禁用eslint
     /* eslint-disable */
     useEffect(() => {
-        props.history.push(tabBars[heightlight].paths)
-    }, [heightlight])
+        let index = sessionStorage.getItem('tabIndex') || 1
+        props.history.push(tabBars[index].paths)
+    }, [])
 
 
     // 切换tab模块
     function toTabable(path, index) {
+        sessionStorage.setItem('tabIndex', index)
         setheightlight(index)
         props.history.push(path)
     }
@@ -85,7 +85,7 @@ const LeftSilderAddTitle = inject('Store')(observer((props) => {
                 background: changSHstate ? 'rgba(47,44,44,0.7)' : '#fff'
             }} onTouchEnd={()=>{hide()}}>
                 <div className="left-mask-wrap-content" onTouchEnd={(e) => {e.stopPropagation()}} >
-                    <PgLeftSlider />
+                    <PgLeftSlider {...props}/>
                 </div>
             </div>
         </>
@@ -96,7 +96,6 @@ const LeftSilderAddTitle = inject('Store')(observer((props) => {
 const LeftSilderAddTitlepro = memo(LeftSilderAddTitle) 
 const RouterViewPro = memo(RouterView)
 function Index(props: any) {
-    console.log('..............')
     return (
         <>
             <div className='index-wraps'>

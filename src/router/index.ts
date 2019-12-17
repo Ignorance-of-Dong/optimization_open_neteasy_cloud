@@ -54,6 +54,11 @@ export default {
             exact: false
         },
         {
+            path: "/yuncun",
+            component: React.lazy(() => import('../views/PgYunCun')),
+            exact: false
+        },
+        {
             path: "/index",
             component: React.lazy(() => import('../views/PgIndex')),
             exact: false,

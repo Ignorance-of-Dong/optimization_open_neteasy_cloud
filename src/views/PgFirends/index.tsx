@@ -1,25 +1,39 @@
-import React, { useEffect, useRef } from 'react'
-import { apievent } from '../../api'
-function PgFirends() {
+import React, { useEffect } from 'react'
+import { Icons } from 'components/index'
+import './index.scss'
+function PgFirends(props: any): JSX.Element {
+
     useEffect(() => {
-        apievent().then(res => {
-            console.log(res)
-        })
+        console.log('进入云村入口页面')
     }, [])
-    let musicRef = useRef(null)
+
     return (
         <>
-            PgFirends
-            {/* <a href="">xiazia</a> */}
-            <audio src='' controls preload="auto" ref={musicRef}/>
-            <a href="http://m7.music.126.net/20190904144737/76cd03cd80bd6b40b95b9d02b63d4086/ymusic/45da/7b2b/b570/1147927e0cac8352f8898df3e4a2b6f4.mp3" download="aaa.mp3">sssss</a>
-            {/* <p onClick={() => {
-                musicRef.ondownload = function() {
-
-                }
-            }}>
-                2222222222
-            </p> */}
+            <div className="yuncun-wraps">
+                <div className="yuncun-conation">
+                    <div className="yuncun-tip" onClick={() => {
+                        props.history.push('/yuncun')
+                    }}>
+                        <div className="left">
+                            <div className="left-title">
+                                云村热评墙 <Icons className='lower-icon' un='&#xe621;'/>
+                            </div>
+                            <div className="left-contant">
+                                村友，这些评论戳中你的心了吗？
+                            </div>
+                        </div>
+                        <div className="right">
+                            <div className="right-mouth">
+                                {new Date().toDateString().split(" ")[1]}.
+                            </div>
+                            <div className="right-day">
+                                {new Date().getDate()}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
         </>
     )
 }

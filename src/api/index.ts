@@ -6,7 +6,7 @@
  * @Description: 
  */
 // import axios from 'axios'
-import fetch from '../utils/fetch'
+import fetch from 'utils/fetch'
 
 
 
@@ -150,7 +150,7 @@ function apibanner(params?) {
 }
 
 /**
- * 获取朋友动态
+ * 获取云村热评
  */
 function apievent(params?) {
   // return fetch.post(`/event?pagesize=30`, {})
@@ -162,6 +162,17 @@ function apievent(params?) {
  */
 function apilyric(params?) {
   return fetch.post(`/lyric?id=${params.id}`, {})
+}
+
+// 获取视频标签
+function apivideogroup(params?) {
+  return fetch.post(`/video/group/list`, {})
+}
+
+//获取视频标签下的视频
+
+function apigrouplist(params?) {
+  return fetch.post(`/video/group?id=${params.id}`, {})
 }
 
 export {
@@ -184,5 +195,7 @@ export {
   apisongdetail,
   apibanner,
   apievent,
-  apilyric
+  apilyric,
+  apivideogroup,
+  apigrouplist
 }

@@ -108,6 +108,7 @@ function PgFind(props: any): JSX.Element {
         <>
             <WingBlank>
                 <Carousel
+                    className='find-carousel'
                     autoplay={true}
                     infinite
                     beforeChange={() => { }}
