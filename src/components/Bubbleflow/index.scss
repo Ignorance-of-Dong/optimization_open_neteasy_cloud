@@ -1,0 +1,39 @@
+@import 'src/assets/style/px2rem.scss';
+
+.bubble-wrap {
+    width: 100%;
+    // height: 100%;
+    // background: Red;
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    .bubble-tip {
+        margin: px2rem(20);
+        padding: px2rem(15) px2rem(30);
+        border-radius: px2rem(30);
+        background: #ccc;
+        transform-origin: center;
+        opacity: .5;
+        // transform: rotateZ(2deg)
+        animation: Shake .5s infinite ;
+        
+    }
+    @keyframes Shake {
+        0% {
+            transform: translateX(0) translateY(0) rotateZ(0);
+        }
+        25%{
+            transform: translateX(2px) translateY(2px) rotateZ(1deg);
+        }
+        50% {
+            transform: translateX(-2px) translateY(-2px) rotateZ(-2deg);
+        }
+        75% {
+            transform: translateX(2px) translateY(2px) rotateZ(1deg);
+        }
+        100% {
+            transform: translateX(0) translateY(0) rotateZ(0);
+        }
+    }
+}

@@ -175,6 +175,18 @@ function apigrouplist(params?) {
   return fetch.post(`/video/group?id=${params.id}`, {})
 }
 
+// 获取视频播放地址
+function apivideourl(params?) {
+  return fetch.post(`/video/url?id=${params.id}`, {})
+}
+
+// 获取热门评论
+function apihotcomment(params?) {
+  return fetch.post(`/comment/hot?id=${params.id}&type=0`, {})
+}
+
+
+
 export {
   apilogincellphone,
   apipersonalizedMv,
@@ -197,5 +209,7 @@ export {
   apievent,
   apilyric,
   apivideogroup,
-  apigrouplist
+  apigrouplist,
+  apivideourl,
+  apihotcomment
 }

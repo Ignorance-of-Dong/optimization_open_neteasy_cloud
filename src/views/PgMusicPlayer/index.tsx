@@ -105,7 +105,7 @@ function EjectModule(props: ejectModuleProps) {
      * 设置歌曲列表scroll高度
      */
     const setScrollTop = useCallback(() => {
-        let list = props.Store.songListDetails.length ? props.Store.songListDetails.length : JSON.parse(sessionStorage.getItem('songListDetails'))
+        let list = JSON.parse(sessionStorage.getItem('songListDetails'))
         let { id } = query()
         list.forEach((item, index) => {
             if (item.id * 1 === id * 1) {
@@ -320,6 +320,7 @@ function PgMusicPlayer(props: any) {
                 setstatePlay(false)
                 type === 'last' ? getsongurl(list[_index].id) : getsongurl(list[_index].id)
                 type === 'last' ? props.history.replace(`/musicplayer?id=${list[_index].id}`) : props.history.replace(`/musicplayer?id=${list[_index].id}`)
+                setTimeout(() => { setstatePlay(true)}, 1000)
             }
         }
     }, [])

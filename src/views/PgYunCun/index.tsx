@@ -1,13 +1,15 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { Carousel } from 'antd-mobile';
 import { Icons, Toast } from 'components/index'
-import { apievent, apisongurl } from 'api'
+import { apievent, apisongurl, apihotcomment } from 'api'
 import './index.scss'
 function YunCun(props: any): JSX.Element {
     let [cloudVillageReviews, setCloudVillageReviews] = useState([])
     let [currentSlidingId, setCurrentSlidingId] = useState(1)
     let [currentBackground, setCurrentBackground] = useState('')
     let [songUrl, setsongUrl] = useState('')
+    let [hotComments, sethotComments] = useState([])
+    let [autoplay, setautoplay] = useState(false)
     let audiosRef = useRef(null)
 
     const getCloudVillageReviews = useCallback(async (): Promise<any> => {
@@ -27,6 +29,10 @@ function YunCun(props: any): JSX.Element {
             }
             await apisongurl(params).then(res => {
                 setsongUrl(res.data[0].url)
+            })
+            await apihotcomment(params).then(res => {
+                sethotComments(res.hotComments)
+                setautoplay(true)
             })
             audiosRef.current.play()
         }
@@ -108,6 +114,9 @@ function YunCun(props: any): JSX.Element {
                                                         <div className="yuncun-wall-aspirations-music">
                                                             <div className="yuncun-wall-aspirations-content">
                                                                 {item.simpleResourceInfo.name} - {item.simpleResourceInfo.artists[0].name}
+                                                                <div className="git-music">
+                                                                    <img src="https://wimg.588ku.com/gif620/19/07/09/7a6f5f0a2e1d75c9df651714f2266be7.gif" alt="" />
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -121,6 +130,21 @@ function YunCun(props: any): JSX.Element {
                         }
                         
                     </Carousel>
+                    <div className="floating-comment">
+                        <Carousel className="my-carousel"
+                            vertical
+                            dots={false}
+                            autoplay={autoplay}
+                            infinite
+                            autoplayInterval={3000}
+                        >
+                            {
+                                hotComments.map(item => (
+                                    <div className="yuncun-wall-commit" key={item.commentId}>{item.content}</div>
+                                ))
+                            }
+                        </Carousel>
+                    </div>
             </div>
         </div>
     </>

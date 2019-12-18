@@ -4,6 +4,14 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
+    position: relative;
+    .load-bearing {
+        position: absolute;
+        top: px2rem(300);
+        width: 100%;
+        height: px2rem(900);
+        // background: #ccc;
+    }
     .yuncun-conation {
         height: 100%;
         overflow-y: auto;

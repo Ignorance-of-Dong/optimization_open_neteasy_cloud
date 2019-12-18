@@ -9,6 +9,7 @@ function PgMy(props: any) {
 
     const getApiuserplayer = useCallback(() => {
         let useMsg = sessionStorage.getItem('useMsg')
+        if (!useMsg) return;
         let uid = JSON.parse(useMsg).userId
         let parmas = {
             uid: uid
@@ -115,7 +116,7 @@ function PgMy(props: any) {
                         创建的歌单
                     </div>
                     {
-                        myCreateOrder.map((res, index) => {
+                        myCreateOrder.length ? myCreateOrder.map((res, index) => {
                             return(
                                 <div className="my-music-list-create-tip" key={res.id} onClick={() => {
                                     toPlayDetails(res.id)
@@ -133,7 +134,13 @@ function PgMy(props: any) {
                                     </div>
                                 </div>
                             )
-                        })
+                        }) : 
+
+                        <div className="no-order" onClick={() => {
+                                props.history.push('/loginphone')
+                        }}>
+                            您还未登陆，去登陆😋
+                        </div>
                     }
                 </div>
                 <div className="my-music-list-create">
@@ -141,7 +148,7 @@ function PgMy(props: any) {
                         收藏的歌单
                     </div>
                     {
-                        collectionOrder.map((res, index) => {
+                        collectionOrder.length ? collectionOrder.map((res, index) => {
                             return (
                                 <div className="my-music-list-create-tip" key={res.id} onClick={() => {
                                     toPlayDetails(res.id)
@@ -159,7 +166,13 @@ function PgMy(props: any) {
                                     </div>
                                 </div>
                             )
-                        })
+                        }) : 
+                        <div className="no-order" onClick={() => {
+                            props.history.push('/loginphone')
+                        }}>
+                                您还未登陆，去登陆😋
+                        </div>
+
                     }
                 </div>
             </div>

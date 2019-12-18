@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Icons } from 'components/index'
+import { Icons, Bubbleflow } from 'components/index'
 import './index.scss'
 function PgFirends(props: any): JSX.Element {
 
@@ -31,6 +31,9 @@ function PgFirends(props: any): JSX.Element {
                             </div>
                         </div>
                     </div>
+                </div>
+                <div className="load-bearing">
+                    <Bubbleflow />
                 </div>
                 
             </div>

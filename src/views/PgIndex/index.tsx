@@ -1,5 +1,5 @@
 import { NavBar, Icon } from 'antd-mobile';
-import React, { useState, useEffect, useCallback, memo } from 'react'
+import React, { useState, useEffect, useCallback, memo, useRef } from 'react'
 import RouterView from '../../router/routerView'
 import PgLeftSlider from '../PgLeftSlider'
 import {observer,inject} from 'mobx-react'
@@ -10,6 +10,8 @@ const LeftSilderAddTitle = inject('Store')(observer((props) => {
     let index: number = sessionStorage.getItem('tabIndex') ? Number(sessionStorage.getItem('tabIndex')) : 1
     let [heightlight, setheightlight] = useState(index)
     let [changSHstate, setchangSHstate] = useState(false)
+
+    let tabBar = useRef(null)
 
     
     let tabBars = [
@@ -48,6 +50,8 @@ const LeftSilderAddTitle = inject('Store')(observer((props) => {
     useEffect(() => {
         let index = sessionStorage.getItem('tabIndex') || 1
         props.history.push(tabBars[index].paths)
+        // console.log(props.Store)
+        props.Store.setTabBarHeight(tabBar.current.offsetHeight)
     }, [])
 
 
@@ -60,26 +64,28 @@ const LeftSilderAddTitle = inject('Store')(observer((props) => {
     
     return(
         <>
-            <NavBar
-                mode="light"
-                icon={<Icon type="ellipsis" />}
-                rightContent={[
-                    <Icon key="0" type="search" style={{ marginRight: '10' }} onClick={() => {
-                        props.history.push('/search')
-                    }}/>,
-                ]}
-                onLeftClick={show}
-            >
-                {
-                    tabBars.map((item, index) => {
-                        return (
-                            <div className={heightlight === index ? 'tab-index-bar-actived' : 'tab-index-bar'} onClick={() => {
-                                toTabable(item.paths, index)
-                            }} key={index}>{item.title}</div>
-                        )
-                    })
-                }
-            </NavBar>
+            <div ref={tabBar}>
+                <NavBar
+                    mode="light"
+                    icon={<Icon type="ellipsis" />}
+                    rightContent={[
+                        <Icon key="0" type="search" style={{ marginRight: '10' }} onClick={() => {
+                            props.history.push('/search')
+                        }} />,
+                    ]}
+                    onLeftClick={show}
+                >
+                    {
+                        tabBars.map((item, index) => {
+                            return (
+                                <div className={heightlight === index ? 'tab-index-bar-actived' : 'tab-index-bar'} onClick={() => {
+                                    toTabable(item.paths, index)
+                                }} key={index}>{item.title}</div>
+                            )
+                        })
+                    }
+                </NavBar>
+            </div>
             <div className="left-mask-wrap" style={{
                 left: changSHstate ? '0px' : '-500px',
                 background: changSHstate ? 'rgba(47,44,44,0.7)' : '#fff'

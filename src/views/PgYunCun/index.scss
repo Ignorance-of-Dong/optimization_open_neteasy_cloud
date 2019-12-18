@@ -56,6 +56,7 @@
     }
     .yuncun-wall-contant {
         flex: 1;
+        position: relative;
         // background: red;
         .yuncun-wall-space-carousel {
             touch-action: none;
@@ -150,6 +151,9 @@
                             width: 100%;
                             height: px2rem(160);
                             padding-top: px2rem(80);
+                            // display: flex;
+                            // justify-content: flex-start;
+                            // align-items: center;
                             // background: #ccc;
                             .yuncun-wall-aspirations-content {
                                 width: 100%;
@@ -158,10 +162,53 @@
                                 line-height: px2rem(80);
                                 color: #ccc;
                                 font-size: px2rem(30);
+                                position: relative;
+                            }
+                            .git-music {
+                                display: inline-block;
+                                position: absolute;
+                                top: px2rem(-50);
+                                left: 0;
+                                width: px2rem(300);
+                                height: 100%;
+                                // background: red;
+                                // background: url('../../assets/images/music.gif') no-repeat;
+                                img{
+                                    width: 100%;
+                                    height: 100%;
+                                }
                             }
                         }
                     }
                 }
+            }
+        }
+        .floating-comment {
+            position: absolute;
+            width: 90%;
+            height: px2rem(90);
+            top: px2rem(20);
+            line-height: px2rem(70);
+            left: px2rem(30);
+            .my-carousel {
+                width: 100%;
+                height: px2rem(90)!important;
+                .slider-frame {
+                    height: px2rem(90) !important;
+                    ul, li{
+                        height: px2rem(90) !important;
+                    }
+                }
+            }
+            .yuncun-wall-commit {
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                padding: px2rem(10);
+                color: #ecf0f1;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
             }
         }
     }
