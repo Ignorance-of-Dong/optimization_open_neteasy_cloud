@@ -38,6 +38,7 @@ let Config: overalSituationConfig = {
 		"utils": path.resolve(process.cwd(), 'src', 'utils'),
 		"views": path.resolve(process.cwd(), 'src', 'views'),
 		"api": path.resolve(process.cwd(), 'src', 'api'),
+		"assets": path.resolve(process.cwd(), 'src', 'assets'),
 	}
 }
 export default Config

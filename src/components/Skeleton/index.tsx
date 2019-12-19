@@ -1,7 +1,9 @@
 import React from 'react';
 import './index.scss'
-
-function Skeleton(props: any) {
+interface props{
+    type: number
+}
+function Skeleton(props: props) {
 
     const BannerSkeleton = () => {
         return <>

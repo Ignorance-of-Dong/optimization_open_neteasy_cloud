@@ -1,6 +1,6 @@
 import React, { useState, useRef ,useEffect, memo, useCallback} from 'react'
 import './index.scss'
-import { Headers, Icons, Toast } from '../../components'
+import { Headers, Icons, Toasts } from '../../components'
 import { Slider, Modal } from 'antd-mobile';
 import formatSeconds from '../../utils/formatSeconds'
 import query from '../../utils/useQuery'
@@ -223,7 +223,7 @@ function PgMusicPlayer(props: any) {
             }).catch(err => {
                 audiosRef.current.pause()
                 setstatePlay(false)
-                Toast('加载歌曲失败,请重试！', 2000)
+                Toasts('加载歌曲失败,请重试！', 2000)
             })
         } else {
             audiosRef.current.pause()

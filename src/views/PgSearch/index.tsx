@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import './index.scss'
 import { Icon } from 'antd-mobile';
-import { Toast } from 'components/index'
 import { apisearchhotdetai, apisearchsuggest } from 'api'
 function PgSearch(props: any) {
     let [hotSong, sethootSong] = useState([])

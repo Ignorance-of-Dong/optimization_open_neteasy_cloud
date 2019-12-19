@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { Carousel } from 'antd-mobile';
-import { Icons, Toast } from 'components/index'
+import { Icons } from 'components/index'
 import { apievent, apisongurl, apihotcomment } from 'api'
 import './index.scss'
 function YunCun(props: any): JSX.Element {

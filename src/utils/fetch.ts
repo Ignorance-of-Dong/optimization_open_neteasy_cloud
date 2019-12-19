@@ -1,5 +1,7 @@
-import { Toast } from '../components'
+import { Toasts, ToastLodingPro } from 'components/index'
 const BASEHOST = 'http://musicapi.ignorantscholar.cn'
+
+let urlList = {}
 let fetchs = {
 	/**
 	  * 基于 fetch 封装的 GET请求
@@ -9,6 +11,7 @@ let fetchs = {
 	  * @returns {Promise}
 	  */
 	get: (url, params?) => {
+		// urlList.push(url)
 		if (params) {
 			var paramsArray = [];
 			Object.keys(params).forEach(function (key) {
@@ -40,6 +43,11 @@ let fetchs = {
 		})
 	},
 	post: (url, options?) => {
+		if (Object.keys(urlList).length === 0) {
+			ToastLodingPro.loading();
+		}
+		urlList[url] = url
+		
 		return fetch(BASEHOST + url, {
 			method: 'post',
 			headers: {
@@ -51,16 +59,23 @@ let fetchs = {
 			body: JSON.stringify(options)
 		}).then(response => {
 			return response.json().then((res) => {
+				delete urlList[url] // 每次请求成功后 都删除队列里的路径
+				if (Object.keys(urlList).length === 0) {
+					ToastLodingPro.hide()
+				}
 				if (response.ok && res.code === 200) {
 					return Promise.resolve(res)
 				} else {
-					console.log(res, '000000000')
-					Toast(res.msg || '网络请求异常', 2000)
+					Toasts(res.msg || '网络请求异常', 2000)
 					return Promise.reject(res)
 				}
 			})
 		}).catch(err => {
-			Toast('网络请求异常，请两分钟后再试', 2000)
+			delete urlList[url] // 每次请求成功后 都删除队列里的路径
+			if (Object.keys(urlList).length === 0) {
+				ToastLodingPro.hide()
+			}
+			Toasts('网络请求异常，请两分钟后再试', 2000)
 		})
 	}
 }

@@ -5,6 +5,7 @@
       "components/*": ["src/components/*"],
       "utils/*": ["src/utils/*"],
       "views/*": ["src/views/*"],
+      "assets/*": ["src/assets/*"],
       "api": ["src/api"]
     },
     "outDir": "./dist/",
