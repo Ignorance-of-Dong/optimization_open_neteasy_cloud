@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useCallback, useLayoutEffect, memo } from 'react'
+import React, { useEffect, useState, useCallback, memo } from 'react'
 import { Carousel, WingBlank } from 'antd-mobile';
 import './index.scss'
-import { Icons, Toast } from '../../components'
+import { Icons, Skeleton } from 'components/index'
 import { observer } from 'mobx-react'
-import { apipersonalizedSongList, apialbum, apifirstMv, apibanner } from '../../api/index'
+import { apipersonalizedSongList, apialbum, apifirstMv, apibanner } from 'api'
 
 
 function MvModule(props: any): JSX.Element {
@@ -51,10 +51,11 @@ function MvModule(props: any): JSX.Element {
 const MvModulePro = memo(MvModule)
 
 function PgFind(props: any): JSX.Element {
-    let [_recommendedSongList, setrecommendedSongList] = useState([])
-    let [_newDish, setnewDish] = useState([])
-    let [_personalizedMv, setpersonalizedMv] = useState([])
-    let [_bannerList, setbannerList] = useState([])
+    let [recommendedSongList, setrecommendedSongList] = useState([])
+    let [newDish, setnewDish] = useState([])
+    let [personalizedMv, setpersonalizedMv] = useState([])
+    let [bannerList, setbannerList] = useState([])
+    let [autoPlay, setAutoPlay] = useState(false)
 
     let getapipersonalizedSongList = useCallback(async (): Promise<any> => {
         let params = {
@@ -66,11 +67,11 @@ function PgFind(props: any): JSX.Element {
             })
             await apibanner().then(res => {
                 setbannerList(res.banners)
+                setAutoPlay(true)
             })
         } catch (err) {
-            Toast('网络请求异常，请两分钟后再试', 2000)
         }
-    }, [_recommendedSongList, _bannerList])
+    }, [recommendedSongList, bannerList])
 
     let getapipersonalizedMv = useCallback(async (): Promise<any> => {
         let params = {
@@ -78,10 +79,8 @@ function PgFind(props: any): JSX.Element {
         }
         await apifirstMv(params).then((res: any) => {
             setpersonalizedMv(res.data)
-        }).catch(err => {
-            Toast('网络请求异常，请两分钟后再试', 2000)
         })
-    }, [_personalizedMv])
+    }, [personalizedMv])
 
     let getnewDish = useCallback(async (): Promise<any> => {
         let params = {
@@ -89,10 +88,8 @@ function PgFind(props: any): JSX.Element {
         }
         apialbum(params).then(res => {
             setnewDish(res.albums)
-        }).catch(err => {
-            Toast('网络请求异常，请两分钟后再试', 2000)
         })
-    }, [_newDish])
+    }, [newDish])
 
     useEffect(() => {
         getapipersonalizedSongList()
@@ -109,26 +106,26 @@ function PgFind(props: any): JSX.Element {
             <WingBlank>
                 <Carousel
                     className='find-carousel'
-                    autoplay={true}
+                    autoplay={autoPlay}
                     infinite
                     beforeChange={() => { }}
                     afterChange={() => { }}
                 >
-                    {_bannerList.map(val => (
-                        <span
-                            key={val}
-                            style={{ display: 'inline-block', width: '100%', height: '100%' }}
-                        >
-                            <img
-                                src={`${val.pic}`}
-                                alt=""
-                                style={{ width: '100%', verticalAlign: 'top', height: '100%' }}
-                                // onLoad={() => {
-                                //     window.dispatchEvent(new Event('resize'));
-                                // }}
-                            />
-                        </span>
-                    ))}
+                    {
+                        bannerList.length ? bannerList.map(val => (
+                            <span
+                                key={val}
+                                style={{ display: 'inline-block', width: '100%', height: '100%' }}
+                            >
+                                <img
+                                    src={`${val.pic}`}
+                                    alt=""
+                                    style={{ width: '100%', verticalAlign: 'top', height: '100%' }}
+                                />
+                            </span>
+                        )) : 
+                        <Skeleton type={0}/>
+                    }
                 </Carousel>
             </WingBlank>
             <div className="fined-tab-bars">
@@ -175,7 +172,7 @@ function PgFind(props: any): JSX.Element {
                 <div className="common-song-content">
                     <div className="recommended-song-list">
                         {
-                            _recommendedSongList.map(item => {
+                            recommendedSongList.length ? recommendedSongList.map(item => {
                                 return (
                                     <div className="recommended-song-tip" key={item.id}>
                                         <div className="recommended-song-price" onClick={() => {
@@ -188,7 +185,8 @@ function PgFind(props: any): JSX.Element {
                                         </div>
                                     </div>
                                 )
-                            })
+                            }) : 
+                            <Skeleton type={1} />
                         }
                     </div>
                 </div>
@@ -205,7 +203,7 @@ function PgFind(props: any): JSX.Element {
                 <div className="common-song-content">
                     <div className="recommended-song-list">
                         {
-                            _newDish.map(item => {
+                            newDish.length ? newDish.map(item => {
                                 return (
                                     <div className="recommended-song-tip" key={item.id}>
                                         <div className="recommended-song-price">
@@ -216,7 +214,8 @@ function PgFind(props: any): JSX.Element {
                                         </div>
                                     </div>
                                 )
-                            })
+                            }) :
+                            <Skeleton type={1} />
                         }
                     </div>
                 </div>
@@ -233,11 +232,12 @@ function PgFind(props: any): JSX.Element {
                 <div className="common-song-content">
                     <div className="song-mv-list">
                         {
-                            _personalizedMv.map(res => {
+                            personalizedMv.length ? personalizedMv.map(res => {
                                 return (
                                     <MvModulePro res={res} key={res.id} {...props} />
                                 )
-                            })
+                            }) : 
+                            <Skeleton type={2} />
                         }
 
                     </div>

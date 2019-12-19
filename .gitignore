@@ -33,7 +33,6 @@ yarn-error.log*
 
 *.zip
 
-/246
-/227
 /dist
 /build
+/music

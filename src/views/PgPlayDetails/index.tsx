@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useCallback} from 'react'
 import './index.scss'
-import { Icons, Toast, Headers } from '../../components'
+import { Icons, Headers } from '../../components'
 import query from '../../utils/useQuery'
 import { apiplaylistDetail } from '../../api'
 import {inject, observer} from 'mobx-react'
@@ -17,7 +17,6 @@ function PgPlayDetails(props: any) {
             setsongListObj(res.playlist)
             setsongListDetails(res.playlist.tracks)
         }).catch(err => {
-            Toast('网络请求异常，请两分钟后再试', 2000)
         })
     }, [songListDetails, songListObj])
 

@@ -18,7 +18,6 @@ function YunCun(props: any): JSX.Element {
             setCurrentBackground(res.data[0].simpleResourceInfo.songCoverUrl)
             getSongUrl(res.data[0].simpleResourceInfo.songId)
         }).catch(err => {
-            Toast('网络请求异常，请两分钟后再试', 2000)
         })
     }, [cloudVillageReviews])
 

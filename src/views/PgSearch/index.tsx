@@ -12,7 +12,6 @@ function PgSearch(props: any) {
         apisearchhotdetai().then(res => {
             sethootSong(res.data)
         }).catch(err => {
-            Toast('网络请求异常，请两分钟后再试', 2000)
         })
     }, [])
     
@@ -28,7 +27,6 @@ function PgSearch(props: any) {
             setsearchWord('')
             setsearchSong(res.result.songs)
         }).catch(err => {
-            Toast('网络请求异常，请两分钟后再试', 2000)
         })
     }, [])
 

@@ -59,6 +59,8 @@ let fetchs = {
 					return Promise.reject(res)
 				}
 			})
+		}).catch(err => {
+			Toast('网络请求异常，请两分钟后再试', 2000)
 		})
 	}
 }

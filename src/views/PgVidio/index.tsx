@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState, useRef } from 'react'
 import { PullToRefresh } from 'antd-mobile';
-import { Toast, Icons } from 'components/index'
+import { Skeleton, Icons } from 'components/index'
 import './index.scss'
 import { apivideogroup, apigrouplist } from 'api'
 import { observer, inject } from 'mobx-react'
@@ -52,7 +52,6 @@ function PgVidio(props :any): JSX.Element {
         await apigrouplist(params).then(res => {
             setVideoList(res.datas)
         }).catch(err => {
-            Toast('网络请求异常，请两分钟后再试', 2000)
         })
     }, [])
 
@@ -107,7 +106,7 @@ function PgVidio(props :any): JSX.Element {
                         }}
                     >
                         {
-                            videoList.map((item, index) => {
+                            videoList.length ? videoList.map((item, index) => {
                                 return (
                                     <div className="vidio-list-tip" key={index}>
 
@@ -132,8 +131,6 @@ function PgVidio(props :any): JSX.Element {
                                                         >
                                                             <ControlBar autoHide={true}>
                                                                 <ReplayControl seconds={5} order={2.1} />
-                                                                <ReplayControl seconds={10} order={2.2} />
-                                                                <ReplayControl seconds={30} order={2.3} />
                                                             </ControlBar>
                                                             <BigPlayButton position="center" />
                                                         </Player>
@@ -158,7 +155,9 @@ function PgVidio(props :any): JSX.Element {
                                         </div>
                                     </div>
                                 )
-                            })
+                            }) : 
+
+                            <Skeleton type={2}/>
                         }
                     </PullToRefresh>
                 </div>
