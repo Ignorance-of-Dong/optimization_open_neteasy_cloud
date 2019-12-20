@@ -6,10 +6,10 @@ import { apivideogroup, apigrouplist } from 'api'
 import { observer, inject } from 'mobx-react'
 import { Player, BigPlayButton, ControlBar, ReplayControl } from 'video-react';
 
-const tarList: Array<any> = [
+const tarList: Array<object> = [
     {
-        tag: 'MV',
-        id: 1000
+        tag: '翻跳',
+        id: 60105  
     },
     {
         tag: '中文翻唱',

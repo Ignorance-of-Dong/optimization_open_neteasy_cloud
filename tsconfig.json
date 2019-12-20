@@ -31,7 +31,8 @@
     "skipLibCheck": false,                      // 跳过lib文件的静态检查，哎，不是所有的lib都给你写得规规整整的。
   },
   "include": [
-    "./src/**/*"
+    "./src/**/*",
+    "images.d.ts"
   ],
   "exclude": [
     "node_modules",

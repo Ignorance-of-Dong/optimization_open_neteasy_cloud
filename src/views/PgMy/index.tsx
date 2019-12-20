@@ -5,7 +5,7 @@ import { apiuserplayer } from 'api'
 function PgMy(props: any) {
     let [myCreateOrder, setmyCreateOrder] = useState([])
     let [collectionOrder, setcollectionOrder] = useState([])
-    let [_condition, _setcondition] = useState(false)
+    let [condition, setcondition] = useState(false)
 
     const getApiuserplayer = useCallback(() => {
         let useMsg = sessionStorage.getItem('useMsg')
@@ -27,13 +27,13 @@ function PgMy(props: any) {
             setmyCreateOrder(myCreateOrder)
             setcollectionOrder(collectionOrder)
         }).catch(err => {
-            _setcondition(false)
+            setcondition(false)
         })
     }, [])
 
     useEffect(() => {
         getApiuserplayer()
-    }, [_condition])
+    }, [condition])
 
 
     const toPlayDetails = (id) => {

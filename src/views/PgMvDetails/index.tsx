@@ -47,8 +47,6 @@ function PgMvDeatils(props: any) {
                         <BigPlayButton position="center" />
                         <ControlBar autoHide={false}>
                             <ReplayControl seconds={5} order={2.1} />
-                            <ReplayControl seconds={10} order={2.2} />
-                            <ReplayControl seconds={30} order={2.3} />
                         </ControlBar>
                     </Player>
                 </div>

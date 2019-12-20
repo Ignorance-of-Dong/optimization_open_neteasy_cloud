@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useCallback} from 'react'
+import React, {useEffect, useState, useCallback, useRef} from 'react'
 import './index.scss'
 import { Icons, Headers } from '../../components'
 import query from '../../utils/useQuery'
@@ -7,6 +7,9 @@ import {inject, observer} from 'mobx-react'
 function PgPlayDetails(props: any) {
     let [songListDetails, setsongListDetails] = useState([])
     let [songListObj, setsongListObj] = useState(null)
+    let [titlePostion, setTitlePostion] = useState(false)
+    let headerRef = useRef(null)
+    let titleRef = useRef(null)
 
     const getapiplaylistDetail = useCallback( async (): Promise<any> => {
         let { id } = query()
@@ -21,21 +24,52 @@ function PgPlayDetails(props: any) {
     }, [songListDetails, songListObj])
 
     useEffect(() => {
+        console.log(headerRef.current.headerRef.current.offsetHeight)
         getapiplaylistDetail()
+    }, [])
+
+    const scrollFun = useCallback((e) => {
+        if (e.target.scrollTop > (titleRef.current.offsetHeight - headerRef.current.headerRef.current.offsetHeight)) {
+            setTitlePostion(true)
+        } else {
+            setTitlePostion(false)
+        }
     }, [])
 
     return (
         <>
             
-            <div className="play-details-wrap">
-                <div className="play-details-title">
+            <div className="play-details-wrap" onScroll={(e) => scrollFun(e)}>
+                <div className="play-details-title" ref={titleRef}>
                     <div className="play-details-title-mask" style={{
                         background: `url(${songListObj ? songListObj.coverImgUrl : 'http://p2.music.126.net/SHElx36maw8L6CIXfiNbFw==/109951164144982394.jpg'})`,
                         backgroundRepeat: 'no-repeat',
                         backgroundSize: 'cover',
                         backgroundPosition: '10%'
                     }}></div>
-                    <Headers className='postion-header' props={props}>{songListObj ? songListObj.name : '加载中。。。'}</Headers>
+                   
+                    <Headers ref={headerRef} style={
+                    {
+                        backgroundColor: titlePostion ? '#fff' : ''
+                    }
+                    } 
+                    otherEl={<div className="header-mask" style={
+                        titlePostion 
+                        ? 
+                        {
+                            backgroundImage: `url(${songListObj ? songListObj.coverImgUrl : 'http://p2.music.126.net/SHElx36maw8L6CIXfiNbFw==/109951164144982394.jpg'})`,
+                        } 
+                        : 
+                        {
+                            background: `url(${songListObj ? songListObj.coverImgUrl : 'http://p2.music.126.net/SHElx36maw8L6CIXfiNbFw==/109951164144982394.jpg'})`,
+                        }
+                    }></div>} 
+                    className='postion-header' 
+                    svgCol='#fff'
+                    props={props}>
+                    
+                        {songListObj ? songListObj.name : '加载中。。。'}
+                    </Headers>
                     <div className="play-details-title-mask-content">
                         
                         <div className="play-details-left-pic">
@@ -58,10 +92,18 @@ function PgPlayDetails(props: any) {
                     </div>
                 </div>
                 <div className="play-details-content">
-                    <div className="play-details-content-title">
-                        <div className="play-details-content-title-playok">
+                    <div className="play-details-content-title" style={{
+                        position: titlePostion ? 'fixed' : 'relative',
+                        top: titlePostion ? headerRef.current.headerRef.current.offsetHeight : 0,
+                        zIndex: 5
+                    }}>
+                        <div className="play-details-content-title-playok" onClick={() => {
+                            props.Store.getSongListDetails(songListDetails)
+                            sessionStorage.setItem('songListDetails', JSON.stringify(songListDetails))
+                            props.history.push(`/musicplayer?id=${songListDetails[0].id}`)
+                        }}>
                             <Icons className='playok-icon' un='&#xe615;' />
-                            <p className='start-play-all'>播放全部<span className='song-number'>(共56首)</span></p>
+                            <p className='start-play-all'>播放全部<span className='song-number'>(共{songListDetails.length}首)</span></p>
                         </div>
                     </div>
                     <div className="play-details-content-song-listview">

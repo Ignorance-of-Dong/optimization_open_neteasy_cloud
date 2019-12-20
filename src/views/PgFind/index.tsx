@@ -223,7 +223,7 @@ function PgFind(props: any): JSX.Element {
             <div className="common-song-wrap">
                 <div className="common-song-title">
                     <div className="common-song-left">
-                        最新MV
+                        最热MV
                     </div>
                     <div className="common-song-right">
                         查看更多

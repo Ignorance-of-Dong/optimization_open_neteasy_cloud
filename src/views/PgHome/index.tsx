@@ -1,12 +1,12 @@
 import React from 'react'
 import './index.scss'
-
+import logo from 'assets/images/logo.png'
 function Home(props: any) {
     return (
         <>
             <div className='home-wrap'>
                 <div className="home-logo">
-                    <img className='home-logo-wh' src={require('../../assets/images/logo.png')} alt="" />
+                    <img className='home-logo-wh' src={logo} alt="" />
                 </div>
                 <div className='home-button'>
                     <div className='iphone-login' onClick={() => {

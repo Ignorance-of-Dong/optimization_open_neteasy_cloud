@@ -1,10 +1,10 @@
 import React, { useState, useRef ,useEffect, memo, useCallback} from 'react'
 import './index.scss'
-import { Headers, Icons, Toasts } from '../../components'
+import { Headers, Icons, Toasts } from 'components/index'
 import { Slider, Modal } from 'antd-mobile';
-import formatSeconds from '../../utils/formatSeconds'
-import query from '../../utils/useQuery'
-import { apisongurl, apisongdetail, apilyric } from '../../api'
+import formatSeconds from 'utils/formatSeconds'
+import query from 'utils/useQuery'
+import { apisongurl, apisongdetail, apilyric } from 'api'
 import Lyric from 'lyric-parser'
 import { inject, observer } from 'mobx-react'
 
@@ -209,6 +209,10 @@ function PgMusicPlayer(props: any) {
     // 事件监听 歌曲播放进度
     const CurrentPlaybackProgress = useCallback(() => {
         setcurrenttime(audiosRef.current.currentTime)
+    }, [])
+
+    useEffect(() => {
+        console.log('执行播放器主界面')
     }, [])
 
     /**

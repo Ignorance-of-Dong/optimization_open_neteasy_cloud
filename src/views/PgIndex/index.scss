@@ -219,11 +219,12 @@
         }
     }
 }
-.index-wraps-content {
+.index-wraps-content { 
     width: 100%;
     // background: #ccc;
     flex: 1;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 .left-mask-wrap {
     width: 100%;

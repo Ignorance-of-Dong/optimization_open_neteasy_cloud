@@ -102,7 +102,7 @@ function apisimiMv(params) {
  * 最新mv
  */
 function apifirstMv(params?) {
-  return fetch.post(`/mv/first?limit=10`)
+  return fetch.post(`/mv/all?order=最热&area=韩国`)
 }
 
 /**
