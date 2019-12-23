@@ -185,10 +185,16 @@ function apihotcomment(params?) {
   return fetch.post(`/comment/hot?id=${params.id}&type=0`, {})
 }
 
+// 获取每日推荐歌曲
+function apirecommendsongs(params?) {
+  return fetch.post(`/recommend/songs`, {})
+}
+
 
 
 export {
   apilogincellphone,
+  apirecommendsongs,
   apipersonalizedMv,
   mvsetusl,
   videoGroup,

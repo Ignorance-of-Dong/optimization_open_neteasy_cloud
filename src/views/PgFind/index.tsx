@@ -62,9 +62,11 @@ function PgFind(props: any): JSX.Element {
             limit: 6
         }
         try {
+           
             await apipersonalizedSongList(params).then((res: any) => {
                 setrecommendedSongList(res.result)
             })
+            
             await apibanner().then(res => {
                 setbannerList(res.banners)
                 setAutoPlay(true)
@@ -129,7 +131,9 @@ function PgFind(props: any): JSX.Element {
                 </Carousel>
             </WingBlank>
             <div className="fined-tab-bars">
-                <div className="fined-tab-list">
+                <div className="fined-tab-list" onClick={() => {
+                    props.history.push('/recommendeddaily')
+                }}>
                     <div className="fined-icon-run">
                         <Icons className='fined-icon' un='&#xe677;' />
                     </div>

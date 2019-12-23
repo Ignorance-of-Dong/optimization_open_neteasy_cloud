@@ -1,0 +1,20 @@
+@import 'src/views/PgPlayDetails/index.scss';
+.serial-numbers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    span{
+        display: block;
+        width: px2rem(90);
+        height: px2rem(90);
+        border-radius: px2rem(15);
+        overflow: hidden;
+        img{
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+.start-play-all-boxshaw {
+    box-shadow: -4px -7px 5px #fff;
+}

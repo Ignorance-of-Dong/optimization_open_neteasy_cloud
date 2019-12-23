@@ -59,6 +59,11 @@ export default {
             exact: false
         },
         {
+            path: "/recommendeddaily",
+            component: React.lazy(() => import('../views/PgRecommendedDaily')),
+            exact: false
+        },
+        {
             path: "/index",
             component: React.lazy(() => import('../views/PgIndex')),
             exact: false,

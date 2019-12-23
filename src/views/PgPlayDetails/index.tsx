@@ -1,8 +1,8 @@
 import React, {useEffect, useState, useCallback, useRef} from 'react'
 import './index.scss'
-import { Icons, Headers } from '../../components'
-import query from '../../utils/useQuery'
-import { apiplaylistDetail } from '../../api'
+import { Icons, Headers } from 'components/index'
+import query from 'utils/useQuery'
+import { apiplaylistDetail } from 'api'
 import {inject, observer} from 'mobx-react'
 function PgPlayDetails(props: any) {
     let [songListDetails, setsongListDetails] = useState([])
