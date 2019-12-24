@@ -119,8 +119,8 @@ function PgPlayDetails(props: any) {
                                             {(index + 1)}.
                                         </div>
                                         <div className="serial-content-wrap">
-                                            <div className='serial-content-song-name'><span className='name'>{res.name}</span> <span className='alias'>{JSON.stringify(res.alia) === '{}' || '[]' ? '' : `(${res.alia[0]})`}</span> </div>
-                                            <div className='serial-content-song-author'>{res.ar[0].name}</div>
+                                            <div className='serial-content-song-name'><span className='name serial-content-song-names'>{res.name}</span> <span className='alias'>{JSON.stringify(res.alia) === '{}' || '[]' ? '' : `(${res.alia[0]})`}</span> </div>
+                                            <div className='serial-content-song-author serial-content-song-names'>{res.ar[0].name}</div>
                                         </div>
                                         <div className="serial-all">
                                             <Icons className='playok-icon' un='&#xe615;' />

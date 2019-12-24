@@ -18,3 +18,10 @@
 .start-play-all-boxshaw {
     box-shadow: -4px -7px 5px #fff;
 }
+.serial-content-song-names {
+    width: px2rem(600);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}

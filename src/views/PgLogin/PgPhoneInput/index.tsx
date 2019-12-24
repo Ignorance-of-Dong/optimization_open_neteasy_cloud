@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { Headers, Toast } from '../../../components'
+import { Headers, Toasts } from 'components/index'
 import './index.scss'
 function PgPhoneInput(props: any) {
     let [phone, setphone] = useState('')
     function toPassword() {
         if (phone.length < 11) {
-            Toast('请输入11位数字的手机号', 2000)
+            Toasts('请输入11位数字的手机号', 2000)
             return
         }
         props.history.push(`/loginpassword?phone=${phone}`)

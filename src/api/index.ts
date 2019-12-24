@@ -190,12 +190,30 @@ function apirecommendsongs(params?) {
   return fetch.post(`/recommend/songs`, {})
 }
 
+// 获取歌单分类
+function apiplaylistcatlist(params?) {
+  return fetch.post(`/playlist/hot`, {})
+}
+
+// 获取每日推荐歌单歌单
+function apiresource(params?) {
+  return fetch.post(`/recommend/resource`, {})
+}
+
+// 获取分类歌单列表
+function apihighqualitylist(params?) {
+  let { cat, limit, before} = params
+  return fetch.post(`/top/playlist/highquality?cat=${cat}&cat=${limit}&cat=${before}`, {})
+}
+
 
 
 export {
+  apiplaylistcatlist,
   apilogincellphone,
   apirecommendsongs,
   apipersonalizedMv,
+  apiresource,
   mvsetusl,
   videoGroup,
   apirelatedAllvideo,

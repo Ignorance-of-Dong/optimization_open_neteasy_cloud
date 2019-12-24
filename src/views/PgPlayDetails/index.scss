@@ -215,3 +215,10 @@
     top: 0;
     z-index: -1;
 }
+.serial-content-song-names {
+    width: px2rem(600);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}

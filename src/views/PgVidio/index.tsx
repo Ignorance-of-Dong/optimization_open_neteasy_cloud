@@ -56,7 +56,7 @@ function PgVidio(props :any): JSX.Element {
     }, [])
 
     useEffect(() => {
-        getVideoList(tarList[0].id)
+        getVideoList(tarList[0]['id'])
         apivideogroup()
         const hei = document.documentElement.clientHeight - tagRef.current.offsetHeight - props.Store.tabBarHeight; // 获取到当前可适高度
         setListHeight(hei)
@@ -101,7 +101,7 @@ function PgVidio(props :any): JSX.Element {
                         getScrollContainer={() => undefined}
                         onRefresh={ async () => {
                             setrefreshing(true)
-                            await getVideoList(tarList[tagId].id)
+                            await getVideoList(tarList[tagId]['id'])
                             setrefreshing(false)
                         }}
                     >

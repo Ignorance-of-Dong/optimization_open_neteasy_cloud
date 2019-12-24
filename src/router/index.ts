@@ -64,6 +64,11 @@ export default {
             exact: false
         },
         {
+            path: "/songsquare",
+            component: React.lazy(() => import('../views/PgSongSquare')),
+            exact: false
+        },
+        {
             path: "/index",
             component: React.lazy(() => import('../views/PgIndex')),
             exact: false,
