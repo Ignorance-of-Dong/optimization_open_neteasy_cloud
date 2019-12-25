@@ -8,20 +8,58 @@ import 'swiper/css/swiper.min.css'
 function PgSongSquare(props: any) {
 
     const activationSwiper = () => {
+        let effect = 2
         new Swiper('.swiper-container', {
-            effect: 'coverflow', //3d滑动
-            grabCursor: true,
-            centeredSlides: true,
-            loop: true,
-            slidesPerView: 2,
+            // effect: 'coverflow', //3d滑动
+            // grabCursor: true,
+            // centeredSlides: true,
+            // loop: true,
+            // slidesPerView: 2,
             // autoplay: true,
-            coverflow: {
-                rotate: 0,  //设置为0
-                stretch: 0,
-                depth: 200,
-                modifier: 2,
-                slideShadows: true
-            }
+            // coverflow: {
+            //     rotate: 30,
+            //     stretch: 10,
+            //     depth: 60,
+            //     modifier: 2,
+            //     slideShadows: true
+            // }
+            loop: true,
+            speed: 1000,
+            slidesPerView: 2,
+            spaceBetween: 30,
+            autoplay: true,
+            // centeredSlides: true,
+            watchSlidesProgress: true,
+            on: {
+                setTranslate: function () {
+                    let slides = this.slides
+                    for (let i = 0; i < slides.length; i++) {
+                        let slide = slides.eq(i)
+                        let progress = slides[i].progress
+                        //slide.html(progress.toFixed(2)); 看清楚progress是怎么变化的
+                        slide.css({ 'opacity': '', 'background': '' }); slide.transform('');//清除样式
+
+                        if (effect == 1) {
+                            slide.transform('scale(' + (1 - Math.abs(progress) / 8) + ')');
+                        } else if (effect == 2) {
+                            slide.css('opacity', (1 - Math.abs(progress) / 2));
+                            slide.transform('translate3d(0,' + Math.abs(progress) * 20 + 'px, 0)');
+                        }
+                        else if (effect == 3) {
+                            slide.transform('rotate(' + progress * 30 + 'deg)');
+                        } else if (effect == 4) {
+                            slide.css('background', 'rgba(' + (255 - Math.abs(progress) * 20) + ',' + (127 + progress * 32) + ',' + Math.abs(progress) * 64 + ')');
+                        }
+
+                    }
+                },
+                setTransition: function (transition) {
+                    for (var i = 0; i < this.slides.length; i++) {
+                        var slide = this.slides.eq(i)
+                        slide.transition(transition);
+                    }
+                },
+            },
         });
     }
 
@@ -82,13 +120,6 @@ function PgSongSquare(props: any) {
     }, [recommendSongOrder, currenTag, pageupdateTime])
 
 
-    const addM = useCallback(() => {
-        let Sup = recommendSongOrder.length % 3;
-        let arr = []
-        
-        
-    }, [recommendSongOrder])
-
     const getapiresource = useCallback(() => {
         let topList = []
         let remList = []
@@ -111,10 +142,14 @@ function PgSongSquare(props: any) {
     const init = async () => {
         await getapiplaylistcatlist()
         await getapiresource()
-        setTimeout( async () => {
-            await activationSwiper()
-        }, 500)
+        // setTimeout( async () => {
+        //     await 
+        // }, 1000)
     }
+
+    useEffect(() => {
+        activationSwiper()
+    }, [topSongOrder])
 
     useEffect(() => {
         init()
@@ -150,7 +185,7 @@ function PgSongSquare(props: any) {
                                             return (
                                                 <div className="swiper-slide" key={item.id}>
                                                     <div className="cursol-pic" onClick={() => {
-                                                        props.history.push(`/playdetails?id=${item.id}`)
+                                                        // props.history.push(`/playdetails?id=${item.id}`)
                                                     }}>
                                                         <img src={item.picUrl} alt="" />
                                                     </div>

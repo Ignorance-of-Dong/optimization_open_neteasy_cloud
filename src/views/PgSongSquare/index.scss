@@ -15,7 +15,7 @@
             width: 100%;
             height: 100%;
 
-            @media screen and (max-width:480px) {
+            @media screen and (max-width:400px) {
                 .recommended-song-list {
                     width: 100%;
                     // height: px2rem(400);
@@ -23,7 +23,7 @@
                     justify-content: space-between;
                     align-items: center;
                     flex-wrap: wrap;
-                    padding: px2rem(10) px2rem(40);
+                    padding: px2rem(10) px2rem(20);
 
                     .recommended-song-tip {
                         width: px2rem(250);
@@ -114,18 +114,22 @@
 
         .swiper-container {
             width: 100%;
-            overflow: visible!important;
+            // overflow: visible!important;
             // overflow: visible;
+            overflow: unset;
         }
 
         .swiper-wrapper {
+            width: px2rem(400) !important;
+            margin: 0 auto!important;
+            // width: px2rem(400);
             height: 100%;
         }
 
         .swiper-slide {
             // background-position: center;
             // background-size: cover;
-            width: px2rem(400);
+            width: px2rem(400)!important;
             height: px2rem(500);
             background: #efeff4;
             border-radius: px2rem(15);
