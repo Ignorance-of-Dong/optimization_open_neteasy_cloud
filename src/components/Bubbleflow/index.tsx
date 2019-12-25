@@ -27,7 +27,7 @@ function Bubbleflow() :JSX.Element {
                         <div className="bubble-tip" key={index} style={{
                             background: bacCol[Math.round(Math.random() * bacCol.length)],
                             marginLeft: Math.round(Math.random() * 40),
-                            animation: `Shake ${Math.random()}s infinite`
+                            animation: `Shake ${Math.random() * 2}s infinite`
                         }}>
                             {item}
                         </div>

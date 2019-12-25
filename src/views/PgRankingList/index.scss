@@ -1,0 +1,92 @@
+@import 'src/assets/style/px2rem.scss';
+
+.ranking-list-wrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    .rangking-list-contant {
+        width: 100%;
+        flex: 1;
+        overflow-y: auto;
+        // background: #ccc;
+        .rangking-list-tip {
+            width: 100%;
+            .rangking-list-tip-header {
+                width: 100%;
+                height: px2rem(100);
+                background: #fff;
+                padding-left: px2rem(30);
+                font-weight: 800;
+                line-height: px2rem(100);
+                font-size: px2rem(35);
+            }
+            .rangking-list-tip-list {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                padding: px2rem(20);
+                @media screen and (min-width:400px) {
+                    .rangking-list-tip-low {
+                        width: px2rem(280);
+                        height: px2rem(350);
+                        // background: red;
+                        margin-bottom: px2rem(20);
+
+                        .rangking-list-tip-pic {
+                            width: 100%;
+                            height: px2rem(280);
+                            // background: yellow;
+                            border-radius: px2rem(15);
+                            overflow: hidden;
+                            img {
+                                width: 100%;
+                                height: 100%;
+                            }
+                        }
+                        .rangking-list-tip-name {
+                            width: 100%;
+                            height: px2rem(70);
+                            font-size: px2rem(25);
+                            line-height: px2rem(70);
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                        }
+                    }
+                }
+                @media screen and (max-width:400px) {
+                    .rangking-list-tip-low {
+                        width: px2rem(250);
+                        height: px2rem(320);
+                        margin-bottom: px2rem(20);
+
+                        .rangking-list-tip-pic {
+                            width: 100%;
+                            height: px2rem(250);
+                            border-radius: px2rem(15);
+                            overflow: hidden;
+                            img {
+                                width: 100%;
+                                height: 100%;
+                            }
+                        }
+                        .rangking-list-tip-name {
+                            width: 100%;
+                            height: px2rem(70);
+                            // background: yellow;
+                            font-size: px2rem(25);
+                            line-height: px2rem(70);
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                        }
+                    }
+                }
+                
+            }
+        }
+    }
+}

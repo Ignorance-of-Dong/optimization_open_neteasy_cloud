@@ -203,17 +203,23 @@ function apiresource(params?) {
 // 获取分类歌单列表
 function apihighqualitylist(params?) {
   let { cat, limit, before} = params
-  return fetch.post(`/top/playlist/highquality?cat=${cat}&cat=${limit}&cat=${before}`, {})
+  return fetch.post(`/top/playlist/highquality?cat=${cat}&limit=${limit}&before=${before}`, {})
+}
+
+function apitoplist(params) {
+  return fetch.post(`/top/list?idx=${params.id}`, {})
 }
 
 
 
 export {
   apiplaylistcatlist,
+  apihighqualitylist,
   apilogincellphone,
   apirecommendsongs,
   apipersonalizedMv,
   apiresource,
+  apitoplist,
   mvsetusl,
   videoGroup,
   apirelatedAllvideo,

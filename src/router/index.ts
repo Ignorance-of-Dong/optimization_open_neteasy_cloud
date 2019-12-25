@@ -69,6 +69,11 @@ export default {
             exact: false
         },
         {
+            path: "/rankinglist",
+            component: React.lazy(() => import('../views/PgRankingList')),
+            exact: false
+        },
+        {
             path: "/index",
             component: React.lazy(() => import('../views/PgIndex')),
             exact: false,

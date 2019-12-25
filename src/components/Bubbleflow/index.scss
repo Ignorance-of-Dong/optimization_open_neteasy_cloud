@@ -16,24 +16,24 @@
         transform-origin: center;
         opacity: .5;
         // transform: rotateZ(2deg)
-        animation: Shake .5s infinite ;
+        // animation: Shake .5s infinite ;
         
     }
     @keyframes Shake {
         0% {
-            transform: translateX(0) translateY(0) rotateZ(0);
+            transform: translateX(0) translateY(0) rotateZ(0) scale(1);
         }
         25%{
-            transform: translateX(2px) translateY(2px) rotateZ(1deg);
+            transform: translateX(2px) translateY(2px) rotateZ(1deg) scale(0.5);
         }
         50% {
-            transform: translateX(-2px) translateY(-2px) rotateZ(-2deg);
+            transform: translateX(-2px) translateY(-2px) rotateZ(-2deg) scale(0.7);
         }
         75% {
-            transform: translateX(2px) translateY(2px) rotateZ(1deg);
+            transform: translateX(2px) translateY(2px) rotateZ(1deg) scale(0.9);
         }
         100% {
-            transform: translateX(0) translateY(0) rotateZ(0);
+            transform: translateX(0) translateY(0) rotateZ(0) scale(1);
         }
     }
 }

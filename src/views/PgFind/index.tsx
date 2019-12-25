@@ -123,6 +123,9 @@ function PgFind(props: any): JSX.Element {
                                     src={`${val.pic}`}
                                     alt=""
                                     style={{ width: '100%', verticalAlign: 'top', height: '100%' }}
+                                    onClick={() => {
+                                        val.url ? window.location.href = val.url : null
+                                    }}
                                 />
                             </span>
                         )) : 
@@ -147,7 +150,9 @@ function PgFind(props: any): JSX.Element {
                     </div>
                     <p className='fined-icon-text small'>歌单</p>
                 </div>
-                <div className="fined-tab-list">
+                <div className="fined-tab-list" onClick={() => {
+                    props.history.push('/rankinglist')
+                }}>
                     <div className="fined-icon-run">
                         <Icons className='fined-icon' un='&#xe6ad;' />
                     </div>

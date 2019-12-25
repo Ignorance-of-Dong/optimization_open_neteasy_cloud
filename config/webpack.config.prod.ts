@@ -11,13 +11,13 @@ import merge from 'webpack-merge'
 const webpackCommon = require('./webpack.config.common')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // 清除上一次打包后的旧版文件
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // 将css单独打包出来
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin"); // 压缩js代码
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin") // 压缩css，将多余的css注释和重复代码去除
 const ROOT_PATH = process.cwd(); // 获取到当前node运行的进程目录
 const DIST_PATH = path.resolve(ROOT_PATH, "build"); // 获取到dist目录
 const ProgressBarPlugin = require('progress-bar-webpack-plugin') // 显示进度条
 const chalk = require('react-dev-utils/chalk')
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 import Config from '../web.config'
 
 module.exports = merge(webpackCommon, {
@@ -102,14 +102,8 @@ module.exports = merge(webpackCommon, {
 			}
 		},
 		
-		minimizer: [
-			new UglifyJsPlugin({
-				uglifyOptions: {
-					compress: false
-				}
-			}),
-			// new OptimizeCSSAssetsPlugin({})
-		]
+		minimize: true,
+		minimizer: [new TerserPlugin()],
 	},
 	plugins: [
 		new ProgressBarPlugin({

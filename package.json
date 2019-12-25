@@ -1,6 +1,6 @@
 {
-  "name": "todowenpack",
-  "version": "1.0.0",
+  "name": "optimization_open_neteasy_cloud",
+  "version": "1.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -37,6 +37,7 @@
     "sass-loader": "^8.0.0",
     "style-loader": "^1.0.1",
     "swiper": "^5.2.1",
+    "terser-webpack-plugin": "^2.3.1",
     "ts-node": "^8.5.4",
     "typescript": "^3.7.2",
     "uglifyjs-webpack-plugin": "^2.2.0",

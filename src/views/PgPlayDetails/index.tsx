@@ -2,7 +2,7 @@ import React, {useEffect, useState, useCallback, useRef} from 'react'
 import './index.scss'
 import { Icons, Headers } from 'components/index'
 import query from 'utils/useQuery'
-import { apiplaylistDetail } from 'api'
+import { apiplaylistDetail, apitoplist } from 'api'
 import {inject, observer} from 'mobx-react'
 function PgPlayDetails(props: any) {
     let [songListDetails, setsongListDetails] = useState([])
@@ -23,9 +23,20 @@ function PgPlayDetails(props: any) {
         })
     }, [songListDetails, songListObj])
 
+    const getapitoplist = useCallback( async () => {
+        let { id } = query()
+        let params = {
+            id: id
+        }
+        await apitoplist(params).then(res => {
+            setsongListObj(res.playlist)
+            setsongListDetails(res.playlist.tracks)
+        })
+    }, [])
+
     useEffect(() => {
-        console.log(headerRef.current.headerRef.current.offsetHeight)
-        getapiplaylistDetail()
+        let { isList } = query()
+        isList ? getapitoplist() : getapiplaylistDetail()
     }, [])
 
     const scrollFun = useCallback((e) => {
