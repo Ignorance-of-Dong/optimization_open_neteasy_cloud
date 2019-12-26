@@ -18,6 +18,13 @@
 * {
     -webkit-appearance: none;
     box-sizing: border-box;
+    /* -webkit-transform: translate3d(0, 0, 0);
+
+    -moz-transform: translate3d(0, 0, 0);
+
+    -ms-transform: translate3d(0, 0, 0);
+
+    transform: translate3d(0, 0, 0); */
 }
 .small {
     transform: scale(0.8);

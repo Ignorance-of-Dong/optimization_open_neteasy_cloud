@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { Carousel } from 'antd-mobile';
 import { Icons } from 'components/index'
 import { apievent, apisongurl, apihotcomment } from 'api'
+import gifMusic from 'assets/images/music.gif'
 import './index.scss'
 function YunCun(props: any): JSX.Element {
     let [cloudVillageReviews, setCloudVillageReviews] = useState([])
@@ -114,7 +115,7 @@ function YunCun(props: any): JSX.Element {
                                                             <div className="yuncun-wall-aspirations-content">
                                                                 {item.simpleResourceInfo.name} - {item.simpleResourceInfo.artists[0].name}
                                                                 <div className="git-music">
-                                                                    <img src="https://wimg.588ku.com/gif620/19/07/09/7a6f5f0a2e1d75c9df651714f2266be7.gif" alt="" />
+                                                                    <img src={gifMusic} alt="" />
                                                                 </div>
                                                             </div>
                                                         </div>
