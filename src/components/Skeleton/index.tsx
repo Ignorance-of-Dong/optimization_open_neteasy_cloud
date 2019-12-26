@@ -13,7 +13,7 @@ function Skeleton(props: props) {
                 style={{ display: 'inline-block', width: '100%', height: '100%' }}
             >
                 <img
-                    src={`http://p1.music.126.net/IKbN18ZWktWIXy44RZmcEA==/109951164566476117.jpg`}
+                    src={`http://p1.music.126.net/TPHBa3D5EVIztGfudfj7iQ==/109951164579581902.jpg`}
                     alt=""
                     style={{ width: '100%', height: '100%' }}
                 />

@@ -2,9 +2,13 @@ import React from 'react'
 import { List, Badge } from 'antd-mobile'
 import { Icons } from '../../components'
 import './index.scss'
-function PgLeftSlider(props) {
+function PgLeftSlider(props: any): JSX.Element {
+
     let useMsg = sessionStorage.getItem('useMsg')
+
     let useMsgs = JSON.parse(useMsg)
+
+
     return <List className='left-slider-wraps'>
         <div className="left-slider-topwrap">
             {

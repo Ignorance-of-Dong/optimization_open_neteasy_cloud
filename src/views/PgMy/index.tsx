@@ -3,11 +3,11 @@ import './index.scss'
 import { Icons } from 'components/index'
 import { apiuserplayer } from 'api'
 function PgMy(props: any) {
-    let [myCreateOrder, setmyCreateOrder] = useState([])
-    let [collectionOrder, setcollectionOrder] = useState([])
-    let [condition, setcondition] = useState(false)
+    let [myCreateOrder, setmyCreateOrder] = useState<Array<any>>([])
+    let [collectionOrder, setcollectionOrder] = useState<Array<any>>([])
+    let [condition, setcondition] = useState<boolean>(false)
 
-    const getApiuserplayer = useCallback(() => {
+    const getApiuserplayer = useCallback((): Promise<any> => {
         let useMsg = sessionStorage.getItem('useMsg')
         if (!useMsg) return;
         let uid = JSON.parse(useMsg).userId
@@ -31,12 +31,12 @@ function PgMy(props: any) {
         })
     }, [])
 
-    useEffect(() => {
+    useEffect((): void => {
         getApiuserplayer()
     }, [condition])
 
 
-    const toPlayDetails = (id) => {
+    const toPlayDetails = (id): void => {
         props.history.push(`/playdetails?id=${id}`)
     }
 
@@ -117,7 +117,7 @@ function PgMy(props: any) {
                     </div>
                     {
                         myCreateOrder.length ? myCreateOrder.map((res, index) => {
-                            return(
+                            return (
                                 <div className="my-music-list-create-tip" key={res.id} onClick={() => {
                                     toPlayDetails(res.id)
                                 }}>
@@ -134,12 +134,12 @@ function PgMy(props: any) {
                                     </div>
                                 </div>
                             )
-                        }) : 
+                        }) :
 
-                        <div className="no-order" onClick={() => {
+                            <div className="no-order" onClick={() => {
                                 props.history.push('/loginphone')
-                        }}>
-                            您还未登陆，去登陆😋
+                            }}>
+                                您还未登陆，去登陆😋
                         </div>
                     }
                 </div>
@@ -166,10 +166,10 @@ function PgMy(props: any) {
                                     </div>
                                 </div>
                             )
-                        }) : 
-                        <div className="no-order" onClick={() => {
-                            props.history.push('/loginphone')
-                        }}>
+                        }) :
+                            <div className="no-order" onClick={() => {
+                                props.history.push('/loginphone')
+                            }}>
                                 您还未登陆，去登陆😋
                         </div>
 

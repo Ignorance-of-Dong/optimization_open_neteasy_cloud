@@ -1,7 +1,7 @@
 import React from 'react'
 import './index.scss'
 import logo from 'assets/images/logo.png'
-function Home(props: any) {
+function Home(props: any): JSX.Element {
     return (
         <>
             <div className='home-wrap'>

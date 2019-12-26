@@ -3,7 +3,7 @@ import { Icons, Bubbleflow } from 'components/index'
 import './index.scss'
 function PgFirends(props: any): JSX.Element {
 
-    useEffect(() => {
+    useEffect((): void => {
         console.log('进入云村入口页面')
     }, [])
 

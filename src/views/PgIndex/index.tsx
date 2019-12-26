@@ -1,5 +1,5 @@
 import { NavBar, Icon } from 'antd-mobile';
-import React, { useState, useEffect, useCallback, memo, useRef } from 'react'
+import React, { useState, useEffect, useCallback, memo, useRef, ForwardRefExoticComponent } from 'react'
 import RouterView from '../../router/routerView'
 import PgLeftSlider from '../PgLeftSlider'
 import {observer,inject} from 'mobx-react'
@@ -14,7 +14,7 @@ const LeftSilderAddTitle = inject('Store')(observer((props) => {
     let tabBar = useRef(null)
 
     
-    let tabBars = [
+    let tabBars: Array<any> = [
         {
             title: '我的',
             paths: '/index/my'
@@ -35,28 +35,27 @@ const LeftSilderAddTitle = inject('Store')(observer((props) => {
 
 
     // 显示侧边栏
-    const show = useCallback(() => {
+    const show = useCallback((): void => {
         setchangSHstate(true)
     }, [changSHstate])
 
     // 关闭侧边栏
-    const hide = useCallback(() =>{
+    const hide = useCallback((): void =>{
         setchangSHstate(false)
     }, [changSHstate])
 
 
     // eslint 并不了解你的规则，应该在此处禁用eslint
     /* eslint-disable */
-    useEffect(() => {
+    useEffect((): void => {
         let index = sessionStorage.getItem('tabIndex') || 1
         props.history.push(tabBars[index].paths)
-        // console.log(props.Store)
         props.Store.setTabBarHeight(tabBar.current.offsetHeight)
     }, [])
 
 
     // 切换tab模块
-    function toTabable(path, index) {
+    function toTabable(path, index): void {
         sessionStorage.setItem('tabIndex', index)
         setheightlight(index)
         props.history.push(path)
@@ -99,9 +98,10 @@ const LeftSilderAddTitle = inject('Store')(observer((props) => {
 }))
 
 
-const LeftSilderAddTitlepro = memo(LeftSilderAddTitle) 
-const RouterViewPro = memo(RouterView)
-function Index(props: any) {
+const LeftSilderAddTitlepro: ForwardRefExoticComponent<any> = memo(LeftSilderAddTitle) 
+const RouterViewPro: ForwardRefExoticComponent<any> = memo(RouterView)
+
+function Index(props: any): JSX.Element {
     return (
         <>
             <div className='index-wraps'>

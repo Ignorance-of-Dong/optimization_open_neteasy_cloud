@@ -1,4 +1,4 @@
-function formatSeconds(times) {
+function formatSeconds(times): string {
     var result = '00:00';
     var hour, minute, second
     if (times > 0) {

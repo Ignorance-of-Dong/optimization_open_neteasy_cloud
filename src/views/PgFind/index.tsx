@@ -8,10 +8,12 @@ import { apipersonalizedSongList, apialbum, apifirstMv, apibanner } from 'api'
 
 function MvModule(props: any): JSX.Element {
     let res = props.res
-    let [show, setshow] = useState(false)
-    const toMvDetails =  () => {
+    let [show, setshow] = useState<boolean>(false)
+
+    const toMvDetails = (): void => {
         props.history.push(`/mvdetails?id=${res.id}`)
     }
+
     return (
         <>
             <div className="song-mv-tips">
@@ -51,11 +53,11 @@ function MvModule(props: any): JSX.Element {
 const MvModulePro = memo(MvModule)
 
 function PgFind(props: any): JSX.Element {
-    let [recommendedSongList, setrecommendedSongList] = useState([])
-    let [newDish, setnewDish] = useState([])
-    let [personalizedMv, setpersonalizedMv] = useState([])
-    let [bannerList, setbannerList] = useState([])
-    let [autoPlay, setAutoPlay] = useState(false)
+    let [recommendedSongList, setrecommendedSongList] = useState<Array<any>>([])
+    let [newDish, setnewDish] = useState<Array<any>>([])
+    let [personalizedMv, setpersonalizedMv] = useState<Array<any>>([])
+    let [bannerList, setbannerList] = useState<Array<any>>([])
+    let [autoPlay, setAutoPlay] = useState<boolean>(false)
 
     let getapipersonalizedSongList = useCallback(async (): Promise<any> => {
         let params = {
@@ -93,7 +95,7 @@ function PgFind(props: any): JSX.Element {
         })
     }, [newDish])
 
-    useEffect(() => {
+    useEffect((): void => {
         getapipersonalizedSongList()
         getapipersonalizedMv()
         getnewDish()

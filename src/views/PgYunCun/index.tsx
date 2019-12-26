@@ -5,12 +5,12 @@ import { apievent, apisongurl, apihotcomment } from 'api'
 import gifMusic from 'assets/images/music.gif'
 import './index.scss'
 function YunCun(props: any): JSX.Element {
-    let [cloudVillageReviews, setCloudVillageReviews] = useState([])
-    let [currentSlidingId, setCurrentSlidingId] = useState(1)
-    let [currentBackground, setCurrentBackground] = useState('')
-    let [songUrl, setsongUrl] = useState('')
-    let [hotComments, sethotComments] = useState([])
-    let [autoplay, setautoplay] = useState(false)
+    let [cloudVillageReviews, setCloudVillageReviews] = useState<Array<any>>([])
+    let [currentSlidingId, setCurrentSlidingId] = useState<number>(1)
+    let [currentBackground, setCurrentBackground] = useState<string>('')
+    let [songUrl, setsongUrl] = useState<string>('')
+    let [hotComments, sethotComments] = useState<Array<any>>([])
+    let [autoplay, setautoplay] = useState<boolean>(false)
     let audiosRef = useRef(null)
 
     const getCloudVillageReviews = useCallback(async (): Promise<any> => {
@@ -39,7 +39,7 @@ function YunCun(props: any): JSX.Element {
     }, [])
 
 
-    useEffect(() => {
+    useEffect((): void => {
         getCloudVillageReviews()
     }, [])
 
@@ -48,7 +48,7 @@ function YunCun(props: any): JSX.Element {
         audiosRef.current.pause()
     }, [])
 
-    useEffect(() => {
+    useEffect((): void => {
         let backgroundResult = cloudVillageReviews.length ? cloudVillageReviews[currentSlidingId - 1].simpleResourceInfo.songCoverUrl : ''
         let songUrlId = cloudVillageReviews.length ? cloudVillageReviews[currentSlidingId - 1].simpleResourceInfo.songId : ''
         setCurrentBackground(backgroundResult)

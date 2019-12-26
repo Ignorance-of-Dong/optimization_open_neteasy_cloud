@@ -5,24 +5,24 @@ import { apirecommendsongs } from 'api'
 import { inject, observer } from 'mobx-react'
 function PgRecommendedDaily(props: any) {
 
-    let [songListDetails, setsongListDetails] = useState([])
-    let [titlePostion, setTitlePostion] = useState(false)
+    let [songListDetails, setsongListDetails] = useState<Array<any>>([])
+    let [titlePostion, setTitlePostion] = useState<boolean>(false)
     let headerRef = useRef(null)
     let titleRef = useRef(null)
 
 
-    const getRecommendSongs = useCallback( async () => {
+    const getRecommendSongs = useCallback( async (): Promise<any> => {
         await apirecommendsongs().then(res => {
             let songs = res.data.dailySongs
             setsongListDetails(songs)
         })
     }, [])
 
-    useEffect(() => {
+    useEffect((): void => {
         getRecommendSongs()
     }, [])
 
-    const scrollFun = useCallback((e) => {
+    const scrollFun = useCallback((e): void => {
         if (e.target.scrollTop > (titleRef.current.offsetHeight - headerRef.current.headerRef.current.offsetHeight)) {
             setTitlePostion(true)
         } else {

@@ -2,6 +2,7 @@ import React from 'react';
 import './index.scss'
 import { Headers } from 'components/index'
 import Singlerowdata from './singleRowData'
+
 function PgRankingList(props: any): JSX.Element {
     return <>
         <div className="ranking-list-wrap">

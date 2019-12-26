@@ -1,17 +1,18 @@
 import React from 'react'
-// import { login } from '../../api/index.js'
 import { observer } from 'mobx-react'
 import Store from './store'
 
-import Headers from '../../../components/Headers'
+import Headers from 'components/Headers'
 import './index.scss'
 
-function PgPasswordInput(props: any) {
+function PgPasswordInput(props: any): JSX.Element {
     let { passwordFn, changePass, password } = Store
+
     async function toLogin() {
         await passwordFn()
         props.history.push('/index/fined')
     }
+
     return (
         <>
             <Headers props={props} />

@@ -6,7 +6,7 @@ import { apivideogroup, apigrouplist } from 'api'
 import { observer, inject } from 'mobx-react'
 import { Player, BigPlayButton, ControlBar, ReplayControl } from 'video-react';
 
-const tarList: Array<object> = [
+const tarList: Array<any> = [
     {
         tag: '翻跳',
         id: 60105  
@@ -28,41 +28,40 @@ const tarList: Array<object> = [
 
 function PgVidio(props :any): JSX.Element {
 
-    let [tagId, setTagId] = useState(0)
-    let [videoList, setVideoList] = useState([])
-    let [listHeight, setListHeight] = useState(0)
-    let [refreshing, setrefreshing] = useState(true)
-    let [currentIndex, setCurrentIndex] = useState(null)
+    let [tagId, setTagId] = useState<number>(0)
+    let [videoList, setVideoList] = useState<Array<any>>([])
+    let [listHeight, setListHeight] = useState<number>(0)
+    let [refreshing, setrefreshing] = useState<boolean>(true)
+    let [currentIndex, setCurrentIndex] = useState<any>(null)
 
     let listRef = useRef(null)
     let tagRef = useRef(null)
     let videoRef = useRef(null)
 
-    const startPlayVideo = useCallback( async (index) => {
+    const startPlayVideo = useCallback( async (index): Promise<any> => {
         setCurrentIndex(index)
         setTimeout(() => {
             videoRef.current.play()
         })
     }, [])
 
-    const getVideoList = useCallback( async (id) => {
+    const getVideoList = useCallback(async (id): void => {
         let params = {
             id: id
         }
         await apigrouplist(params).then(res => {
             setVideoList(res.datas)
-        }).catch(err => {
         })
     }, [])
 
-    useEffect(() => {
+    useEffect((): void => {
         getVideoList(tarList[0]['id'])
         apivideogroup()
         const hei = document.documentElement.clientHeight - tagRef.current.offsetHeight - props.Store.tabBarHeight; // 获取到当前可适高度
         setListHeight(hei)
     }, [])
 
-    const changeTagId = useCallback((index) => {
+    const changeTagId = useCallback((index): void => {
         setCurrentIndex(null)
         setTagId(index)
         getVideoList(tarList[index].id)

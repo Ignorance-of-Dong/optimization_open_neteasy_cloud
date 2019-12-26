@@ -5,7 +5,6 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    // background: #ccc;
 
     .song-square-nav {
         width: 100%;
@@ -103,9 +102,6 @@
             }
         }
     }
-    // .scroll {
-        // overflow-y: auto;
-    // }
     .song-square-swiper-wrap {
         width: 100%;
         height: px2rem(520);
@@ -114,34 +110,25 @@
 
         .swiper-container {
             width: 100%;
-            // overflow: visible!important;
-            // overflow: visible;
             overflow: unset;
         }
 
         .swiper-wrapper {
-            width: px2rem(400) !important;
             margin: 0 auto!important;
-            // width: px2rem(400);
             height: 100%;
         }
-
         .swiper-slide {
-            // background-position: center;
-            // background-size: cover;
-            width: px2rem(400)!important;
+            width: 60%;
+            height:100%;
             height: px2rem(500);
-            background: #efeff4;
             border-radius: px2rem(15);
-            overflow: hidden;
-            box-shadow: 1px 3px 1px 1px ghostwhite;
             .cursol-pic {
                 width: px2rem(400);
                 margin: 0 auto;
                 border-radius: px2rem(15) px2rem(15) px2rem(0) px2rem(0);
                 height: px2rem(400);
-                border-radius: px2rem(15);
                 overflow: hidden;
+                box-shadow: 2px 0px 6px 2px #ccc;
                 img{
                     width: 100%;
                     height: 100%;
@@ -153,7 +140,8 @@
                 height: px2rem(100);
                 padding: px2rem(20);
                 margin: 0 auto;
-                background: #efeff4;
+                box-shadow: 2px 2px 6px 2px #ccc;
+                border-radius: px2rem(0) px2rem(0) px2rem(15) px2rem(15);
             }
 
         }

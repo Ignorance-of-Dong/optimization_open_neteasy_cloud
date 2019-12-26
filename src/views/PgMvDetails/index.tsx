@@ -1,19 +1,23 @@
 import React, {useEffect, useState} from 'react'
 import "../../../node_modules/video-react/dist/video-react.css";
 import './index.scss'
-import { Icons, Headers } from '../../components'
-import { apimvdetails, apisimiMv, apicommentMv } from '../../api'
+import { Icons, Headers } from 'components/index'
+import { apimvdetails, apisimiMv, apicommentMv } from 'api'
 import { Player, BigPlayButton, ControlBar, ReplayControl} from 'video-react';
-import query from '../../utils/useQuery';
-function PgMvDeatils(props: any) {
-    let [mvDetails, setmvDetails] = useState(null)
-    let [relevantVideo, setrelevantVideo] = useState([])
-    let [brilliantComments, setbrilliantComments] = useState([])
-    useEffect(() => {
+import query from 'utils/useQuery';
+
+
+function PgMvDeatils(props: any): JSX.Element {
+    let [mvDetails, setmvDetails] = useState<any>(null)
+    let [relevantVideo, setrelevantVideo] = useState<Array<any>>([])
+    let [brilliantComments, setbrilliantComments] = useState<Array<any>>([])
+
+    useEffect((): void => {
         let {id} = query()
         getaData(id)
     }, [])
-    const getaData = async (id) => {
+
+    const getaData = async (id): Promise<any> => {
         let params = {
             id: id
         }
@@ -28,10 +32,11 @@ function PgMvDeatils(props: any) {
         })
     }
     
-    function switchingVideo(id) {
+    function switchingVideo(id): void {
         getaData(id)
         props.history.replace(`/mvdetails?id=${id}`)
     }
+    
     return(
         <>
             <div className="mv-details-wraps">

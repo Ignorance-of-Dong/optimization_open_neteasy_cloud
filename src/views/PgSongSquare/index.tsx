@@ -5,30 +5,18 @@ import { Headers } from 'components/index'
 import { Tabs, PullToRefresh } from 'antd-mobile';
 import { apiplaylistcatlist, apiresource, apipersonalizedSongList, apihighqualitylist } from 'api'
 import 'swiper/css/swiper.min.css'
-function PgSongSquare(props: any) {
+
+function PgSongSquare(props: any): JSX.Element {
 
     const activationSwiper = () => {
-        let effect = 2
         new Swiper('.swiper-container', {
-            // effect: 'coverflow', //3d滑动
-            // grabCursor: true,
-            // centeredSlides: true,
-            // loop: true,
-            // slidesPerView: 2,
-            // autoplay: true,
-            // coverflow: {
-            //     rotate: 30,
-            //     stretch: 10,
-            //     depth: 60,
-            //     modifier: 2,
-            //     slideShadows: true
-            // }
-            loop: true,
-            speed: 1000,
-            slidesPerView: 2,
-            spaceBetween: 30,
+            slidesPerView: 2, //每屏显示的个数
+            loopedSlides: 5,   //一般与slidersPerView一起使用
+            centeredSlides: true,
+            spaceBetween: 30, //间隔距离
             autoplay: true,
-            // centeredSlides: true,
+            speed: 1000,
+            loop: true,
             watchSlidesProgress: true,
             on: {
                 setTranslate: function () {
@@ -39,18 +27,8 @@ function PgSongSquare(props: any) {
                         //slide.html(progress.toFixed(2)); 看清楚progress是怎么变化的
                         slide.css({ 'opacity': '', 'background': '' }); slide.transform('');//清除样式
 
-                        if (effect == 1) {
-                            slide.transform('scale(' + (1 - Math.abs(progress) / 8) + ')');
-                        } else if (effect == 2) {
-                            slide.css('opacity', (1 - Math.abs(progress) / 2));
-                            slide.transform('translate3d(0,' + Math.abs(progress) * 20 + 'px, 0)');
-                        }
-                        else if (effect == 3) {
-                            slide.transform('rotate(' + progress * 30 + 'deg)');
-                        } else if (effect == 4) {
-                            slide.css('background', 'rgba(' + (255 - Math.abs(progress) * 20) + ',' + (127 + progress * 32) + ',' + Math.abs(progress) * 64 + ')');
-                        }
-
+                        slide.css('opacity', (1 - Math.abs(progress) / 2));
+                        slide.transform('translate3d(0,' + Math.abs(progress) * 20 + 'px, 0)');
                     }
                 },
                 setTransition: function (transition) {
@@ -75,7 +53,7 @@ function PgSongSquare(props: any) {
     let [currenTag, setCurrenTag] = useState('')
     let [isPage, setIsPage] = useState(true)
     let [supplement, setSupplement] = useState([])
-    
+
 
 
 
@@ -86,7 +64,7 @@ function PgSongSquare(props: any) {
     }, [])
 
     const getapihighqualitylist = useCallback((Aug) => {
-        let { ISPAGE = false, title = currenTag} = Aug
+        let { ISPAGE = false, title = currenTag } = Aug
         let params = {
             cat: title,
             limit: 21,
@@ -113,7 +91,7 @@ function PgSongSquare(props: any) {
                 setSupplement(arr)
                 await setRecommendSongOrder(res.playlists)
             }
-            
+
             setupdateTime(res.lasttime)
             setIsPage(res.more)
         })
@@ -157,11 +135,11 @@ function PgSongSquare(props: any) {
         setListHeight(hei)
     }, [])
 
-    const renderContent = tab =>{
+    const renderContent = tab => {
         return (<div className='tab-contant'>
             {
-                tab.title == '推荐' ? 
-                <>
+                tab.title == '推荐' ?
+                    <>
                         <PullToRefresh
                             damping={60}
                             style={{
@@ -177,19 +155,40 @@ function PgSongSquare(props: any) {
                             onRefresh={async () => {
                             }}
                         >
-                        <div className="song-square-swiper-wrap scroll">
-                            <div className="swiper-container">
-                                <div className="swiper-wrapper">
+                            <div className="song-square-swiper-wrap scroll">
+                                <div className="swiper-container swiper-no-swiping">
+                                    <div className="swiper-wrapper">
+                                        {
+                                            topSongOrder.map(item => {
+                                                return (
+                                                    <div className="swiper-slide" key={item.id}>
+                                                        <div className="cursol-pic" onClick={() => {
+                                                            props.history.push(`/playdetails?id=${item.id}`)
+                                                        }}>
+                                                            <img src={item.picUrl} alt="" />
+                                                        </div>
+                                                        <div className="cursol-name">
+                                                            {item.name}
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="song-order-list">
+                                <div className="recommended-song-list">
                                     {
-                                        topSongOrder.map(item => {
+                                        recommendSongOrder.map(item => {
                                             return (
-                                                <div className="swiper-slide" key={item.id}>
-                                                    <div className="cursol-pic" onClick={() => {
-                                                        // props.history.push(`/playdetails?id=${item.id}`)
-                                                    }}>
+                                                <div className="recommended-song-tip" key={item.id} onClick={() => {
+                                                    props.history.push(`/playdetails?id=${item.id}`)
+                                                }}>
+                                                    <div className="recommended-song-price">
                                                         <img src={item.picUrl} alt="" />
                                                     </div>
-                                                    <div className="cursol-name">
+                                                    <div className="recommended-song-text">
                                                         {item.name}
                                                     </div>
                                                 </div>
@@ -197,33 +196,12 @@ function PgSongSquare(props: any) {
                                         })
                                     }
                                 </div>
-                            </div>
-                        </div>
-                        <div className="song-order-list">
-                            <div className="recommended-song-list">
-                                {
-                                    recommendSongOrder.map(item => {
-                                        return (
-                                            <div className="recommended-song-tip" key={item.id} onClick={() => {
-                                                props.history.push(`/playdetails?id=${item.id}`)
-                                            }}>
-                                                <div className="recommended-song-price">
-                                                    <img src={item.picUrl} alt="" />
-                                                </div>
-                                                <div className="recommended-song-text">
-                                                    {item.name}
-                                                </div>
-                                            </div>
-                                        )
-                                    })
-                                }
-                            </div>
 
-                        </div>
-                    </PullToRefresh>
-                </>
-                :
-                <div className="song-order-list">
+                            </div>
+                        </PullToRefresh>
+                    </>
+                    :
+                    <div className="song-order-list">
                         <PullToRefresh
                             damping={60}
                             style={{
@@ -237,7 +215,7 @@ function PgSongSquare(props: any) {
                             distanceToRefresh={25}
                             getScrollContainer={() => undefined}
                             onRefresh={async () => {
-                                isPage ? getapihighqualitylist({ISPAGE:true}) : null
+                                isPage ? getapihighqualitylist({ ISPAGE: true }) : null
                             }}
                         >
                             <div className="recommended-song-list">
@@ -260,7 +238,7 @@ function PgSongSquare(props: any) {
                                 {
                                     supplement.map(item => {
                                         return (
-                                            <div className="recommended-song-tip" key={item} style={{opacity: 0}}>
+                                            <div className="recommended-song-tip" key={item} style={{ opacity: 0 }}>
                                                 <div className="recommended-song-price">
                                                     {/* <img src={item.coverImgUrl} alt="" /> */}
                                                 </div>
@@ -274,13 +252,13 @@ function PgSongSquare(props: any) {
 
                             </div>
                         </PullToRefresh>
-                </div>
+                    </div>
             }
         </div>);
     }
 
     const conversion = (taglist: Array<any>): Array<any> => {
-        let newArr = [{id: 0,title: '推荐'}]
+        let newArr = [{ id: 0, title: '推荐' }]
         taglist.forEach((item) => {
             newArr.push({
                 id: item.id,
@@ -290,7 +268,7 @@ function PgSongSquare(props: any) {
         return newArr
     }
 
-    const tagChange = useCallback( async (modules) => {
+    const tagChange = useCallback(async (modules) => {
         let { id, title } = modules
         await setRecommendSongOrder([])
         await setupdateTime('')
@@ -306,12 +284,12 @@ function PgSongSquare(props: any) {
         <div className="song-square-wrap">
             <Headers props={props} ref={headerRef}>歌单广场</Headers>
             <div className="song-square-nav">
-                <Tabs 
+                <Tabs
                     tabs={conversion(navList)}
                     swipeable={false}
                     tabBarActiveTextColor='red'
-                    onChange={(modules) => {tagChange(modules)}}
-                    tabBarUnderlineStyle={{ border: '1px red solid'}}
+                    onChange={(modules) => { tagChange(modules) }}
+                    tabBarUnderlineStyle={{ border: '1px red solid' }}
                     renderTabBar={props => <Tabs.DefaultTabBar {...props} page={5} />}>
                     {renderContent}
                 </Tabs>

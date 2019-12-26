@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import { Headers, Toasts } from 'components/index'
 import './index.scss'
 function PgPhoneInput(props: any) {
-    let [phone, setphone] = useState('')
-    function toPassword() {
+    let [phone, setphone] = useState<string>('')
+
+    function toPassword(): void {
         if (phone.length < 11) {
             Toasts('请输入11位数字的手机号', 2000)
             return

@@ -1,16 +1,16 @@
 import { observable, action } from 'mobx'
 
 class Index {
-    @observable songListDetails = []
-    @observable tabBarHeight = 0
+    @observable songListDetails: Array<any> = []
+    @observable tabBarHeight: number = 0
 
     @action.bound
-    getSongListDetails(data) {
+    getSongListDetails(data): void {
         this.songListDetails = data
     }
 
     @action.bound
-    setTabBarHeight(hei) {
+    setTabBarHeight(hei): void {
         this.tabBarHeight = hei
     }
 }

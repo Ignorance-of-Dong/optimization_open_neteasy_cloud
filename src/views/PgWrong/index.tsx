@@ -1,2 +1,2 @@
 import React from 'react';
-export default function Wrong() {return <div>404</div>}
+export default function Wrong(): JSX.Element {return <div>404</div>}

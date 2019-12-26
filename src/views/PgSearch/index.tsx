@@ -2,34 +2,34 @@ import React, { useEffect, useState, useCallback } from 'react'
 import './index.scss'
 import { Icon } from 'antd-mobile';
 import { apisearchhotdetai, apisearchsuggest } from 'api'
-function PgSearch(props: any) {
-    let [hotSong, sethootSong] = useState([])
-    let [searchSong, setsearchSong] = useState([])
-    let [searchWord, setsearchWord] = useState('')
 
-    const getApisearchhotdetai = useCallback(() => {
+
+function PgSearch(props: any): JSX.Element {
+    let [hotSong, sethootSong] = useState<Array<any>>([])
+    let [searchSong, setsearchSong] = useState<Array<any>>([])
+    let [searchWord, setsearchWord] = useState<string>('')
+
+    const getApisearchhotdetai = useCallback((): void => {
         apisearchhotdetai().then(res => {
             sethootSong(res.data)
-        }).catch(err => {
         })
     }, [])
     
-    useEffect(() => {
+    useEffect((): void => {
         getApisearchhotdetai()
     }, [])
 
-    const goSearchSong = useCallback((keywords) => {
+    const goSearchSong = useCallback((keywords): void => {
         let params = {
             keywords
         }
         apisearchsuggest(params).then(res => {
             setsearchWord('')
             setsearchSong(res.result.songs)
-        }).catch(err => {
         })
     }, [])
 
-    function quickSearchSong(keywords) {
+    function quickSearchSong(keywords): void {
         setsearchWord(keywords)
         goSearchSong(keywords)
     }

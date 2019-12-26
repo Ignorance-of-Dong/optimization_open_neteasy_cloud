@@ -1,4 +1,4 @@
-import React, { useState, useRef ,useEffect, memo, useCallback} from 'react'
+import React, { useState, useRef ,useEffect, memo, useCallback, ForwardRefExoticComponent} from 'react'
 import './index.scss'
 import { Headers, Icons, Toasts } from 'components/index'
 import { Slider, Modal } from 'antd-mobile';
@@ -13,7 +13,7 @@ interface currentProps{
     currenttime: number | string
 }
 
-function CurrentTime(props: currentProps) {
+function CurrentTime(props: currentProps): JSX.Element {
     return(
         <>
             {formatSeconds(props.currenttime) ? formatSeconds(props.currenttime) : '00:00'}
@@ -25,15 +25,18 @@ interface speedProps{
     currenttime: any,
     musicTime: any
 }
-function Speed(props: speedProps) {
+function Speed(props: speedProps): JSX.Element {
+
     useEffect(() => {
         console.log('Speed函数')
     }, [])
+
     const logs = useCallback(() => {
         return (value) => {
             props.dropSpeed(value)
         }
     }, [])
+
     return (
         <>
             <Slider
@@ -54,7 +57,7 @@ function Speed(props: speedProps) {
         </>
     )
 }
-const SpeedPro = memo(Speed)
+const SpeedPro: ForwardRefExoticComponent<any> = memo(Speed)
 interface ejectModuleProps{
     showModule: boolean,
     setshowModule: Function,
@@ -62,17 +65,17 @@ interface ejectModuleProps{
     setChildModuleScroll: Function,
     [propName: string]: any;
 }
-function EjectModule(props: ejectModuleProps) {
-    let [_state, _setstate] = useState(0)
-    let [songListDetail, setsongListDetail] = useState([])
-    let [id, setid] = useState('')
+
+function EjectModule(props: ejectModuleProps): JSX.Element {
+    let [_state, _setstate] = useState<number>(0)
+    let [songListDetail, setsongListDetail] = useState<Array<any>>([])
+    let [id, setid] = useState<string>('')
     let listRef = useRef(null)
-    // let { id } = query()
 
     /**
      * 实时获取歌曲在列表的位子【并在切换上一首 | 下一首实时更新】
      */
-    useEffect(() => {
+    useEffect((): void => {
         let { id } = query()
         let list = JSON.parse(sessionStorage.getItem('songListDetails'))
         setsongListDetail(list)
@@ -91,7 +94,7 @@ function EjectModule(props: ejectModuleProps) {
      * 弹层打开时设置歌曲列表scroll高度
      * @param scrollCurrent scroll高度
      */
-    const setScroll = useCallback((scrollCurrent) => {
+    const setScroll = useCallback((scrollCurrent): void => {
         if (listRef.current) {
             setTimeout(() => {
                 listRef.current.scrollTop = scrollCurrent
@@ -104,7 +107,7 @@ function EjectModule(props: ejectModuleProps) {
     /**
      * 设置歌曲列表scroll高度
      */
-    const setScrollTop = useCallback(() => {
+    const setScrollTop = useCallback((): void => {
         let list = JSON.parse(sessionStorage.getItem('songListDetails'))
         let { id } = query()
         list.forEach((item, index) => {
@@ -123,7 +126,7 @@ function EjectModule(props: ejectModuleProps) {
     /**
      * 初始化获取歌曲列表scroll高度
      */
-    useEffect(() => {
+    useEffect((): void => {
         console.log('EjectModule函数')
         setScrollTop()
     }, [])
@@ -133,13 +136,14 @@ function EjectModule(props: ejectModuleProps) {
      * @param index 歌曲列表的下标
      * @param id 歌曲id
      */
-    const selectMusic = useCallback((index, id) => {
+    const selectMusic = useCallback((index, id): void => {
         sessionStorage.setItem('currScrollTop', (50 * (index - 1)).toString())
         _setstate(index)
         props.history.replace(`/musicplayer?id=${id}`)
         props.getsongurl(id)
         listRef.current.scrollTop = 50 * (index - 1)
     }, [])
+
     return(
         <>
             <Modal
@@ -186,20 +190,21 @@ function EjectModule(props: ejectModuleProps) {
     )
 }
 
-const EjectModulePro = memo(EjectModule)
-function PgMusicPlayer(props: any) {
-    let [statePlay, setstatePlay] = useState(false)
-    let [musicTime, setmusicTime] = useState('00:00')
-    let [currenttime, setcurrenttime] = useState('00:00')
-    let [showModule, setshowModule] = useState(true)
-    let [songUrl, setsongUrl] = useState('')
-    let [songDetails, setsongDetails] = useState(null)
-    let [lyric, setlyric] = useState([])
-    let [showlyric, setshowlyric] = useState('Start')
+const EjectModulePro: ForwardRefExoticComponent<any> = memo(EjectModule)
+
+function PgMusicPlayer(props: any): JSX.Element {
+    let [statePlay, setstatePlay] = useState<boolean>(false)
+    let [musicTime, setmusicTime] = useState<string>('00:00')
+    let [currenttime, setcurrenttime] = useState<string>('00:00')
+    let [showModule, setshowModule] = useState<boolean>(true)
+    let [songUrl, setsongUrl] = useState<string>('')
+    let [songDetails, setsongDetails] = useState<any>(null)
+    let [lyric, setlyric] = useState<Array<any>>([])
+    let [showlyric, setshowlyric] = useState<string>('Start')
     let audiosRef = useRef(null)
 
     // 事件监听开始 / 停止
-    const PlayOrPause = useCallback( async () => {
+    const PlayOrPause = useCallback( async (): Promise<any> => {
         setstatePlay(false)
         setcurrenttime('00:00')
         await goLastSong(typeCheck[0])
@@ -207,18 +212,18 @@ function PgMusicPlayer(props: any) {
     }, [])
 
     // 事件监听 歌曲播放进度
-    const CurrentPlaybackProgress = useCallback(() => {
+    const CurrentPlaybackProgress = useCallback((): void => {
         setcurrenttime(audiosRef.current.currentTime)
     }, [])
 
-    useEffect(() => {
+    useEffect((): void => {
         console.log('执行播放器主界面')
     }, [])
 
     /**
      * 执行播放 | 暂停
      */
-    useEffect(() => {
+    useEffect((): void => {
         if (statePlay) {
             audiosRef.current.play().then((res) => {
                 setmusicTime(audiosRef.current.duration)
@@ -238,7 +243,7 @@ function PgMusicPlayer(props: any) {
      * 获取歌曲的链接地址【歌曲详情，歌曲歌词】
      * @param id 歌曲id
      */
-    const getsongurl = useCallback((id) => {
+    const getsongurl = useCallback((id): void => {
         audiosRef.current.pause()
         setstatePlay(false)
         let params = {
@@ -264,7 +269,7 @@ function PgMusicPlayer(props: any) {
     /**
      * 获取歌曲播放链接地址【初始化获取】
      */
-    useEffect(() => {
+    useEffect((): void => {
         let { id } = query()
         getsongurl(id)
     }, [])
@@ -272,7 +277,7 @@ function PgMusicPlayer(props: any) {
     /**
      * 实时更新进度条【播放时间i】
      */
-    const dropSpeed = useCallback((currenttime) => {
+    const dropSpeed = useCallback((currenttime): void => {
         setcurrenttime(currenttime ? currenttime : 0)
         audiosRef.current.currentTime = currenttime
     }, [])
@@ -280,7 +285,7 @@ function PgMusicPlayer(props: any) {
     /**
      * 打开播放列表弹层
      */
-    const openModule = useCallback(() => {
+    const openModule = useCallback((): void => {
         setshowModule(true)
     }, [])
 
@@ -288,7 +293,7 @@ function PgMusicPlayer(props: any) {
      * 设置播放列表的scroll定位i高度
      * @param callback 回调函数
      */
-    const setChildModuleScroll = useCallback((callback) => {
+    const setChildModuleScroll = useCallback((callback): void => {
         let currScrollTop = sessionStorage.getItem('currScrollTop')
         callback(currScrollTop)
     }, [])
@@ -300,7 +305,7 @@ function PgMusicPlayer(props: any) {
      * 获取上一首 | 下一首
      * @param type 上一首或者下一首类型
      */
-    const goLastSong = useCallback((type) => {
+    const goLastSong = useCallback((type): void => {
         let { id } = query()
         let list = JSON.parse(sessionStorage.getItem('songListDetails'))
         let _index = 0
@@ -331,7 +336,7 @@ function PgMusicPlayer(props: any) {
     /**
      * 实时更新歌词
      */
-    useEffect(() => {
+    useEffect((): void => {
         let _index = 0
         for (let i = 0; i < lyric.length - 1; i++) {
             if (parseInt((lyric[i].time / 1000).toString()) === parseInt(currenttime)) {
@@ -345,6 +350,7 @@ function PgMusicPlayer(props: any) {
             setshowlyric(lyazy)
         }
     }, [currenttime, lyric])
+    
     return (
         <>
             <div className="audios">

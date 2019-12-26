@@ -4,10 +4,12 @@ import { Icons, Headers } from 'components/index'
 import query from 'utils/useQuery'
 import { apiplaylistDetail, apitoplist } from 'api'
 import {inject, observer} from 'mobx-react'
-function PgPlayDetails(props: any) {
-    let [songListDetails, setsongListDetails] = useState([])
-    let [songListObj, setsongListObj] = useState(null)
-    let [titlePostion, setTitlePostion] = useState(false)
+
+function PgPlayDetails(props: any): JSX.Element {
+    let [songListDetails, setsongListDetails] = useState<Array<any>>([])
+    let [songListObj, setsongListObj] = useState<any>(null)
+    let [titlePostion, setTitlePostion] = useState<boolean>(false)
+
     let headerRef = useRef(null)
     let titleRef = useRef(null)
 
@@ -23,7 +25,7 @@ function PgPlayDetails(props: any) {
         })
     }, [songListDetails, songListObj])
 
-    const getapitoplist = useCallback( async () => {
+    const getapitoplist = useCallback( async (): Promise<any> => {
         let { id } = query()
         let params = {
             id: id
@@ -34,12 +36,12 @@ function PgPlayDetails(props: any) {
         })
     }, [])
 
-    useEffect(() => {
+    useEffect((): void => {
         let { isList } = query()
         isList ? getapitoplist() : getapiplaylistDetail()
     }, [])
 
-    const scrollFun = useCallback((e) => {
+    const scrollFun = useCallback((e): void => {
         if (e.target.scrollTop > (titleRef.current.offsetHeight - headerRef.current.headerRef.current.offsetHeight)) {
             setTitlePostion(true)
         } else {
