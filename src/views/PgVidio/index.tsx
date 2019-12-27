@@ -45,7 +45,7 @@ function PgVidio(props :any): JSX.Element {
         })
     }, [])
 
-    const getVideoList = useCallback(async (id): void => {
+    const getVideoList = useCallback(async(id): Promise<any> => {
         let params = {
             id: id
         }
@@ -61,12 +61,11 @@ function PgVidio(props :any): JSX.Element {
         setListHeight(hei)
     }, [])
 
-    const changeTagId = useCallback((index): void => {
+    const changeTagId = useCallback(<T extends number>(index: T): void => {
         setCurrentIndex(null)
         setTagId(index)
-        getVideoList(tarList[index].id)
+        getVideoList(tarList[index]['id'])
     }, [])
-
 
     return (
         <>
@@ -76,9 +75,9 @@ function PgVidio(props :any): JSX.Element {
                         tarList.map((item, index) => {
                             return(
                                 <div className="vidio-top-tag-tip" style={{ color: tagId == index ? 'red' : '' }} key={index} onClick={() => {
-                                    changeTagId(index)
+                                    changeTagId<number>(index)
                                 }}>
-                                    {item.tag}
+                                    {item['tag']}
                                     <div className="line" style={{ background: tagId == index ? 'red' : ''}}></div>
                                 </div>
                             )
