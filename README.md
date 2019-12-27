@@ -19,6 +19,7 @@ Optimization project
 - ES6：采用ES6语法。
 - CSS3：CSS3动画及样式。
 - typeScript: 使用ts规范变量声明
+- Ant Design Mobile： 阿里云移动UI库
 
 ### 功能介绍
 
