@@ -146,7 +146,9 @@ function EjectModule(props: ejectModuleProps): JSX.Element {
 
     return(
         <>
+        <div className="m-p-w-m">
             <Modal
+                className='moduel-medit-wrap'
                 popup
                 visible={props.showModule}
                 onClose={() => { props.setshowModule(false) }}
@@ -186,6 +188,7 @@ function EjectModule(props: ejectModuleProps): JSX.Element {
                     </div>
                 </div>
             </Modal>
+            </div>
         </>
     )
 }

@@ -153,3 +153,22 @@ button {
     height: 100%;
     background: #fff;
 }
+
+@media screen and (min-width:412px) {
+    #root {
+        width: 412px;
+        height: 100%;
+        overflow: hidden;
+        margin: 0 auto !important;
+        position: relative;
+    }
+}
+
+@media screen and (max-width:412px) {
+    #root {
+        width: 100%;
+        position: relative;
+        height: 100%;
+        background: #fff;
+    }
+}

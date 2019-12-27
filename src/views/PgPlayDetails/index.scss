@@ -107,23 +107,42 @@
             height: px2rem(130);
             background: #fff;
             // border-radius: px2rem(60) px2rem(60) 0 0;
-            .play-details-content-title-playok {
-                width: 100%;
-                height: 100%;
-                display: flex;
-                justify-content: flex-start;
-                align-items: center;
-                padding:0 px2rem(40);
-                .playok-icon {
-                    margin-right: px2rem(20);
-                    font-size: px2rem(60);
+            
+            .playok-icon {
+                margin-right: px2rem(20);
+                font-size: px2rem(60);
+            }
+
+            .start-play-all {
+                font-size: px2rem(40);
+            }
+
+            .song-number {
+                font-size: px2rem(30);
+                color: #ccc;
+            }
+            @media screen and (min-width:412px) {
+                .play-details-content-title-playok {
+                    width: 412px;
+                    height: 100%;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    padding: 0 px2rem(40);
+
                 }
-                .start-play-all {
-                    font-size: px2rem(40);
-                }
-                .song-number {
-                    font-size: px2rem(30);
-                    color: #ccc;
+            }
+
+            @media screen and (max-width:412px) {
+
+                .play-details-content-title-playok {
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    padding: 0 px2rem(40);
+
                 }
             }
         }

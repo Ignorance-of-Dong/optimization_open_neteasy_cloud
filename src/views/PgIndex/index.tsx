@@ -85,11 +85,14 @@ const LeftSilderAddTitle = inject('Store')(observer((props) => {
                     }
                 </NavBar>
             </div>
-            <div className="left-mask-wrap" style={{
-                left: changSHstate ? '0px' : '-500px',
-                background: changSHstate ? 'rgba(47,44,44,0.7)' : '#fff'
-            }} onTouchEnd={()=>{hide()}}>
-                <div className="left-mask-wrap-content" onTouchEnd={(e) => {e.stopPropagation()}} >
+            <div className="left-mask-wrap" 
+                style={{
+                    left: changSHstate ? '0px' : '-500px',
+                    background: changSHstate ? 'rgba(47,44,44,0.7)' : '#fff'
+                }} 
+                onClick={()=>{hide()}}
+            >
+                <div className="left-mask-wrap-content" onClick={(e) => {e.stopPropagation()}} >
                     <PgLeftSlider {...props}/>
                 </div>
             </div>
@@ -104,7 +107,7 @@ const RouterViewPro: ForwardRefExoticComponent<any> = memo(RouterView)
 function Index(props: any): JSX.Element {
     return (
         <>
-            <div className='index-wraps'>
+            <div className='index-wraps' style={{ overflow: 'hidden'}}>
                 <LeftSilderAddTitlepro {...props}/>
                 <div className="index-wraps-content">
                     <RouterViewPro routers={props.route} />

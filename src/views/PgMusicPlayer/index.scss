@@ -10,6 +10,25 @@
     z-index: 0;
     box-shadow:inset 0px 0px 200px 5px #555;
 }
+
+@media screen and (min-width:412px) {
+    .am-modal-mask{
+        width: 412px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+   .moduel-medit-wrap {
+       width: 412px;
+       left: 50%;
+       transform: translateX(-50%);
+   }
+}
+
+@media screen and (max-width:412px) {
+   .moduel-medit-wrap {
+       width: 100%;
+   }
+}
 .music-player-wraps {
     width: 100%;
     height: 100%;
