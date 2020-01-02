@@ -1,0 +1,256 @@
+@import 'src/assets/style/px2rem.scss';
+
+.adiostation-wrap {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    .adiostation-carousel {
+        touch-action: none;
+        width: 95% !important;
+        margin: 0 auto;
+
+        .slider-list {
+            // width: 90% !important;
+            height: px2rem(350) !important;
+            border-radius: px2rem(20);
+        }
+
+        .slider-frame {
+            border-radius: px2rem(10);
+        }
+
+        .slider-slide {
+            height: 100% !important;
+        }
+    }
+    .adiostation-tab {
+        width: 100%;
+        height: px2rem(230);
+        margin-top: px2rem(15);
+        // background: red;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 0 px2rem(15);
+        border-bottom: px2rem(1.5) solid #ccc;
+        .adiostation-tab-tip {
+            width: px2rem(120);
+            height: px2rem(170);
+            // background: yellow;
+            .adiostation-tab-tip-icon {
+                width: px2rem(120);
+                height: px2rem(120);
+                background: red;
+                border-radius: 50%;
+                text-align: center;
+                line-height: px2rem(120);
+                .adiostation-icon-one {
+                    font-size: px2rem(60);
+                    color: white;
+                }
+                .adiostation-icon-two {
+                    font-size: px2rem(65);
+                    color: white;
+                }
+                .adiostation-icon-three {
+                    font-size: px2rem(75);
+                    color: white;
+                }
+                .adiostation-icon-four {
+                    font-size: px2rem(65);
+                    color: white;
+                }
+            }
+            .adiostation-tab-tip-name {
+                width: 100%;
+                text-align: center;
+                font-size: px2rem(25);
+                // line-height: px2rem(60);
+                padding-top: px2rem(15);
+            }
+        }
+    }
+    .adiostation-recommend {
+        width: 100%;
+        .adiostation-recommend-title {
+            width: 100%;
+            height: px2rem(100);
+            // background: red;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 px2rem(20);
+            .adiostation-recommend-title-name {
+                .recommend-icon {
+                    font-size: px2rem(25);
+                }
+            }
+            .adiostation-recommend-title-all {
+
+            }
+        }
+        .adiostation-recommend-content-tip {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: px2rem(150);
+            padding: 0 px2rem(15);
+            // background: yellow;
+            .adiostation-recommend-content-tip-pic {
+                width: px2rem(120);
+                height: px2rem(120);
+                border-radius: px2rem(15);
+                // background: red;
+                overflow: hidden;
+                img{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .adiostation-recommend-content-tip-text {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding-left: px2rem(20);
+                height: 100%;
+                .adioe-name {
+                    width: 100%;
+                    padding-bottom: px2rem(15);
+                }
+                .adio-author {
+                    width: 100%;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    .author-pic {
+                        width: px2rem(40);
+                        height: px2rem(40);
+                        border-radius: 50%;
+                        // background: green;
+                        margin-right: px2rem(15);
+                        overflow: hidden;
+                        img {
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+                    .author-name {
+                        font-size: px2rem(25);
+                    }
+                }
+            }
+        }
+        @media screen and (max-width:480px) {
+            .adiostation-content-row{
+                width: 100%;
+                // height: px2rem(400);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                padding: 0 px2rem(20);
+
+                .adiostation-content-row-tip {
+                    width: px2rem(250);
+                    height: px2rem(330);
+                    // background: #fff;
+                    margin-top: px2rem(30);
+                    display: flex;
+                    flex-direction: column;
+
+                    .adiostation-content-row-price {
+                        width: px2rem(250);
+                        height: px2rem(250);
+                        // background: lightblue;
+                        background: url('../../assets/images/timg.gif') no-repeat;
+                        // background: url('https://wimg.588ku.com/gif620/19/09/03/2ac4df3fe74e781eee46f34e8252ef32.gif') no-repeat;
+                        background-size: 100% 100%;
+                        border-radius: px2rem(10);
+                        overflow: hidden;
+
+                        img {
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+
+                    .adiostation-content-row-text{
+                        width: 100%;
+                        font-size: px2rem(25);
+                        padding-top: px2rem(10);
+                        text-align: left;
+                        color: #000;
+                        word-break: break-all;
+                        margin: 0;
+                        height: px2rem(75);
+                        text-overflow: -o-ellipsis-lastline;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2;
+                        line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                    }
+                }
+            }
+        }
+
+        @media screen and (min-width:400px) {
+            .adiostation-content-row{
+                width: 100%;
+                // height: px2rem(400);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                padding: 0 px2rem(40);
+
+                .adiostation-content-row-tip {
+                    width: px2rem(280);
+                    height: px2rem(350);
+                    // background: #fff;
+                    margin-top: px2rem(30);
+                    display: flex;
+                    flex-direction: column;
+
+                    .adiostation-content-row-price {
+                        width: px2rem(280);
+                        height: px2rem(280);
+                        background: url('../../assets/images/timg.gif') no-repeat;
+                        background-size: 100% 100%;
+                        border-radius: px2rem(10);
+                        overflow: hidden;
+
+                        img {
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+
+                    .adiostation-content-row-text{
+                        width: 100%;
+                        flex: 1;
+                        font-size: px2rem(25);
+                        padding-top: px2rem(20);
+                        text-align: left;
+                        color: #000;
+                        word-break: break-all;
+                        margin: 0;
+                        height: px2rem(80);
+                        text-overflow: -o-ellipsis-lastline;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2;
+                        line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                    }
+                }
+            }
+        }
+        .mp {
+            margin-top: px2rem(30);
+        }
+    }
+}

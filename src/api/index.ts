@@ -211,22 +211,41 @@ function apitoplist(params) {
   return fetch.post(`/top/list?idx=${params.id}`, {})
 }
 
+// 获取专辑详情
 function apialbumlist(params) {
   return fetch.post(`/album?id=${params.id}`, {})
+}
+
+// 获取电台banner
+function apidjbanner(params?) {
+  return fetch.post(`/dj/banner`, {})
+}
+
+// 获取电台分类
+function apidjcatelist(params?) {
+  return fetch.post(`/dj/category/recommend`, {})
+}
+
+// 获取电台推荐
+function apipersonalizeddjprogram(params?) {
+  return fetch.post(`/personalized/djprogram`, {})
 }
 
 
 
 export {
+  apipersonalizeddjprogram,
   apiplaylistcatlist,
   apihighqualitylist,
   apilogincellphone,
   apirecommendsongs,
   apipersonalizedMv,
   apiresource,
+  apidjbanner,
   apitoplist,
   mvsetusl,
   videoGroup,
+  apidjcatelist,
   apirelatedAllvideo,
   apicommentMv,
   apiplaylistDetail,

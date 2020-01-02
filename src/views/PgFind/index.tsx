@@ -160,7 +160,9 @@ function PgFind(props: any): JSX.Element {
                     </div>
                     <p className='fined-icon-text small'>排行榜</p>
                 </div>
-                <div className="fined-tab-list">
+                <div className="fined-tab-list" onClick={() => {
+                    props.history.push('/radiostation')
+                }}>
                     <div className="fined-icon-run">
                         <Icons className='fined-icon' un='&#xe65e;' />
                     </div>
