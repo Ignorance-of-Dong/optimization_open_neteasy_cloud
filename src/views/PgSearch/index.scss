@@ -1,4 +1,5 @@
 @import 'src/assets/style/px2rem.scss';
+
 .search-wrap {
     width: 100%;
     height: 100%;
@@ -6,6 +7,7 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+
     .search-title {
         width: 100%;
         height: px2rem(100);
@@ -14,6 +16,7 @@
         align-items: center;
         // background: #ccc;
         padding: 0 px2rem(20);
+
         .search-input {
             flex: 1;
             height: 100%;
@@ -22,6 +25,7 @@
             margin: 0 px2rem(30);
         }
     }
+
     .search-content {
         width: 100%;
         flex: 1;
@@ -29,15 +33,18 @@
         display: flex;
         flex-direction: column;
         overflow: hidden;
+
         .search-header-title {
             width: 100%;
             padding: px2rem(40) px2rem(30);
             font-weight: 800;
         }
+
         .search-content-list {
             width: 100%;
             flex: 1;
             overflow-y: auto;
+
             .search-content-tip {
                 width: 100%;
                 height: px2rem(130);
@@ -46,34 +53,200 @@
                 display: flex;
                 justify-content: flex-start;
                 align-items: center;
+
                 .search-content-tip-number {
                     width: px2rem(130);
                     height: px2rem(130);
                     text-align: center;
                     line-height: px2rem(130);
                 }
+
                 .search-content-tip-content {
                     flex: 1;
                     height: 100%;
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
+
                     // align-items: center;
                     .search-content-song-name {
                         font-weight: 800;
+                        width: px2rem(600);
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+
                         .introduce {
                             font-size: px2rem(30);
                             color: #ccc;
                         }
                     }
+
                     .search-content-song-introduce {
                         color: #ccc;
                         font-size: px2rem(30);
                         padding-top: px2rem(20);
+                        width: px2rem(600);
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+
                         .search-content-song-author {
                             margin-right: px2rem(20);
+                            width: px2rem(600);
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
                         }
                     }
+                }
+            }
+        }
+    }
+
+    .album-search-warp {
+        width: 100%;
+
+        .album-search-tip {
+            width: 100%;
+            height: px2rem(150);
+            // background: yellow;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding-left: px2rem(15);
+
+            .album-search-pic {
+                width: px2rem(100);
+                height: px2rem(100);
+                background: white;
+                border-radius: px2rem(15);
+                overflow: hidden;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            .album-search-context {
+                flex: 1;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding-left: px2rem(20);
+
+                .album-search-context-name {
+                    width: px2rem(600);
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    padding-bottom: px2rem(10);
+                }
+
+                .album-search-context-author {
+                    font-size: px2rem(25);
+                    color: #ccc;
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .songsheet-wrap {
+        width: 100%;
+
+        .songsheet-search-tip {
+            width: 100%;
+            height: px2rem(150);
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding-left: px2rem(15);
+
+            .songsheet-search-pic {
+                width: px2rem(100);
+                height: px2rem(100);
+                background: white;
+                border-radius: px2rem(15);
+                overflow: hidden;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            .songsheet-search-context {
+                flex: 1;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding-left: px2rem(20);
+
+                .songsheet-search-context-name {
+                    width: px2rem(600);
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    padding-bottom: px2rem(10);
+                }
+
+                .songsheet-search-context-author {
+                    font-size: px2rem(25);
+                    color: #ccc;
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .videos-wrap {
+        width: 100%;
+
+        .videos-search-tip {
+            width: 100%;
+            height: px2rem(200);
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding-left: px2rem(15);
+
+            .videos-search-pic {
+                width: px2rem(320);
+                height: px2rem(150);
+                background: white;
+                border-radius: px2rem(15);
+                overflow: hidden;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            .videos-search-context {
+                flex: 1;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding-left: px2rem(20);
+
+                .videos-search-context-name {
+                    width: px2rem(600);
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    padding-bottom: px2rem(30);
+                }
+
+                .videos-search-context-author {
+                    font-size: px2rem(25);
+                    color: #ccc;
+                    width: 100%;
                 }
             }
         }

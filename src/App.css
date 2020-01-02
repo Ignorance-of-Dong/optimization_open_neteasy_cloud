@@ -154,9 +154,9 @@ button {
     background: #fff;
 }
 
-@media screen and (min-width:412px) {
+@media screen and (min-width:430px) {
     #root {
-        width: 412px;
+        width: 430px;
         height: 100%;
         overflow: hidden;
         margin: 0 auto !important;
@@ -164,7 +164,7 @@ button {
     }
 }
 
-@media screen and (max-width:412px) {
+@media screen and (max-width:430px) {
     #root {
         width: 100%;
         position: relative;

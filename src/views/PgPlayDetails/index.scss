@@ -121,9 +121,9 @@
                 font-size: px2rem(30);
                 color: #ccc;
             }
-            @media screen and (min-width:412px) {
+            @media screen and (min-width:430px) {
                 .play-details-content-title-playok {
-                    width: 412px;
+                    width: 430px;
                     height: 100%;
                     display: flex;
                     justify-content: flex-start;
@@ -133,7 +133,7 @@
                 }
             }
 
-            @media screen and (max-width:412px) {
+            @media screen and (max-width:430px) {
 
                 .play-details-content-title-playok {
                     width: 100%;

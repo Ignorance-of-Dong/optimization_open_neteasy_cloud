@@ -1,10 +1,13 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState, useCallback, memo } from 'react'
 import './index.scss'
 import { Icon, Tabs } from 'antd-mobile';
 import { apisearchhotdetai, apisearchsuggest } from 'api'
 
 
 const SingleSearchResults = (props) => {
+    useEffect(() => {
+        console.log('进入单曲tab')
+    },[])
     let { searchSong } = props
     return (
         <>
@@ -47,18 +50,157 @@ const SingleSearchResults = (props) => {
     )
 }
 
+
+const AlbumSearchResults = (props) => {
+    let [searchAlubm, setsearchAlubm] = useState<Array<any>>([])
+    useEffect((): void => {
+        goSearchSong(props.keywords)
+    }, [])
+
+    const goSearchSong = useCallback((keywords, type = 1): void => {
+        let params = {
+            keywords,
+            type: 10
+        }
+        apisearchsuggest(params).then(res => {
+            // if(type == 1) {
+            setsearchAlubm(res.result.albums)
+            // }
+            // console.log(res)
+        })
+    }, [])
+    useEffect(() => {
+        console.log('进入专辑tab')
+    }, [])
+    console.log()
+    return <>
+        <div className="album-search-warp">
+            {
+                searchAlubm.map(item => {
+                    return (
+                        <div className="album-search-tip" key={item.id} onClick={() => {
+                            props.history.push(`/playdetails?id=${item.id}&isAlumb=${true}`)
+                        }}>
+                            <div className="album-search-pic">
+                                <img src={item.blurPicUrl} alt=""/>
+                            </div>
+                            <div className="album-search-context">
+                                <div className="album-search-context-name">
+                                    {item.name}
+                                </div>
+                                <div className="album-search-context-author">
+                                    {item.artist.name}
+                                </div>
+                            </div>
+                        </div>
+                    )
+                })
+            }
+        </div>
+    </>
+}
+
+const SongSheetSearchResults = (props) => {
+    let [searchSheet, setsearchSheet] = useState<Array<any>>([])
+    useEffect((): void => {
+        goSearchSong(props.keywords)
+    }, [])
+
+    const goSearchSong = useCallback((keywords): void => {
+        let params = {
+            keywords,
+            type: 1000
+        }
+        apisearchsuggest(params).then(res => {
+            setsearchSheet(res.result.playlists)
+        })
+    }, [])
+    return <>
+        <div className="songsheet-wrap">
+            {
+                searchSheet.map(item => {
+                    return (
+                        <div className="songsheet-search-tip" key={item.id} onClick={() => {
+                            props.history.push(`/playdetails?id=${item.id}`)
+                        }}>
+                            <div className="songsheet-search-pic">
+                                <img src={item.coverImgUrl} alt="" />
+                            </div>
+                            <div className="songsheet-search-context">
+                                <div className="songsheet-search-context-name">
+                                    {item.name}
+                                </div>
+                                <div className="songsheet-search-context-author">
+                                    {item.trackCount}首 by {item.creator.nickname}， 播放{item.playCount}次
+                                </div>
+                            </div>
+                        </div>
+                    )
+                })
+            }
+        </div>
+
+    </>
+}
+
+const VideoSearchResults = (props) => {
+
+    let [videoSheet, setvideoSheet] = useState<Array<any>>([])
+
+    useEffect((): void => {
+        goSearchSong(props.keywords)
+    }, [])
+
+    const goSearchSong = useCallback((keywords): void => {
+        let params = {
+            keywords,
+            type: 1004
+        }
+        apisearchsuggest(params).then(res => {
+            setvideoSheet(res.result.mvs)
+        })
+    }, [])
+    return <>
+        <div className="videos-wrap">
+            {
+                videoSheet.map(item => {
+                    return (
+                        <div className="videos-search-tip" key={item.id} onClick={() => {
+                            props.history.push(`/mvdetails?id=${item.id}`)
+                        }}>
+                            <div className="videos-search-pic">
+                                <img src={item.cover} alt="" />
+                            </div>
+                            <div className="videos-search-context">
+                                <div className="videos-search-context-name">
+                                    {item.name} {item.briefDesc ? (item.briefDesc) : ''}
+                                </div>
+                                <div className="videos-search-context-author">
+                                    {item.artists[0].name}， 播放{item.playCount}次
+                                </div>
+                            </div>
+                        </div>
+                    )
+                })
+            }
+        </div>
+    </>
+}
+
+
+const AlbumSearchResultsPro = memo(AlbumSearchResults)
+
 function PgSearch(props: any): JSX.Element {
     let [hotSong, sethootSong] = useState<Array<any>>([])
     let [searchSong, setsearchSong] = useState<Array<any>>([])
     let [searchWord, setsearchWord] = useState<string>('')
 
     const tabs = [
-        { title: '单曲' },
-        { title: '专辑' },
-        { title: '歌单' },
-        { title: 'MV' },
-        { title: '电台' },
-        { title: '视频' }
+        { title: '单曲', id: '1'},
+        { title: '专辑', id: '10' },
+        { title: '歌单', id: '1000' },
+        { title: '电台', id: '1009' },
+        { title: 'MV', id: '1004' }
     ];
 
 
@@ -72,12 +214,12 @@ function PgSearch(props: any): JSX.Element {
         getApisearchhotdetai()
     }, [])
 
-    const goSearchSong = useCallback((keywords): void => {
+    const goSearchSong = useCallback((keywords, type = 1): void => {
         let params = {
-            keywords
+            keywords,
+            type
         }
         apisearchsuggest(params).then(res => {
-            // setsearchWord('')
             setsearchSong(res.result.songs)
         })
     }, [])
@@ -87,48 +229,37 @@ function PgSearch(props: any): JSX.Element {
         goSearchSong(keywords)
     }
 
-    const renderContent = (tab) =>{
-        console.log(tab)
-        switch (tab.title){
+    const renderContent = useCallback((tab): JSX.Element =>{
+        switch (tab.title) {
             case '单曲':
-                return <SingleSearchResults searchSong={searchSong} history={props.history} quickSearchSong={quickSearchSong}/>
-            break;
+                return <SingleSearchResults searchSong={searchSong} history={props.history} quickSearchSong={quickSearchSong} />
+                break;
             case '专辑':
-                return <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '150px', backgroundColor: '#fff' }}>
-                    <p>专辑</p>
-                </div>
-            break;
+                return <AlbumSearchResults keywords={searchWord} history={props.history} />
+                break;
             case '歌单':
-                return <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '150px', backgroundColor: '#fff' }}>
-                    <p>歌单</p>
-                </div>
-            break;
-            case 'MV':
-                return <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '150px', backgroundColor: '#fff' }}>
-                    <p>MV</p>
-                </div>
-            break;
+                return <SongSheetSearchResults keywords={searchWord} history={props.history}/>
+                break;
             case '电台':
-                return <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '150px', backgroundColor: '#fff' }}>
-                    <p>电台</p>
-                </div>
-            break;
-            case '视频':
-                return <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '150px', backgroundColor: '#fff' }}>
-                    <p>视频</p>
-                </div>
-            break;
-            case '综合':
-                return <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '150px', backgroundColor: '#fff' }}>
-                    <p>综合</p>
-                </div>
-            break;
+                return <>正在开发中。。。。</>
+                break;
+            case 'MV':
+                return <VideoSearchResults keywords={searchWord} history={props.history} />
+                break;
         }
-    }
+    }, [searchSong])
     
 
     const tagChange = useCallback((modules) => {
-        console.log()
+        // console.log(modules)
+        // goSearchSong(searchWord, modules.id)
+    }, [searchWord])
+
+    const queryChange = useCallback((e) => {
+        if (e.target.value == '') {
+            setsearchSong([])
+        }
+        setsearchWord(e.target.value)
     }, [])
     return(
         <>
@@ -138,7 +269,7 @@ function PgSearch(props: any): JSX.Element {
                         <path fill='#000' d="M317.288601 514.022357L774.12597 54.614875a32.126397 32.126397 0 0 0-45.619484-44.976956L249.180639 488.963767a32.126397 32.126397 0 0 0 0 45.619484l479.968375 479.968376a32.126397 32.126397 0 0 0 45.619484-45.619485z" />
                     </svg>
                     <input type="text" value={searchWord} className='search-input' onChange={(e) => {
-                        setsearchWord(e.target.value)
+                        queryChange(e)
                     }}/>
                     <Icon key="0" type="search" style={{ marginRight: '10' }} onClick={() => {
                         goSearchSong(searchWord)
@@ -158,6 +289,7 @@ function PgSearch(props: any): JSX.Element {
                                 tabBarUnderlineStyle={{
                                     border: '1px red solid', }}
                             tabs={tabs} 
+                            prerenderingSiblingsNumber={0}
                             renderTabBar={props => <Tabs.DefaultTabBar {...props} page={6} />}>
                                 {renderContent}
                             </Tabs>

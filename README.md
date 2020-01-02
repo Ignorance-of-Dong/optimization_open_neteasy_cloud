@@ -1,5 +1,5 @@
 # 网易云音乐
-Optimization project
+🎅❄️🎶Optimization project
 
 ### react网易云音乐(H5)
 
@@ -32,7 +32,7 @@ Optimization project
 - 视频
 - MV详情页
 - 我的
-- 搜索【目前只可以搜索歌曲】
+- 搜索【支持单曲，MV，专辑，歌单，电台还在开发中】
 - 播放页【歌词，播放列表，上一首，下一首】
 
 ### 部分功能效果图

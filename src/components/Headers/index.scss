@@ -25,9 +25,9 @@
     align-items: center;
 }
 
-@media screen and (min-width:412px) {
+@media screen and (min-width:430px) {
     .header-bar {
-        width: 412px;
+        width: 430px;
         height: px2rem(100);
         // border-bottom: px2rem(1) solid #ccc;
         display: flex;
@@ -39,7 +39,7 @@
     }
 }
 
-@media screen and (max-width:412px) {
+@media screen and (max-width:430px) {
 
     .header-bar {
         width: 100%;

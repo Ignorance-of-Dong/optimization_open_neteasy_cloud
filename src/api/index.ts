@@ -132,7 +132,8 @@ function apisearchhotdetai(params?) {
  * 收索歌曲
  */
 function apisearchsuggest(params?) {
-  return fetch.post(`/search?keywords=${params.keywords}`, {})
+  let { keywords, type} = params
+  return fetch.post(`/search?keywords=${keywords}&type=${type}`, {})
 }
 
 /**
@@ -210,6 +211,10 @@ function apitoplist(params) {
   return fetch.post(`/top/list?idx=${params.id}`, {})
 }
 
+function apialbumlist(params) {
+  return fetch.post(`/album?id=${params.id}`, {})
+}
+
 
 
 export {
@@ -227,6 +232,7 @@ export {
   apiplaylistDetail,
   apipersonalizedSongList,
   apialbum,
+  apialbumlist,
   apisongurl,
   apimvdetails,
   apisimiMv,

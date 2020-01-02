@@ -2,7 +2,7 @@ import React, {useEffect, useState, useCallback, useRef} from 'react'
 import './index.scss'
 import { Icons, Headers } from 'components/index'
 import query from 'utils/useQuery'
-import { apiplaylistDetail, apitoplist } from 'api'
+import { apiplaylistDetail, apitoplist, apialbumlist } from 'api'
 import {inject, observer} from 'mobx-react'
 
 function PgPlayDetails(props: any): JSX.Element {
@@ -21,7 +21,6 @@ function PgPlayDetails(props: any): JSX.Element {
         await apiplaylistDetail(params).then(res => {
             setsongListObj(res.playlist)
             setsongListDetails(res.playlist.tracks)
-        }).catch(err => {
         })
     }, [songListDetails, songListObj])
 
@@ -36,9 +35,30 @@ function PgPlayDetails(props: any): JSX.Element {
         })
     }, [])
 
+    const getalbumlist = useCallback(async (): Promise<any> => {
+        let { id } = query()
+        let params = {
+            id: id
+        }
+        await apialbumlist(params).then(res => {
+            setsongListObj(res.album)
+            setsongListDetails(res.songs)
+        })
+    }, [])
+
+
+
     useEffect((): void => {
-        let { isList } = query()
-        isList ? getapitoplist() : getapiplaylistDetail()
+        let { isList, isAlumb } = query()
+        if (isList) {
+            getapitoplist()
+            return;
+        }
+        if (isAlumb) {
+            getalbumlist()
+            return;
+        }
+        getapiplaylistDetail()
     }, [])
 
     const scrollFun = useCallback((e): void => {
@@ -55,7 +75,7 @@ function PgPlayDetails(props: any): JSX.Element {
             <div className="play-details-wrap" onScroll={(e) => scrollFun(e)}>
                 <div className="play-details-title" ref={titleRef}>
                     <div className="play-details-title-mask" style={{
-                        background: `url(${songListObj ? songListObj.coverImgUrl : 'http://p2.music.126.net/SHElx36maw8L6CIXfiNbFw==/109951164144982394.jpg'})`,
+                        background: `url(${songListObj ? songListObj.coverImgUrl || songListObj.blurPicUrl : 'http://p2.music.126.net/SHElx36maw8L6CIXfiNbFw==/109951164144982394.jpg'})`,
                         backgroundRepeat: 'no-repeat',
                         backgroundSize: 'cover',
                         backgroundPosition: '10%'
@@ -70,11 +90,11 @@ function PgPlayDetails(props: any): JSX.Element {
                         titlePostion 
                         ? 
                         {
-                            backgroundImage: `url(${songListObj ? songListObj.coverImgUrl : 'http://p2.music.126.net/SHElx36maw8L6CIXfiNbFw==/109951164144982394.jpg'})`,
+                            backgroundImage: `url(${songListObj ? songListObj.coverImgUrl || songListObj.blurPicUrl : 'http://p2.music.126.net/SHElx36maw8L6CIXfiNbFw==/109951164144982394.jpg'})`,
                         } 
                         : 
                         {
-                            background: `url(${songListObj ? songListObj.coverImgUrl : 'http://p2.music.126.net/SHElx36maw8L6CIXfiNbFw==/109951164144982394.jpg'})`,
+                            background: `url(${songListObj ? songListObj.coverImgUrl || songListObj.blurPicUrl : 'http://p2.music.126.net/SHElx36maw8L6CIXfiNbFw==/109951164144982394.jpg'})`,
                         }
                     }></div>} 
                     className='postion-header' 
@@ -86,13 +106,13 @@ function PgPlayDetails(props: any): JSX.Element {
                     <div className="play-details-title-mask-content">
                         
                         <div className="play-details-left-pic">
-                            <img src={songListObj ? songListObj.coverImgUrl : ''} alt="" />
+                            <img src={songListObj ? songListObj.coverImgUrl || songListObj.blurPicUrl : ''} alt="" />
                         </div>
                         <div className="play-details-right-detail">
                             <div className='play-details-right-detail-title'>{songListObj ? songListObj.name : ''}</div>
                             <div className="play-details-right-detail-author">
                                 <div className="play-details-right-detail-author-header">
-                                    <img src={songListObj ? songListObj.coverImgUrl : ''} alt="" />
+                                    <img src={songListObj ? songListObj.coverImgUrl || songListObj.blurPicUrl : ''} alt="" />
                                 </div>
                                 <div className="play-details-right-detail-author-name">
                                     {songListObj ? songListObj.nickname : ''}
