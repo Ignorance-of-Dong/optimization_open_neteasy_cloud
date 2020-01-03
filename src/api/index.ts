@@ -228,9 +228,18 @@ function apidjcatelist(params?) {
 
 // 获取电台推荐
 function apipersonalizeddjprogram(params?) {
-  return fetch.post(`/personalized/djprogram`, {})
+  return fetch.post(`/dj/today/perfered`, {})
 }
 
+// 获取电台节目列表
+function apiprogram(params) {
+  return fetch.post(`/dj/program?rid=${params.id}&limit=40`, {})
+}
+
+// 查询电台详情
+function apidjdetail(params?) {
+  return fetch.post(`/dj/detail?rid=${params.id}`, {})
+}
 
 
 export {
@@ -241,7 +250,9 @@ export {
   apirecommendsongs,
   apipersonalizedMv,
   apiresource,
+  apiprogram,
   apidjbanner,
+  apidjdetail,
   apitoplist,
   mvsetusl,
   videoGroup,

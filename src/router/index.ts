@@ -79,6 +79,11 @@ export default {
             exact: false
         },
         {
+            path: "/radiodetails",
+            component: React.lazy(() => import('../views/PgRadioDetails')),
+            exact: false
+        },
+        {
             path: "/index",
             component: React.lazy(() => import('../views/PgIndex')),
             exact: false,

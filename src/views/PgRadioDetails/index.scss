@@ -1,0 +1,365 @@
+@import 'src/assets/style/px2rem.scss';
+.radio-details-wrap {
+    width: 100%;
+    height: 100%;
+    // background: #ccc;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    // display: flex;
+    // flex-direction: column;
+    .radio-details-title {
+        width: 100%;
+        height: px2rem(600);
+        overflow: hidden;
+        position: relative;
+        .radio-details-title-mask {
+            width: 100%;
+            height: px2rem(800);
+            position: absolute;
+            top:0;
+            left: 0;
+            filter: brightness(70%);
+            z-index: 0;
+            box-shadow:inset 0px 0px 100px 5px #555;
+            // }
+        }
+        .radio-details-title-mask-content {
+            width: 100%;
+            height: px2rem(600);
+            position: absolute;
+            top:0;
+            left: 0;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            // padding: px2rem(20) px2rem(50);
+            box-sizing: border-box;
+            .radio-details-introduction {
+                width: 100%;
+                height: px2rem(130);
+                position: absolute;
+                bottom: 0;
+                // background: #ccc;
+                padding: 0 px2rem(20);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .radio-details-introduction-name {
+                    color: #fff;
+                    font-weight: 600;
+                    .count {
+                        font-size: px2rem(25);
+                        padding-top: px2rem(10);
+                        font-weight: 400;
+                    }
+                }
+                .radio-details-introduction-subscribe {
+                    width: px2rem(200);
+                    height: px2rem(70);
+                    background: red;
+                    color: #fff;
+                    text-align: center;
+                    font-size: px2rem(30);
+                    border-radius: px2rem(40);
+                    line-height: px2rem(70);
+                    .radio-subscribe-icon {
+                        font-size: px2rem(35);
+                        font-weight: 800;
+                        margin-right: px2rem(5);
+                        margin-top: px2rem(10);
+                    }
+                }
+            }
+        }
+    }
+    .radio-details-content {
+        width: 100%;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+        // border-radius: px2rem(60) px2rem(60) 0 0;
+        .radio-details-content-title {
+            width: 100%;
+            height: px2rem(100);
+            background: #fff;
+            // border-radius: px2rem(60) px2rem(60) 0 0;
+            
+            .playok-icon {
+                margin-right: px2rem(20);
+                font-size: px2rem(60);
+            }
+
+            .start-play-all {
+                font-size: px2rem(40);
+            }
+
+            .song-number {
+                font-size: px2rem(30);
+                color: #ccc;
+            }
+            @media screen and (min-width:430px) {
+                .radio-details-content-title-playok {
+                    width: 430px;
+                    height: 100%;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    padding: 0 px2rem(40);
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: center;
+                    //  border-radius: px2rem(60) px2rem(60) 0 0;
+
+                }
+            }
+
+            @media screen and (max-width:430px) {
+
+                .radio-details-content-title-playok {
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    padding: 0 px2rem(40);
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: center;
+                    //  border-radius: px2rem(60) px2rem(60) 0 0;
+
+                }
+            }
+            .radio-details-content-title-left,.radio-details-content-title-right {
+                position: relative;
+                width: px2rem(100);
+                height: 100%;
+                text-align: center;
+                line-height: px2rem(100);
+                .line-postion{
+                    width: 100%;
+                    height: px2rem(4    );
+                    background: red;
+                    position: absolute;
+                    bottom: px2rem(5);
+                }
+            }
+
+        }
+        .radio-details-content-song-listview {
+            width: 100%;
+            flex: 1;
+            // background: lightcyan;
+            background: #fff;
+            overflow-y: auto;
+            -webkit-overflow-scrolling : touch;
+            padding-bottom: px2rem(100);
+            .play-details-content-song-tip {
+                width: 100%;
+                height: px2rem(130);
+                background: #fff;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 px2rem(20);
+                .serial-number {
+                    width: px2rem(130);
+                    height: px2rem(130);
+                    text-align: center;
+                    line-height: px2rem(130);
+                    font-size: px2rem(40);
+                    color: #999;
+                }
+                .serial-content-wrap {
+                    flex: 1;
+                    // height: 100%;
+                    // background: lightseagreen;
+                    .alias {
+                        flex: 1;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        font-size: px2rem(25);
+                        color: #666;
+                        padding-left: px2rem(5);
+                        padding-top:px2rem(10);
+                    }
+                    .name {
+                         font-size: px2rem(35);
+                    }
+                    .serial-content-song-name {
+                        // font-size: px2rem(35);
+                        display: flex;
+                        justify-content: flex-start;
+                        // align-items: center;
+                        // flex-wrap: wrap;
+                    }
+                    .serial-content-song-author {
+                        font-size: px2rem(27);
+                        margin-top:px2rem(10);
+                        color: #666;
+                    }
+                }
+                .serial-all {
+                    width: px2rem(130);
+                    height: px2rem(130);
+                    // background: lightblue;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    .playok-icon {
+                        // margin-right: px2rem(20);
+                        font-size: px2rem(60);
+                        // margin:0 auto;
+                        display: block;
+                        color: #ccc;
+                    }
+                }
+            }
+        }
+        .radio-details-content-song-details {
+            width: 100%;
+            flex: 1;
+            background: #fff;
+            overflow-y: auto;
+            -webkit-overflow-scrolling : touch;
+            padding-bottom: px2rem(100);
+            .radio-details-content-song-header {
+                width: 100%;
+                height: px2rem(80);
+                font-size: px2rem(30);
+                padding-left: px2rem(15);
+                line-height: px2rem(80);
+                font-weight: 600;
+                margin-top: px2rem(15);
+            }
+            .radio-details-content-song-author {
+                width: 100%;
+                height: px2rem(120);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding-left: px2rem(20);
+                .radio-details-content-song-author-pic {
+                    width: px2rem(100);
+                    height: px2rem(100);
+                    border-radius: 50%;
+                    overflow: hidden;
+                    img {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+                .radio-details-content-song-author-content {
+                    flex: 1;
+                    height: px2rem(120);
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    padding-left: px2rem(15);
+                    .name {
+                        padding-bottom: px2rem(5);
+                    }
+                    .decise {
+                        font-size: px2rem(25);
+                        padding-top: px2rem(5);
+                        color: #999;
+                    }
+                }
+            }
+            .radio-details-content-song-dection {
+                width: 100%;
+                height: px2rem(120);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding-left: px2rem(15);
+                .radio-type {
+                    width: 100%;
+                    height: px2rem(60);
+                    line-height: px2rem(60);
+                    font-size: px2rem(30);
+                }
+                .radio-dectional {
+                    width: px2rem(700);
+                    height: px2rem(60);
+                    line-height: px2rem(60);
+                    font-size: px2rem(30);
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;
+                }
+            }
+            .radio-details-content-song-commont {
+                width: 100%;
+                height: pa2rem(300);
+                display: flex;
+                justify-content: space-between;
+                // align-items: center;
+                padding-left: px2rem(15);
+                margin-top: px2rem(30);
+                .header-pic {
+                    width: px2rem(80);
+                    height: px2rem(80);
+                    overflow: hidden;
+                    border-radius: 50%;
+                    img{
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+                .commont-content {
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    padding-left: px2rem(20);
+                    border-bottom: px2rem(1) solid #ccc;
+                    padding-bottom: px2rem(20);
+                    
+                    .c-name {
+                        color: #999;
+                        font-size: px2rem(30);
+                    }
+                    .c-content {
+                        padding: px2rem(30) px2rem(30) px2rem(20) 0;
+                        font-size: px2rem(35);
+                        line-height: px2rem(55);
+                        font-weight: 600;
+                    }
+                    .c-song {
+                        color: #999;
+                        font-size: px2rem(25);
+                    }
+                }
+            }
+        }   
+    }
+}
+
+
+.postion-header {
+    // background: url(http://p2.music.126.net/hVzHvlj0FYfF3ICVxqDYfg==/109951164547710123.jpg);
+    position: fixed;
+    z-index: 3;
+    background-color: '#fff';
+    color: #fff;
+}
+.header-mask {
+    width: 100%;
+    height: px2rem(100);
+    filter: blur(20px);
+    position: absolute;
+    top: 0;
+    z-index: -1;
+}
+.serial-content-song-names {
+    width: px2rem(600);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}

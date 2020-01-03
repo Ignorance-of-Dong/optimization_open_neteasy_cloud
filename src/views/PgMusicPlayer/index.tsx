@@ -20,6 +20,7 @@ function CurrentTime(props: currentProps): JSX.Element {
         </>
     )
 }
+
 interface speedProps{
     dropSpeed: Function,
     currenttime: any,
@@ -76,11 +77,12 @@ function EjectModule(props: ejectModuleProps): JSX.Element {
      * 实时获取歌曲在列表的位子【并在切换上一首 | 下一首实时更新】
      */
     useEffect((): void => {
-        let { id } = query()
+        let { id, isRadio } = query()
         let list = JSON.parse(sessionStorage.getItem('songListDetails'))
         setsongListDetail(list)
+        let okid = isRadio ? 'mainTrackId' : 'id'
         list.forEach((item, index) => {
-            if (item.id * 1 === id * 1) {
+            if (item[okid] * 1 === id * 1) {
                 _setstate(index)
                 setTimeout(() => {
                     sessionStorage.setItem('currScrollTop', (50 * (index - 1)).toString())
@@ -109,9 +111,10 @@ function EjectModule(props: ejectModuleProps): JSX.Element {
      */
     const setScrollTop = useCallback((): void => {
         let list = JSON.parse(sessionStorage.getItem('songListDetails'))
-        let { id } = query()
+        let { id, isRadio } = query()
+        let okid = isRadio ? 'mainTrackId' : 'id'
         list.forEach((item, index) => {
-            if (item.id * 1 === id * 1) {
+            if (item[okid] * 1 === id * 1) {
                 sessionStorage.setItem('currScrollTop', (50 * (index - 1)).toString())
                 listRef.current.scrollTop = 50 * (index - 1)
             }
@@ -139,11 +142,17 @@ function EjectModule(props: ejectModuleProps): JSX.Element {
     const selectMusic = useCallback((index, id): void => {
         sessionStorage.setItem('currScrollTop', (50 * (index - 1)).toString())
         _setstate(index)
-        props.history.replace(`/musicplayer?id=${id}`)
+        let { isRadio } = query()
+        if (isRadio) {
+            props.history.replace(`/musicplayer?id=${id}&isRadio=${true}`)
+        } else {
+            props.history.replace(`/musicplayer?id=${id}`)
+        }
+        
         props.getsongurl(id)
         listRef.current.scrollTop = 50 * (index - 1)
     }, [])
-
+    let {isRadio} = query()
     return(
         <>
         <div className="m-p-w-m">
@@ -168,7 +177,9 @@ function EjectModule(props: ejectModuleProps): JSX.Element {
                                 return(
                                     <div className="eject-module-wrap-content-tip" key={index}>
                                         <div className="eject-module-wrap-content-name" style={{ color: _state === index ? 'red' : ''}} onClick={() => {
-                                            selectMusic(index, res.id)
+                                            let {isRadio} = query()
+                                            let okid = isRadio ? 'mainTrackId' : 'id'
+                                            selectMusic(index, res[okid])
                                         }}>
                                             {_state === index ? <Icons className='eject-module-icon' un='&#xe659;' /> : null}
                                             <div className="eject-module-wrap-music-name">
@@ -176,9 +187,9 @@ function EjectModule(props: ejectModuleProps): JSX.Element {
                                             </div>
                                             <span style={{ color: _state === index ? 'red' : '' }}>&nbsp;-&nbsp;</span>
                                             <div className="eject-module-wrap-music-author" style={{ color: _state === index ? 'red' : '' }}>
-                                                {/* {console.log(res)} */}
-                                                {/* {res.ar[0].name} */}
-                                                {res.ar ? res.ar[0].name : res.artists[0].name}
+                                                {
+                                                    isRadio ? res.radio.name : (res.ar ? res.ar[0].name : res.artists[0].name )
+                                                }
                                             </div>
                                         </div>
                                     </div>
@@ -260,14 +271,18 @@ function PgMusicPlayer(props: any): JSX.Element {
             apisongurl(params).then(res => {
                 setsongUrl(res.data[0].url)
             })
-            apilyric(params).then(res => {
-                let l = new Lyric(res.lrc.lyric, () => { })
-                setlyric(l.lines)
-            })
+            let { isRadio } = query()
+            if (!isRadio) {
+                apilyric(params).then(res => {
+                    let l = new Lyric(res.lrc.lyric, () => { })
+                    setlyric(l.lines)
+                })
+            }
+            
         }catch(err) {
         }
         
-    }, [])
+    }, [songUrl])
 
     /**
      * 获取歌曲播放链接地址【初始化获取】
@@ -309,11 +324,12 @@ function PgMusicPlayer(props: any): JSX.Element {
      * @param type 上一首或者下一首类型
      */
     const goLastSong = useCallback((type): void => {
-        let { id } = query()
+        let { id, isRadio } = query()
         let list = JSON.parse(sessionStorage.getItem('songListDetails'))
         let _index = 0
+        let okid = isRadio ? 'mainTrackId' : 'id'
         for(let i = 0; i < list.length - 1; i++) {
-            if (list[i].id * 1 === id * 1) {
+            if (list[i][okid] * 1 === id * 1) {
                 if (type === typeCheck[1]) {
                     _index = i - 1
                 } else {
@@ -329,12 +345,19 @@ function PgMusicPlayer(props: any): JSX.Element {
                 }
                 audiosRef.current.pause()
                 setstatePlay(false)
-                type === 'last' ? getsongurl(list[_index].id) : getsongurl(list[_index].id)
-                type === 'last' ? props.history.replace(`/musicplayer?id=${list[_index].id}`) : props.history.replace(`/musicplayer?id=${list[_index].id}`)
+                console.log(111)
+                if (isRadio) {
+                    type === 'last' ? getsongurl(list[_index].mainTrackId) : getsongurl(list[_index].mainTrackId)
+                    type === 'last' ? props.history.replace(`/musicplayer?id=${list[_index].mainTrackId}&isRadio=${true}`) : props.history.replace(`/musicplayer?id=${list[_index].mainTrackId}&isRadio=${true}`)
+                } else {
+                    type === 'last' ? getsongurl(list[_index].id) : getsongurl(list[_index].id)
+                    type === 'last' ? props.history.replace(`/musicplayer?id=${list[_index].id}`) : props.history.replace(`/musicplayer?id=${list[_index].id}`)
+                }
+                
                 setTimeout(() => { setstatePlay(true)}, 1000)
             }
         }
-    }, [])
+    }, [songUrl])
 
     /**
      * 实时更新歌词
@@ -353,6 +376,49 @@ function PgMusicPlayer(props: any): JSX.Element {
             setshowlyric(lyazy)
         }
     }, [currenttime, lyric])
+
+
+
+    const getAudioState = useCallback((type): string => {
+        let { id } = query()
+        let list = JSON.parse(sessionStorage.getItem('songListDetails'))
+        for (let i = 0; i < list.length - 1; i++) {
+            if (list[i].mainTrackId * 1 === id * 1) {
+                switch (type) {
+                    case 'pic':
+                        return list[i].coverUrl
+                    break;
+                    case 'name':
+                        return list[i].name
+                    break;
+                }
+            }
+        }
+    }, [])
+
+    const getPicUrl = useCallback((songDetails): string => {
+        if (songDetails) {
+            if (songDetails.al.picUrl) {
+                return songDetails.al.picUrl
+            } else {
+                return getAudioState('pic')
+            }
+        } else {
+            return 'http://p2.music.126.net/SHElx36maw8L6CIXfiNbFw==/109951164144982394.jpg'
+        }
+    }, [songDetails])
+
+    const getname = useCallback(() => {
+        if (songDetails) {
+            if (songDetails.name) {
+                return songDetails.name
+            } else {
+                return getAudioState('name')
+            }
+        } else {
+            return '加载中...'
+        }
+    }, [songDetails])
     
     return (
         <>
@@ -361,18 +427,18 @@ function PgMusicPlayer(props: any): JSX.Element {
             </div>
             
             <div className="music-player-wraps-mask" style={{
-                background: `url(${songDetails ? songDetails.al.picUrl : 'http://p2.music.126.net/SHElx36maw8L6CIXfiNbFw==/109951164144982394.jpg'})`,
+                background: `url(${getPicUrl(songDetails)})`,
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: 'cover',
                 backgroundPosition: '10%'
             }}>
             </div>
             <div className="music-player-wraps">
-                <Headers props={props}>{songDetails ? songDetails.name : '加载中...'}</Headers>
+                <Headers props={props}>{getname()}</Headers>
                 <div className="music-player-content-logo">
                     <div className="rotate-music-logo-wraps" style={{ animationPlayState: statePlay ? 'running' : 'paused'}}>
                         <div className="rotate-music-logo">
-                            <img src={songDetails ? songDetails.al.picUrl : 'http://p2.music.126.net/SHElx36maw8L6CIXfiNbFw==/109951164144982394.jpg'} alt="" />
+                            <img src={getPicUrl(songDetails)} alt="" />
                         </div>
                         
                     </div>

@@ -3,7 +3,14 @@
 .adiostation-wrap {
     width: 100%;
     height: 100%;
-    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    .flex {
+        width: 100%;
+        flex: 1;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
     .adiostation-carousel {
         touch-action: none;
         width: 95% !important;
@@ -86,7 +93,7 @@
                 }
             }
             .adiostation-recommend-title-all {
-
+                justify-content: flex-start;
             }
         }
         .adiostation-recommend-content-tip {
@@ -184,13 +191,10 @@
                         word-break: break-all;
                         margin: 0;
                         height: px2rem(75);
-                        text-overflow: -o-ellipsis-lastline;
+                        line-height: px2rem(40);
                         overflow: hidden;
                         text-overflow: ellipsis;
-                        display: -webkit-box;
-                        -webkit-line-clamp: 2;
-                        line-clamp: 2;
-                        -webkit-box-orient: vertical;
+                        white-space: nowrap;
                     }
                 }
             }
@@ -238,19 +242,17 @@
                         word-break: break-all;
                         margin: 0;
                         height: px2rem(80);
-                        text-overflow: -o-ellipsis-lastline;
+                        line-height: px2rem(40);
                         overflow: hidden;
                         text-overflow: ellipsis;
-                        display: -webkit-box;
-                        -webkit-line-clamp: 2;
-                        line-clamp: 2;
-                        -webkit-box-orient: vertical;
+                        white-space: nowrap;
                     }
                 }
             }
         }
-        .mp {
-            margin-top: px2rem(30);
-        }
+        
+    }
+    .mp {
+        margin-top: px2rem(30) !important;
     }
 }

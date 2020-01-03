@@ -187,6 +187,49 @@ const VideoSearchResults = (props) => {
     </>
 }
 
+const RadioStationSearchResults = (props) => {
+    let [searchSheet, setsearchSheet] = useState<Array<any>>([])
+    useEffect((): void => {
+        goSearchSong(props.keywords)
+    }, [])
+
+    const goSearchSong = useCallback((keywords): void => {
+        let params = {
+            keywords,
+            type: 1009
+        }
+        apisearchsuggest(params).then(res => {
+            setsearchSheet(res.result.djRadios)
+        })
+    }, [])
+    return <>
+        <div className="songsheet-wrap">
+            {
+                searchSheet.map(item => {
+                    return (
+                        <div className="songsheet-search-tip" key={item.id} onClick={() => {
+                            props.history.push(`/radiodetails?id=${item.id}`)
+                        }}>
+                            <div className="songsheet-search-pic">
+                                <img src={item.picUrl} alt="" />
+                            </div>
+                            <div className="songsheet-search-context">
+                                <div className="songsheet-search-context-name">
+                                    {item.name}
+                                </div>
+                                <div className="songsheet-search-context-author">
+                                    {item.dj.nickname}
+                                </div>
+                            </div>
+                        </div>
+                    )
+                })
+            }
+        </div>
+
+    </>
+}
+
 
 const AlbumSearchResultsPro = memo(AlbumSearchResults)
 
@@ -241,7 +284,7 @@ function PgSearch(props: any): JSX.Element {
                 return <SongSheetSearchResults keywords={searchWord} history={props.history}/>
                 break;
             case '电台':
-                return <>正在开发中。。。。</>
+                return <RadioStationSearchResults keywords={searchWord} history={props.history}/>
                 break;
             case 'MV':
                 return <VideoSearchResults keywords={searchWord} history={props.history} />
