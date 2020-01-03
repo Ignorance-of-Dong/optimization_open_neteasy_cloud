@@ -3,7 +3,7 @@
 
 ### react网易云音乐(H5)
 
-- [api来源](https://github.com/Binaryify/NeteaseCloudMusicApi)(感谢Binaryify不断更新的网易云音乐接口，这也将是这个项目不断拓展下去的坚实依托，看着他的star蹭蹭蹭的往上涨，我必须厚着脸皮说有我一份功劳)
+- [api来源](https://github.com/Binaryify/NeteaseCloudMusicApi)(感谢Binaryify不断更新的网易云音乐接口，这也将是这个项目不断拓展下去的坚实依托)
 
 - [源码地址](https://github.com/Ignorance-of-Dong/optimization_open_neteasy_cloud)
 
