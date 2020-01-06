@@ -4,7 +4,7 @@ import { Icons, Headers } from 'components/index'
 import query from 'utils/useQuery'
 import { apiprogram, apidjdetail, apialbumlist } from 'api'
 import {inject, observer} from 'mobx-react'
-
+let ismore = true
 function PgPlayDetails(props: any): JSX.Element {
     let [songListDetails, setsongListDetails] = useState<Array<any>>([])
     let [songListObj, setsongListObj] = useState<any>(null)
@@ -13,17 +13,23 @@ function PgPlayDetails(props: any): JSX.Element {
 
     let headerRef = useRef(null)
     let titleRef = useRef(null)
+    let listRef = useRef(null)
 
     const getapiplaylistDetail = useCallback( async (): Promise<any> => {
         let { id } = query()
         let params = {
-            id: id
+            id: id,
+            offset: songListDetails.length
         }
         await apiprogram(params).then(res => {
-            // setsongListObj(res.playlist)
-            setsongListDetails(res.programs)
+            ismore = res.more
+            setsongListDetails([
+                ...res.programs,
+                ...songListDetails
+            ])
+            
         })
-    }, [songListDetails, songListObj])
+    }, [songListDetails])
 
     const getapitoplist = useCallback( async (): Promise<any> => {
         let { id } = query()
@@ -50,18 +56,10 @@ function PgPlayDetails(props: any): JSX.Element {
 
 
     useEffect((): void => {
-        let { isList, isAlumb } = query()
-        if (isList) {
-            
-            return;
-        }
-        if (isAlumb) {
-            getalbumlist()
-            return;
-        }
         getapitoplist()
         getapiplaylistDetail()
     }, [])
+
 
     const scrollFun = useCallback((e): void => {
         if (e.target.scrollTop > (titleRef.current.offsetHeight - headerRef.current.headerRef.current.offsetHeight)) {
@@ -69,7 +67,17 @@ function PgPlayDetails(props: any): JSX.Element {
         } else {
             setTitlePostion(false)
         }
-    }, [])
+        let currentH = (listRef.current.offsetHeight + titleRef.current.offsetHeight - document.documentElement.clientHeight) - 10
+        let sctopH = e.target.scrollTop
+        if (sctopH - currentH == 10) {
+            console.log(ismore)
+            if (!ismore) {
+                console.log('没有东西了')
+            } else {
+                getapiplaylistDetail()
+            }
+        }
+    }, [songListDetails])
 
     return (
         <>
@@ -152,9 +160,10 @@ function PgPlayDetails(props: any): JSX.Element {
                     </div>
                     {
                         currentSelect ? 
-                            <div className="radio-details-content-song-listview">
+                            <div className="radio-details-content-song-listview" ref={listRef}>
                                 {
                                     songListDetails.map((res, index) => {
+                                        
                                         return (
                                             <div className="play-details-content-song-tip" key={index} onClick={() => {
                                                 props.Store.getSongListDetails(songListDetails)
@@ -165,7 +174,9 @@ function PgPlayDetails(props: any): JSX.Element {
                                                     {(index + 1)}.
                                                 </div>
                                                 <div className="serial-content-wrap">
-                                                    <div className='serial-content-song-name'><span className='name serial-content-song-names'>{res.name}</span> 
+                                                    <div className='serial-content-song-name'><span className='name serial-content-song-names'>
+                                                        {res.name}
+                                                    </span> 
                                                         {/* <span className='alias'>{JSON.stringify(res.alia) === '{}' || '[]' ? '' : `(${res.alia[0]})`}</span> */}</div> 
                                                     <div className='serial-content-song-author serial-content-song-names'>{res.radio.name}</div>
                                                 </div>

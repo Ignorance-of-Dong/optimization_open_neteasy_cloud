@@ -1,0 +1,95 @@
+@import 'src/assets/style/px2rem.scss';
+
+
+.radiolist-wrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    .radiolist-tab {
+        width: 100%;
+        height: px2rem(100);
+        // background: red;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        box-shadow: 1px 1px 2px #ccc;
+        .radiolist-tab-new {
+            height: 100%;
+            line-height: px2rem(100);
+            position: relative;
+            font-size: px2rem(30);
+        }
+        .radiolist-tab-hot {
+            height: 100%;
+            line-height: px2rem(100);
+            position: relative;
+            font-size: px2rem(30);
+        }
+        .line {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: px2rem(6);
+            background: red;
+        }
+    }
+    .radiolist-content {
+        width: 100%;
+        flex: 1;
+        // background: #ccc;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        .radiolist-tip {
+            width: 100%;
+            height: px2rem(230);
+            // background: green;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            .r-t-serial {
+                width: px2rem(100);
+                height: 100%;
+                // background: #ccc;
+                line-height: px2rem(230);
+                text-align: center;
+                font-size: px2rem(60);
+                color: gray;
+                font-weight: 400;
+            }
+            .r-t-pic {
+                width: px2rem(180);
+                height: px2rem(180);
+                border-radius: px2rem(20);
+                // background: red;
+                overflow: hidden;
+                img{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .r-t-content {
+                flex: 1;
+                height: px2rem(200);
+                // background: yellow;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding-left: px2rem(15);
+                .radiolist-name {
+                    font-size: px2rem(35);
+                    padding-bottom: px2rem(10);
+                }
+                .radiolist-author {
+                    font-size: px2rem(25);
+                    padding-bottom: px2rem(10);
+                    color: gray;
+                }
+                .radiolist-hot {
+                    color: gray;
+                    font-size: px2rem(25);
+                }
+            }
+        }
+    }
+}

@@ -214,7 +214,7 @@ function PgMusicPlayer(props: any): JSX.Element {
     let [songUrl, setsongUrl] = useState<string>('')
     let [songDetails, setsongDetails] = useState<any>(null)
     let [lyric, setlyric] = useState<Array<any>>([])
-    let [showlyric, setshowlyric] = useState<string>('Start')
+    let [showlyric, setshowlyric] = useState<string>('')
     let audiosRef = useRef(null)
 
     // 事件监听开始 / 停止
@@ -265,11 +265,11 @@ function PgMusicPlayer(props: any): JSX.Element {
         }
         try{
             apisongdetail(params).then(res => {
-                console.log(res)
                 setsongDetails(res.songs[0])
             })
             apisongurl(params).then(res => {
                 setsongUrl(res.data[0].url)
+                setstatePlay(true)
             })
             let { isRadio } = query()
             if (!isRadio) {
@@ -345,7 +345,6 @@ function PgMusicPlayer(props: any): JSX.Element {
                 }
                 audiosRef.current.pause()
                 setstatePlay(false)
-                console.log(111)
                 if (isRadio) {
                     type === 'last' ? getsongurl(list[_index].mainTrackId) : getsongurl(list[_index].mainTrackId)
                     type === 'last' ? props.history.replace(`/musicplayer?id=${list[_index].mainTrackId}&isRadio=${true}`) : props.history.replace(`/musicplayer?id=${list[_index].mainTrackId}&isRadio=${true}`)

@@ -73,7 +73,9 @@ function PgRadioStation(props: any): JSX.Element {
                             电台分类
                     </div>
                     </div>
-                    <div className="adiostation-tab-tip">
+                    <div className="adiostation-tab-tip" onClick={() => {
+                        props.history.push('/radiolist')
+                    }}>
                         <div className="adiostation-tab-tip-icon">
                             <Icons className='adiostation-icon-two' un='&#xe673;' />
                         </div>
@@ -141,7 +143,7 @@ function PgRadioStation(props: any): JSX.Element {
                     cateList.map((item, index) => {
                         if (!(index % 2)) {
                             return (
-                                <div className="adiostation-recommend mp">
+                                <div className="adiostation-recommend mp" key={index}>
                                     <div className="adiostation-recommend-title">
                                         <div className="adiostation-recommend-title-name">
                                             {item.categoryName}<Icons className='recommend-icon' un='&#xe621;' />
@@ -154,7 +156,7 @@ function PgRadioStation(props: any): JSX.Element {
                                         {
                                             item.radios.map(item => {
                                                 return (
-                                                    <div className="adiostation-content-row-tip" onClick={() => {
+                                                    <div className="adiostation-content-row-tip" key={item.id} onClick={() => {
                                                         props.history.push(`/radiodetails?id=${item.id}`)
                                                     }}>
                                                         <div className="adiostation-content-row-price">
@@ -172,7 +174,7 @@ function PgRadioStation(props: any): JSX.Element {
                                 </div>
                             )
                         } else {
-                            return <div className="adiostation-recommend mp">
+                            return <div className="adiostation-recommend mp" key={index}>
                                 <div className="adiostation-recommend-title">
                                     <div className="adiostation-recommend-title-name">
                                         {item.categoryName}<Icons className='recommend-icon' un='&#xe621;' />
@@ -185,7 +187,7 @@ function PgRadioStation(props: any): JSX.Element {
                                     {
                                         item.radios.map(item => {
                                             return (
-                                                <div className="adiostation-recommend-content-tip" onClick={() => {
+                                                <div className="adiostation-recommend-content-tip" key={item.id} onClick={() => {
                                                     props.history.push(`/radiodetails?id=${item.id}`)
                                                 }}>
                                                     <div className="adiostation-recommend-content-tip-pic">

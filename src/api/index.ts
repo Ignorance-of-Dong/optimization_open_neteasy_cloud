@@ -233,12 +233,20 @@ function apipersonalizeddjprogram(params?) {
 
 // 获取电台节目列表
 function apiprogram(params) {
-  return fetch.post(`/dj/program?rid=${params.id}&limit=40`, {})
+  let { offset } = params
+  return fetch.post(`/dj/program?rid=${params.id}&limit=40&offset=${offset}`, {})
 }
 
 // 查询电台详情
 function apidjdetail(params?) {
   return fetch.post(`/dj/detail?rid=${params.id}`, {})
+}
+
+
+// 查询电台榜单
+function apidjhotlist(params) {
+  let { type } = params
+  return fetch.post(`/dj/toplist?type=${type}`, {})
 }
 
 
@@ -250,6 +258,7 @@ export {
   apirecommendsongs,
   apipersonalizedMv,
   apiresource,
+  apidjhotlist,
   apiprogram,
   apidjbanner,
   apidjdetail,
