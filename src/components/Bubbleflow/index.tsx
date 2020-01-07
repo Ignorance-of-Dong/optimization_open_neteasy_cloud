@@ -2,8 +2,8 @@ import React from 'react';
 import './index.scss'
 const hotguide: Array<string> = [
     '好好生活 慢慢相遇',
-    '『我希望正在看评论的人永远开心』⠀',
     '抱抱',
+    '『我希望正在看评论的人永远开心』⠀',
     '你不是一个人',
     '下山一定要记得买菜，生快',
     '千年修行，只为再见',
