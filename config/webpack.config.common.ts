@@ -16,7 +16,7 @@ module.exports = {
 	},
 	output: {
 		// 输出目录
-		path: path.resolve(__dirname, '../build')
+		path: path.resolve(__dirname, '../music')
 	},
 	resolve: {
 		extensions: ['.tsx', '.ts', '.js', '.jsx', '.css', '.scss' ],

@@ -290,6 +290,7 @@ function PgMusicPlayer(props: any): JSX.Element {
     useEffect((): void => {
         let { id } = query()
         getsongurl(id)
+        console.log(props.Store, 'props')
     }, [])
     
     /**
@@ -408,6 +409,7 @@ function PgMusicPlayer(props: any): JSX.Element {
     }, [songDetails])
 
     const getname = useCallback(() => {
+        console.log('至西宁')
         if (songDetails) {
             if (songDetails.name) {
                 return songDetails.name
@@ -424,6 +426,10 @@ function PgMusicPlayer(props: any): JSX.Element {
             <div className="audios">
                 <audio src={songUrl} controls preload="auto" ref={audiosRef} />
             </div>
+
+            <div className="run" style={{background: `${props.Store.color}`}} onClick={() => {
+                props.Store.setShow()
+            }}></div>
             
             <div className="music-player-wraps-mask" style={{
                 background: `url(${getPicUrl(songDetails)})`,

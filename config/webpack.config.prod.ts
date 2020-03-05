@@ -13,7 +13,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // 清除上一�
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // 将css单独打包出来
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin") // 压缩css，将多余的css注释和重复代码去除
 const ROOT_PATH = process.cwd(); // 获取到当前node运行的进程目录
-const DIST_PATH = path.resolve(ROOT_PATH, "build"); // 获取到dist目录
+const DIST_PATH = path.resolve(ROOT_PATH, "music"); // 获取到dist目录
 const ProgressBarPlugin = require('progress-bar-webpack-plugin') // 显示进度条
 const chalk = require('react-dev-utils/chalk')
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -120,8 +120,8 @@ module.exports = merge(webpackCommon, {
 		new OptimizeCSSAssetsPlugin(),
 		new CopyWebpackPlugin([
 			{
-				from: path.resolve(process.cwd(), "public/server.js"),
-				to: path.resolve(process.cwd(), "build"),
+				from: path.resolve(process.cwd(), "public/cloudmusic.js"),
+				to: path.resolve(process.cwd(), "music"),
 				ignore: ['.*']
 			}
 		])

@@ -176,6 +176,15 @@
         }
     }
 }
+.run {
+    width: px2rem(300);
+    height: px2rem(300);
+    border-radius: 50%;
+    background: red;
+    position: absolute;
+    top: 0;
+    z-index: 999999;
+}
 
 @keyframes rotates {
     from {
