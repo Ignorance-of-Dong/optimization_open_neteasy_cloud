@@ -1,4 +1,4 @@
-[](https://socialify.git.ci/Ignorance-of-Dong/optimization_open_neteasy_cloud/image?language=1&owner=1&stargazers=1&theme=Light)
+![optimization_open_neteasy_cloud](https://socialify.git.ci/Ignorance-of-Dong/optimization_open_neteasy_cloud/image?language=1&owner=1&stargazers=1&theme=Light)
 # 网易云音乐
 🎅❄️🎶Optimization project
 
