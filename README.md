@@ -8,7 +8,7 @@
 
 - [源码地址](https://github.com/Ignorance-of-Dong/optimization_open_neteasy_cloud)
 
-- [项目预览](http://music.ignorantscholar.cn/)（请在chrome调试模式下使用）
+- [项目预览](http://music.fishfairy.cn/)（请在chrome调试模式下使用）
 
 ### 技术栈
 
