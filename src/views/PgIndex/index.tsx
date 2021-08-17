@@ -107,7 +107,7 @@ const RouterViewPro: ForwardRefExoticComponent<any> = memo(RouterView)
 function Index(props: any): JSX.Element {
     return (
         <>
-            <div className='index-wraps' style={{ overflow: 'hidden'}}>
+            <div className='index-wraps root-container' style={{ overflow: 'hidden'}}>
                 <LeftSilderAddTitlepro {...props}/>
                 <div className="index-wraps-content">
                     <RouterViewPro routers={props.route} />

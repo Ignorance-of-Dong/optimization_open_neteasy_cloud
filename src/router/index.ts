@@ -2,7 +2,7 @@
  * @Author: Mr.zheng
  * @Date: 2019-08-09 14:32:22
  * @LastEditors: zhangzheng
- * @LastEditTime: 2021-08-16 17:44:11
+ * @LastEditTime: 2021-08-17 11:58:26
  * @Description: 
  */
 import React from 'react'
@@ -140,6 +140,9 @@ export default {
             path: "/index",
             component: React.lazy(() => import('../views/PgIndex')),
             exact: false,
+            meta: {
+                isGloblePlayer: true
+            },
             children: [
                 {
                     path: "/index/fined",

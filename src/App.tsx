@@ -2,7 +2,7 @@
  * @Author: zhangzheng
  * @Date: 2020-08-05 16:07:26
  * @LastEditors: zhangzheng
- * @LastEditTime: 2021-08-17 11:04:14
+ * @LastEditTime: 2021-08-17 15:05:16
  * @Descripttion: 
  */
 import routerConfig from './router'
@@ -19,15 +19,22 @@ function App(props: any) {
     let { handleGetAudioRef } = props.playerStore;
     let audiosRef = useRef(null);
     let bool:any={};
-    if (sessionStorage.getItem("meta") == "undefined") {
-        bool = {}
+    console.log(sessionStorage.getItem("meta"))
+    if (sessionStorage.getItem("meta") == "undefined" || !sessionStorage.getItem("meta")) {
+        bool =  {isGloblePlayer: false}
     } else {
         bool = JSON.parse(sessionStorage.getItem("meta"));
     }
     // console.log(sessionStorage.getItem("meta") ? "{}" : 1)
     // let status = JSON.parse(sessionStorage.getItem("meta") || "{}");
+    let result = false
+    if (bool.isGloblePlayer && sessionStorage.getItem("songListDetails")) {
+        result = bool.isGloblePlayer
+    } else {
+        result = false
+    }
     console.log(bool)
-    let [globelStatus, setGlobelStatus] = useState(bool.isGloblePlayer|| false)
+    let [globelStatus, setGlobelStatus] = useState(result)
     useEffect(() => {
         handleGetAudioRef(audiosRef)
         console.log(props.playerStore.audiosRef)
@@ -35,13 +42,14 @@ function App(props: any) {
         window.addEventListener('hashchange', (router) => {
             console.log(router, "router")
             let bool:any = {};
-            if (sessionStorage.getItem("meta") == "undefined") {
-                bool =  {}
+            if (sessionStorage.getItem("meta") == "undefined" || !sessionStorage.getItem("meta")) {
+                bool =  {isGloblePlayer: false}
             } else {
                 bool = JSON.parse(sessionStorage.getItem("meta"));
             }
             console.log(bool)
-            if (bool) {
+            console.log(bool && sessionStorage.getItem("songListDetails"))
+            if (bool && sessionStorage.getItem("songListDetails")) {
                 setGlobelStatus(bool.isGloblePlayer)
             } else {
                 setGlobelStatus(false)
