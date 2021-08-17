@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import "../../../node_modules/video-react/dist/video-react.css";
 import './index.scss'
 import { Icons, Headers } from 'components/index'
-import { apimvdetails, apisimiMv, apicommentMv } from 'api'
+import { apimvdetails, apisimiMv, apicommentMv, apiMvUrl } from 'api'
 import { Player, BigPlayButton, ControlBar, ReplayControl} from 'video-react';
 import query from 'utils/useQuery';
 
@@ -11,6 +11,7 @@ function PgMvDeatils(props: any): JSX.Element {
     let [mvDetails, setmvDetails] = useState<any>(null)
     let [relevantVideo, setrelevantVideo] = useState<Array<any>>([])
     let [brilliantComments, setbrilliantComments] = useState<Array<any>>([])
+    let [url, setUrl] = useState("")
 
     useEffect((): void => {
         let {id} = query()
@@ -27,9 +28,11 @@ function PgMvDeatils(props: any): JSX.Element {
         await apicommentMv(params).then(res => {
             setbrilliantComments(res.comments)
         })
-        await apimvdetails(params).then(res => {
-            setmvDetails(res.data)
-        })
+        let res = await apimvdetails(params)
+        setmvDetails(res.data)
+
+        let url = await apiMvUrl({id: res.data.id})
+        setUrl(url.data.url)
     }
     
     function switchingVideo(id): void {
@@ -47,7 +50,7 @@ function PgMvDeatils(props: any): JSX.Element {
                         // className='mv-vidio-wrap-constur'
                         playsInline
                         poster={mvDetails ? mvDetails.cover : ''}
-                        src={mvDetails ? mvDetails.brs[480] : ''}
+                        src={url}
                     >
                         <BigPlayButton position="center" />
                         <ControlBar autoHide={false}>

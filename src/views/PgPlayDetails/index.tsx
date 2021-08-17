@@ -2,9 +2,10 @@ import React, {useEffect, useState, useCallback, useRef} from 'react'
 import './index.scss'
 import { Icons, Headers } from 'components/index'
 import query from 'utils/useQuery'
-import { apiplaylistDetail, apitoplist, apialbumlist } from 'api'
+import { apiplaylistDetail, apitoplist, apialbumlist, apisongdetail, apiTopListDetail } from 'api'
 import {inject, observer} from 'mobx-react'
-
+const controller = new AbortController();
+const { signal } = controller;
 function PgPlayDetails(props: any): JSX.Element {
     let [songListDetails, setsongListDetails] = useState<Array<any>>([])
     let [songListObj, setsongListObj] = useState<any>(null)
@@ -13,54 +14,78 @@ function PgPlayDetails(props: any): JSX.Element {
     let headerRef = useRef(null)
     let titleRef = useRef(null)
 
+    // 获取当前 歌单详情
     const getapiplaylistDetail = useCallback( async (): Promise<any> => {
         let { id } = query()
-        let params = {
-            id: id
+        // 判断当前歌单id是否和Store内部存储的id相同 => 如果相同则取缓存数据
+        if (id != props.commonStore.trackId) {
+
+            // 存储歌单id
+            props.commonStore.localTrackId(id)
+            let res = await apiplaylistDetail({id: id})
+            props.commonStore.setTrackDetail(res.playlist)
+            let list: Array<any> = res.playlist.trackIds || []
+            let newTrackListPromise: Array<any> = [];
+            // 当获取数据超过100条时，只取前100条进行渲染
+            for (let index = 0; index < list.length; index++) {
+                if (index < 100) {
+                    newTrackListPromise.push(apisongdetail({id: list[index].id}, { signal }))
+                }
+            }
+            console.log(newTrackListPromise)
+            // 批量请求歌单内每一部歌曲的详情
+            let trackList = await Promise.all(newTrackListPromise)
+            console.log(trackList, "trackList")
+            let formatTrackList = trackList.map((item: any) => {
+                return item = item.songs[0]
+            })
+            props.commonStore.setTrackList(formatTrackList)
         }
-        await apiplaylistDetail(params).then(res => {
-            setsongListObj(res.playlist)
-            setsongListDetails(res.playlist.tracks)
-        })
+        setsongListObj(props.commonStore.trackDetail)
+        setsongListDetails(props.commonStore.trackList)
     }, [songListDetails, songListObj])
 
     const getapitoplist = useCallback( async (): Promise<any> => {
         let { id } = query()
-        let params = {
-            id: id
-        }
-        await apitoplist(params).then(res => {
-            setsongListObj(res.playlist)
-            setsongListDetails(res.playlist.tracks)
-        })
+        let res = await apitoplist({id: id})
+        setsongListObj(res.playlist)
+        setsongListDetails(res.playlist.tracks)
     }, [])
 
     const getalbumlist = useCallback(async (): Promise<any> => {
         let { id } = query()
-        let params = {
-            id: id
-        }
-        await apialbumlist(params).then(res => {
-            setsongListObj(res.album)
-            setsongListDetails(res.songs)
-        })
+        let res = await apialbumlist({id: id})
+        setsongListObj(res.album)
+        setsongListDetails(res.songs)
+    }, [])
+
+    const getTopDetail = useCallback(() => {
+        let res = apiTopListDetail();
+        console.log(res)
     }, [])
 
 
 
-    useEffect((): void => {
+    useEffect(() => {
         let { isList, isAlumb } = query()
-        if (isList) {
-            getapitoplist()
-            return;
-        }
+
+        console.log(props, "ppp")
         if (isAlumb) {
             getalbumlist()
             return;
         }
         getapiplaylistDetail()
+        
     }, [])
 
+    useEffect(() => {
+        return function cleanup() {
+            console.log("我被执行了")
+            // controller.abort();
+        }
+    }, [])
+
+    // 处理头部高斯背景 => 通过滑动距离计算头部歌单logo的显示方式
     const scrollFun = useCallback((e): void => {
         if (e.target.scrollTop > (titleRef.current.offsetHeight - headerRef.current.headerRef.current.offsetHeight)) {
             setTitlePostion(true)
@@ -71,7 +96,6 @@ function PgPlayDetails(props: any): JSX.Element {
 
     return (
         <>
-            
             <div className="play-details-wrap" onScroll={(e) => scrollFun(e)}>
                 <div className="play-details-title" ref={titleRef}>
                     <div className="play-details-title-mask" style={{
@@ -131,9 +155,11 @@ function PgPlayDetails(props: any): JSX.Element {
                         zIndex: 5
                     }}>
                         <div className="play-details-content-title-playok" onClick={() => {
-                            props.Store.getSongListDetails(songListDetails)
+                            props.commonStore.getSongListDetails(songListDetails)
                             sessionStorage.setItem('songListDetails', JSON.stringify(songListDetails))
-                            props.history.push(`/musicplayer?id=${songListDetails[0].id}`)
+                            props.playerStore.handleGetSongId(songListDetails[0].id)
+                            props.playerStore.handleSongListType("default")
+                            props.history.push(`/musicplayer`)
                         }}>
                             <Icons className='playok-icon' un='&#xe615;' />
                             <p className='start-play-all'>播放全部<span className='song-number'>(共{songListDetails.length}首)</span></p>
@@ -141,12 +167,14 @@ function PgPlayDetails(props: any): JSX.Element {
                     </div>
                     <div className="play-details-content-song-listview">
                         {
-                            songListDetails.map((res, index) => {
+                            songListDetails.length && songListDetails.map((res, index) => {
                                 return (
                                     <div className="play-details-content-song-tip" key={index} onClick={() => {
-                                        props.Store.getSongListDetails(songListDetails)
+                                        props.commonStore.getSongListDetails(songListDetails)
                                         sessionStorage.setItem('songListDetails', JSON.stringify(songListDetails))
-                                        props.history.push(`/musicplayer?id=${res.id}`)
+                                        props.playerStore.handleGetSongId(res.id)
+                                        props.playerStore.handleSongListType("default")
+                                        props.history.push(`/musicplayer`)
                                     }}>
                                         <div className="serial-number">
                                             {(index + 1)}.
@@ -169,4 +197,4 @@ function PgPlayDetails(props: any): JSX.Element {
     )
 }
 
-export default inject('Store')(observer(PgPlayDetails))
+export default inject("commonStore", "playerStore")(observer(PgPlayDetails))

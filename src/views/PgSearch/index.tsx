@@ -18,7 +18,9 @@ const SingleSearchResults = (props) => {
                             return (
                                 <div className="search-content-tip" key={index} onClick={() => {
                                     sessionStorage.setItem('songListDetails', JSON.stringify(searchSong))
-                                    props.history.push(`/musicplayer?id=${res.id}`)
+                                    props.playerStore.handleSongListType("default")
+                                    props.playerStore.handleGetSongId(res.id)
+                                    props.history.push(`/musicplayer`)
                                 }}>
                                     <div className="search-content-tip-number">
                                         {index + 1}.

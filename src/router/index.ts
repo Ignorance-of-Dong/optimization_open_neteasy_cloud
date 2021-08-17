@@ -1,8 +1,8 @@
 /*
  * @Author: Mr.zheng
  * @Date: 2019-08-09 14:32:22
- * @LastEditors: OBKoro1
- * @LastEditTime: 2019-08-09 14:45:33
+ * @LastEditors: zhangzheng
+ * @LastEditTime: 2021-08-16 17:44:11
  * @Description: 
  */
 import React from 'react'
@@ -11,82 +11,130 @@ export default {
         {
             path: "/home",
             component: React.lazy(() => import('../views/PgHome')),
-            exact: true
+            exact: true,
+            meta: {
+                isGloblePlayer: false
+            }
         },
         {
             path: "/loginphone",
             component: React.lazy(() => import('../views/PgLogin/PgPhoneInput')),
-            exact: true
+            exact: true,
+            meta: {
+                isGloblePlayer: false
+            }
         },
         {
             path: "/loginpassword",
             component: React.lazy(() => import('../views/PgLogin/PgPasswordInput')),
-            exact: true
+            exact: true,
+            meta: {
+                isGloblePlayer: false
+            }
         },
         {
             path: "/wrong",
             component: React.lazy(() => import('../views/PgWrong')),
-            exact: true
+            exact: true,
+            meta: {
+                isGloblePlayer: false
+            }
         },
         {
             path: "/mvdetails",
             component: React.lazy(() => import('../views/PgMvDetails')),
-            exact: false
+            exact: false,
+            meta: {
+                isGloblePlayer: false
+            }
         },
         {
             path: "/playdetails",
             component: React.lazy(() => import('../views/PgPlayDetails')),
-            exact: false
+            exact: false,
+            meta: {
+                isGloblePlayer: true
+            }
         },
         {
             path: "/musicplayer",
             component: React.lazy(() => import('../views/PgMusicPlayer')),
-            exact: false
+            exact: false,
+            meta: {
+                isGloblePlayer: false
+            }
         },
         {
             path: "/about",
             component: React.lazy(() => import('../views/PgAbout')),
-            exact: false
+            exact: false,
+            meta: {
+                isGloblePlayer: true
+            }
         },
         {
             path: "/search",
             component: React.lazy(() => import('../views/PgSearch')),
-            exact: false
+            exact: false,
+            meta: {
+                isGloblePlayer: true
+            }
         },
         {
             path: "/yuncun",
             component: React.lazy(() => import('../views/PgYunCun')),
-            exact: false
+            exact: false,
+            meta: {
+                isGloblePlayer: false
+            }
         },
         {
             path: "/recommendeddaily",
             component: React.lazy(() => import('../views/PgRecommendedDaily')),
-            exact: false
+            exact: false,
+            meta: {
+                isGloblePlayer: true
+            }
         },
         {
             path: "/songsquare",
             component: React.lazy(() => import('../views/PgSongSquare')),
-            exact: false
+            exact: false,
+            meta: {
+                isGloblePlayer: true
+            }
         },
         {
             path: "/rankinglist",
             component: React.lazy(() => import('../views/PgRankingList')),
-            exact: false
+            exact: false,
+            meta: {
+                isGloblePlayer: true
+            }
         },
         {
             path: "/radiostation",
             component: React.lazy(() => import('../views/PgRadioStation')),
-            exact: false
+            exact: false,
+            meta: {
+                isGloblePlayer: true
+            }
         },
         {
             path: "/radiodetails",
             component: React.lazy(() => import('../views/PgRadioDetails')),
-            exact: false
+            exact: false,
+            meta: {
+                isGloblePlayer: true
+            }
         },
         {
             path: "/radiolist",
             component: React.lazy(() => import('../views/PgRadioList')),
-            exact: false
+            exact: false,
+            meta: {
+                isGloblePlayer: true
+            }
         },
         {
             path: "/index",
@@ -97,21 +145,33 @@ export default {
                     path: "/index/fined",
                     component: React.lazy(() => import('../views/PgFind')),
                     exact: true,
+                    meta: {
+                        isGloblePlayer: true
+                    }
                 },
                 {
                     path: "/index/my",
                     component: React.lazy(() => import('../views/PgMy')),
                     exact: true,
+                    meta: {
+                        isGloblePlayer: true
+                    }
                 },
                 {
                     path: "/index/firends",
                     component: React.lazy(() => import('../views/PgFirends')),
                     exact: true,
+                    meta: {
+                        isGloblePlayer: true
+                    }
                 },
                 {
                     path: "/index/vidio",
                     component: React.lazy(() => import('../views/PgVidio')),
                     exact: true,
+                    meta: {
+                        isGloblePlayer: false
+                    }
                 }
             ]
         },

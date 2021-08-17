@@ -1,8 +1,8 @@
 /*
  * @Author: Mr.zheng
  * @Date: 2019-08-09 15:00:51
- * @LastEditors: OBKoro1
- * @LastEditTime: 2019-08-09 16:56:18
+ * @LastEditors: zhangzheng
+ * @LastEditTime: 2021-08-16 17:05:45
  * @Description: 
  */
 // import axios from 'axios'
@@ -40,7 +40,7 @@ function apipersonalizedSongList(params) {
  * 推荐新碟
  */
 function apialbum(params) {
-  return fetch.post(`/top/album?limit=${params.limit}`, {})
+  return fetch.post(`/album/new?limit=${params.limit}`, {})
 }
 
 
@@ -82,6 +82,12 @@ function apimvdetails(params) {
  */
 function apirelatedAllvideo(params) {
   return fetch.post(`/related/allvideo?id=${params.id}`)
+}
+/**
+ * 查询相关视频
+ */
+export function apiMvUrl(params) {
+  return fetch.post(`/mv/url?id=${params.id}`)
 }
 
 /**
@@ -139,8 +145,8 @@ function apisearchsuggest(params?) {
 /**
  * 获取歌曲详情
  */
-function apisongdetail(params?) {
-  return fetch.post(`/song/detail?ids=${params.id}`, {})
+function apisongdetail(params?, signal?) {
+  return fetch.post(`/song/detail?ids=${params.id}`, {}, signal)
 }
 
 /**
@@ -209,6 +215,10 @@ function apihighqualitylist(params?) {
 
 function apitoplist(params) {
   return fetch.post(`/top/list?idx=${params.id}`, {})
+}
+
+export function apiTopListDetail() {
+  return fetch.post(`/toplist/detail`, {})
 }
 
 // 获取专辑详情

@@ -37,7 +37,7 @@ function PgPlayDetails(props: any): JSX.Element {
             id: id
         }
         await apidjdetail(params).then(res => {
-            setsongListObj(res.djRadio)
+            setsongListObj(res.data)
             // setsongListDetails(res.playlist.tracks)
         })
     }, [])
@@ -136,7 +136,7 @@ function PgPlayDetails(props: any): JSX.Element {
                         zIndex: 5
                     }}>
                         <div className="radio-details-content-title-playok" onClick={() => {
-                            // props.Store.getSongListDetails(songListDetails)
+                            // props.commonStore.getSongListDetails(songListDetails)
                             // sessionStorage.setItem('songListDetails', JSON.stringify(songListDetails))
                             // props.history.push(`/musicplayer?id=${songListDetails[0].id}`)
                         }}>
@@ -166,9 +166,12 @@ function PgPlayDetails(props: any): JSX.Element {
                                         
                                         return (
                                             <div className="play-details-content-song-tip" key={index} onClick={() => {
-                                                props.Store.getSongListDetails(songListDetails)
+                                                props.commonStore.getSongListDetails(songListDetails)
                                                 sessionStorage.setItem('songListDetails', JSON.stringify(songListDetails))
-                                                props.history.push(`/musicplayer?id=${res.mainTrackId}&isRadio=${true}`)
+                                                props.playerStore.handleGetSongId(res.mainTrackId)
+                                                console.log(res.mainTrackId, "点击的当前的ID")
+                                                props.playerStore.handleSongListType("radio")
+                                                props.history.push(`/musicplayer`)
                                             }}>
                                                 <div className="serial-number">
                                                     {(index + 1)}.
@@ -255,4 +258,4 @@ function PgPlayDetails(props: any): JSX.Element {
     )
 }
 
-export default inject('Store')(observer(PgPlayDetails))
+export default inject('commonStore', 'playerStore')(observer(PgPlayDetails))

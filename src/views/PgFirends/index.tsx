@@ -1,5 +1,12 @@
+/*
+ * @Author: zhangzheng
+ * @Date: 2020-08-05 16:07:26
+ * @LastEditors: zhangzheng
+ * @LastEditTime: 2021-07-30 17:18:31
+ * @Descripttion: 
+ */
 import React, { useEffect } from 'react'
-import { Icons, Bubbleflow } from 'components/index'
+import { Icons, Bubbleflow, Toasts } from 'components/index'
 import './index.scss'
 function PgFirends(props: any): JSX.Element {
 
@@ -12,7 +19,8 @@ function PgFirends(props: any): JSX.Element {
             <div className="yuncun-wraps">
                 <div className="yuncun-conation">
                     <div className="yuncun-tip" onClick={() => {
-                        props.history.push('/yuncun')
+                        // props.history.push('/yuncun')
+                        Toasts("含泪关闭入口😭😭😭😭", 2000)
                     }}>
                         <div className="left">
                             <div className="left-title">

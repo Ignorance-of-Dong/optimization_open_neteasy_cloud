@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState, useRef } from 'react'
 import { PullToRefresh } from 'antd-mobile';
 import { Skeleton, Icons } from 'components/index'
 import './index.scss'
-import { apivideogroup, apigrouplist } from 'api'
+import { apivideogroup, apigrouplist, apivideourl } from 'api'
 import { observer, inject } from 'mobx-react'
 import { Player, BigPlayButton, ControlBar, ReplayControl } from 'video-react';
 
@@ -49,15 +49,29 @@ function PgVidio(props :any): JSX.Element {
         let params = {
             id: id
         }
-        await apigrouplist(params).then(res => {
-            setVideoList(res.datas)
+
+        let { datas } = await apigrouplist(params);
+        let promiseVideos = datas.map(item => {
+            return apivideourl({id: item.data.vid})
         })
+        let result: any[] = await Promise.all(promiseVideos);
+        
+        console.log(result)
+        let videoList = datas.map((item, index) => {
+            return item = {
+                ...item,
+                url: result[index].urls[0].url
+            }
+        })
+        console.log(videoList)
+        setVideoList(videoList)
+
     }, [])
 
     useEffect((): void => {
         getVideoList(tarList[0]['id'])
         apivideogroup()
-        const hei = document.documentElement.clientHeight - tagRef.current.offsetHeight - props.Store.tabBarHeight; // 获取到当前可适高度
+        const hei = document.documentElement.clientHeight - tagRef.current.offsetHeight - props.commonStore.tabBarHeight; // 获取到当前可适高度
         setListHeight(hei)
     }, [])
 
@@ -125,7 +139,7 @@ function PgVidio(props :any): JSX.Element {
                                                             className='vidio-wrap-constur'
                                                             playsInline
                                                             poster={item.data.imgurl16v9 || item.data.coverUrl}
-                                                            src={item.data.urlInfo.url}
+                                                            src={item.url}
                                                         >
                                                             <ControlBar autoHide={true}>
                                                                 <ReplayControl seconds={5} order={2.1} />
@@ -163,4 +177,4 @@ function PgVidio(props :any): JSX.Element {
         </>
     )
 }
-export default inject('Store')(observer(PgVidio))
+export default inject('commonStore')(observer(PgVidio))

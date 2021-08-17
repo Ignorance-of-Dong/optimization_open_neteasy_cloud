@@ -91,7 +91,7 @@ function PgFind(props: any): JSX.Element {
             limit: 3
         }
         apialbum(params).then(res => {
-            setnewDish(res.albums)
+            setnewDish(res.albums || [])
         })
     }, [newDish])
 

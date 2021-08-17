@@ -23,6 +23,7 @@ class Find{
                 this._banner = res.banners
             })
         } catch (err) {
+            console.log(err)
             Toast('网络请求异常，请两分钟后再试', 2000)
         }
     }

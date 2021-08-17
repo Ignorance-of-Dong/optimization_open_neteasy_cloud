@@ -6,7 +6,7 @@ import {observer,inject} from 'mobx-react'
 import './index.scss'
 
 
-const LeftSilderAddTitle = inject('Store')(observer((props) => {
+const LeftSilderAddTitle = inject('commonStore')(observer((props) => {
     let index: number = sessionStorage.getItem('tabIndex') ? Number(sessionStorage.getItem('tabIndex')) : 1
     let [heightlight, setheightlight] = useState(index)
     let [changSHstate, setchangSHstate] = useState(false)
@@ -50,7 +50,7 @@ const LeftSilderAddTitle = inject('Store')(observer((props) => {
     useEffect((): void => {
         let index = sessionStorage.getItem('tabIndex') || 1
         props.history.push(tabBars[index].paths)
-        props.Store.setTabBarHeight(tabBar.current.offsetHeight)
+        props.commonStore.setTabBarHeight(tabBar.current.offsetHeight)
     }, [])
 
 

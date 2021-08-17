@@ -94,9 +94,11 @@ function PgRecommendedDaily(props: any) {
                     zIndex: 5
                 }}>
                     <div className="play-details-content-title-playok" onClick={() => {
-                        props.Store.getSongListDetails(songListDetails)
+                        props.commonStore.getSongListDetails(songListDetails)
                         sessionStorage.setItem('songListDetails', JSON.stringify(songListDetails))
-                        props.history.push(`/musicplayer?id=${songListDetails[0].id}`)
+                        props.playerStore.handleSongListType("default")
+                        props.playerStore.handleGetSongId(songListDetails[0].id)
+                        props.history.push(`/musicplayer`)
                     }}>
                         <Icons className='playok-icon' un='&#xe615;' />
                         <p className='start-play-all'>播放全部<span className='song-number'>(共{songListDetails.length}首)</span></p>
@@ -107,19 +109,21 @@ function PgRecommendedDaily(props: any) {
                         songListDetails.map((res, index) => {
                             return (
                                 <div className="play-details-content-song-tip" key={index} onClick={() => {
-                                    props.Store.getSongListDetails(songListDetails)
+                                    props.commonStore.getSongListDetails(songListDetails)
                                     sessionStorage.setItem('songListDetails', JSON.stringify(songListDetails))
-                                    props.history.push(`/musicplayer?id=${res.id}`)
+                                    props.playerStore.handleSongListType("default")
+                                    props.playerStore.handleGetSongId(res.id)
+                                    props.history.push(`/musicplayer`)
                                 }}>
                                     <div className="serial-number serial-numbers">
                                         {/* {(index + 1)}. */}
                                         <span>
-                                            <img src={res.album.picUrl} alt=""/>
+                                            <img src={res.al.picUrl} alt=""/>
                                         </span>
                                     </div>
                                     <div className="serial-content-wrap">
                                         <div className='serial-content-song-name'><span className='name serial-content-song-names'>{res.name}</span> <span className='alias'>{JSON.stringify(res.alia) === '{}' || '[]' ? '' : `(${res.alia[0]})`}</span> </div>
-                                        <div className='serial-content-song-author serial-content-song-names'>{res.album.artists[0].name} - {res.name}</div>
+                                        <div className='serial-content-song-author serial-content-song-names'>{res.ar[0].name} - {res.name}</div>
                                     </div>
                                     <div className="serial-all">
                                         <Icons className='playok-icon' un='&#xe615;' />
@@ -134,4 +138,4 @@ function PgRecommendedDaily(props: any) {
     </>
 }
 
-export default inject('Store')(observer(PgRecommendedDaily))
+export default inject('commonStore', 'playerStore')(observer(PgRecommendedDaily))

@@ -1,24 +1,8 @@
-import { observable, action } from 'mobx'
+import commonStore from "./modules/commonStore"
+import playerStore from "./modules/playerStore"
 
-class Index {
-    @observable songListDetails: Array<any> = []
-    @observable tabBarHeight: number = 0
-    @observable color: string = '#ccc'
-
-    @action.bound
-    getSongListDetails(data): void {
-        this.songListDetails = data
-    }
-
-    @action.bound
-    setTabBarHeight(hei): void {
-        this.tabBarHeight = hei
-    }
-
-    @action.bound
-    setShow():void {
-        this.color = 'red'
-    }
+const Store = {
+    commonStore,
+    playerStore
 }
-
-export default new Index()
+export default Store;

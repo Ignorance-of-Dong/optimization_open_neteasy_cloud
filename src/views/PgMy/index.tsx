@@ -35,7 +35,6 @@ function PgMy(props: any) {
         getApiuserplayer()
     }, [condition])
 
-
     const toPlayDetails = (id): void => {
         props.history.push(`/playdetails?id=${id}`)
     }
