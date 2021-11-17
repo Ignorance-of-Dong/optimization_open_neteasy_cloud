@@ -1,5 +1,12 @@
+/*
+ * @Author: zhangzheng
+ * @Date: 2020-08-05 16:07:26
+ * @LastEditors: zhangzheng
+ * @LastEditTime: 2021-10-25 18:18:36
+ * @Descripttion: 
+ */
 import {observable, action} from 'mobx'
-import { Icons, Toast } from 'components/index'
+import { Icons, Toasts } from 'components/index'
 import { apipersonalizedSongList, apialbum, apifirstMv, apibanner } from 'api'
 class Find{
     @observable recommendedSongList = []
@@ -15,16 +22,14 @@ class Find{
         }
         try {
             await apipersonalizedSongList(params).then((res: any) => {
-                // setrecommendedSongList(res.result)
                 this.recommendedSongList = res.result
             })
             await apibanner().then(res => {
-                // _setbanner(res.banners)
                 this._banner = res.banners
             })
         } catch (err) {
             console.log(err)
-            Toast('网络请求异常，请两分钟后再试', 2000)
+            Toasts('网络请求异常，请两分钟后再试', 2000)
         }
     }
 }

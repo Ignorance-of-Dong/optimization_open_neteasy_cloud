@@ -2,12 +2,12 @@
  * @Author: zhangzheng
  * @Date: 2020-08-05 16:07:26
  * @LastEditors: zhangzheng
- * @LastEditTime: 2021-08-17 11:44:20
+ * @LastEditTime: 2021-11-17 14:46:53
  * @Descripttion:
  */
 import { Toasts, ToastLodingPro } from "components/index";
-// const BASEHOST = 'http://musicapi.ignorantscholar.cn'
-const BASEHOST = "http://localhost:3000";
+const BASEHOST = 'http://musicapi.fishfairy.cn'
+// const BASEHOST = "http://localhost:3000";
 
 class Fetch {
   urlList = {};
